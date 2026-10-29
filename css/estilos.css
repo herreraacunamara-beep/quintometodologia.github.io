@@ -1,0 +1,43 @@
+:root{--tinta:#10232a;--fondo:#e9eff1;--panel:#fff;--verde:#0f766e;--verde-osc:#0b4f4a;--coral:#e4572e;--gris:#52646b;--linea:#cfdadd}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fondo);color:var(--tinta);line-height:1.5}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+
+/* ---------- Página principal ---------- */
+.cabecera{background:var(--tinta);color:#fff;padding:clamp(28px,5vw,64px) 6vw}
+.cabecera h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1.1;margin:0 0 10px}
+.cabecera p{margin:0 0 6px;max-width:62ch;color:#bfd0d5;font-size:1.1rem}
+.cabecera .resumen{color:#fff;font-weight:600;margin-top:14px}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;max-width:1800px;margin:0 auto;padding:32px 6vw 40px}
+.tarjeta{display:flex;flex-direction:column;gap:8px;background:var(--panel);border:1px solid var(--linea);border-top:6px solid var(--linea);border-radius:14px;padding:20px 22px 22px}
+.tarjeta.lista{border-top-color:var(--verde)}
+.num{font-family:Georgia,"Times New Roman",serif;font-size:3.4rem;line-height:1;color:var(--linea)}
+.tarjeta.lista .num{color:var(--verde)}
+.tarjeta h2{margin:0;font-size:1.25rem}
+.tema{margin:0;color:var(--gris);min-height:3em}
+.estado{align-self:flex-start;font-size:.9rem;font-weight:600;padding:3px 12px;border-radius:99px;background:#fdebe5;color:#9a3412}
+.lista .estado{background:#d8f1ec;color:var(--verde-osc)}
+.boton{display:inline-block;margin-top:auto;text-align:center;text-decoration:none;font-weight:600;padding:11px 16px;border-radius:8px;background:var(--verde);color:#fff;border:2px solid var(--verde);cursor:pointer;font-size:1rem}
+.boton:hover{background:var(--verde-osc);border-color:var(--verde-osc)}
+.boton.suave{background:transparent;color:var(--gris);border-color:var(--linea)}
+.boton.suave:hover{background:var(--fondo);color:var(--tinta)}
+.pie{padding:0 6vw 36px;color:var(--gris);text-align:center}
+@media (min-width:1600px){html{font-size:19px}}
+
+/* ---------- Visor de presentaciones ---------- */
+body.visor{margin:0;height:100vh;overflow:hidden;background:#000}
+#marco{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}
+#barra{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:rgba(16,35,42,.9);color:#fff;font-size:.95rem;opacity:.3;transition:opacity .2s;max-width:96vw}
+#barra:hover,#barra:focus-within{opacity:1}
+#barra[hidden],#barra [hidden]{display:none}
+.ctl{font:inherit;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:4px 14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.ctl:hover{background:rgba(255,255,255,.18)}
+.etiqueta{opacity:.8;white-space:nowrap}
+.contador{min-width:4.5em;text-align:center;font-variant-numeric:tabular-nums}
+.pendiente{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;background:var(--fondo)}
+.pendiente h1{font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.4rem);margin:0}
+.pendiente p{color:var(--gris);font-size:1.2rem;max-width:50ch;margin:0 0 12px}
+.pendiente .boton{margin-top:0}
+@media (max-width:600px){.etiqueta{display:none}}

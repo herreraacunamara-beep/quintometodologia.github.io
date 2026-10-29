@@ -1,0 +1,3 @@
+Carpeta opcional para imágenes, videos o archivos extra de las presentaciones.
+Sugerencia: una subcarpeta por grupo, por ejemplo recursos/grupo5/foto1.jpg
+Desde presentaciones/grupo5.html se usa así:  <img src="recursos/grupo5/foto1.jpg">

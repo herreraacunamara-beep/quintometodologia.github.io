@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentación</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="visor">
+  <iframe id="marco" title="Presentación del grupo" allow="fullscreen" allowfullscreen hidden></iframe>
+
+  <section id="pendiente" class="pendiente" hidden>
+    <h1 id="pend-titulo">Presentación pendiente</h1>
+    <p id="pend-texto">Este grupo todavía no entregó su presentación.</p>
+    <a class="boton" href="index.html">Volver al menú principal</a>
+  </section>
+
+  <nav id="barra" aria-label="Controles de la presentación">
+    <a id="volver" class="ctl" href="index.html">← Menú</a>
+    <span id="etiqueta" class="etiqueta"></span>
+    <button id="ant" class="ctl" type="button" title="Diapositiva anterior (←)" aria-label="Diapositiva anterior" hidden>◀</button>
+    <span id="contador" class="contador" aria-live="polite" hidden></span>
+    <button id="sig" class="ctl" type="button" title="Diapositiva siguiente (→)" aria-label="Diapositiva siguiente" hidden>▶</button>
+    <button id="pantalla" class="ctl" type="button" title="Pantalla completa (F)">Pantalla completa</button>
+  </nav>
+
+  <script src="js/grupos.js"></script>
+  <script src="js/visor.js"></script>
+</body>
+</html>
