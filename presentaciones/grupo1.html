@@ -11,6 +11,7 @@
 h1{font-size:clamp(28px,3.2vw,45px);line-height:1.18;margin:0 0 26px;max-width:990px}
 h2{font-size:clamp(30px,3.2vw,43px);line-height:1.14;margin:0 0 30px}
 .lead{font-size:clamp(19px,2vw,26px);line-height:1.55;max-width:950px;margin:0}
+.para{font-size:clamp(16px,1.6vw,21px);line-height:1.6;max-width:1000px;margin:0 0 20px;text-align:justify;border-left:5px solid var(--accent);padding-left:26px}
 .small{font-size:17px;color:var(--muted);line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:15px}
 .card{border:1px solid var(--line);border-left:4px solid var(--accent);padding:20px 24px;background:#fafcfd;min-height:120px}
@@ -22,7 +23,7 @@ h2{font-size:clamp(30px,3.2vw,43px);line-height:1.14;margin:0 0 30px}
 .footer{position:absolute;bottom:25px;left:78px;right:78px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:13px;color:#7a8792;font-size:13px}
 .cover-sub{font-size:19px;color:var(--muted);margin:0 0 18px}.names{font-size:20px;line-height:1.65;margin-top:14px}
 nav{display:flex;align-items:center;justify-content:center;gap:18px;height:56px}button{background:white;border:1px solid #c8d3da;border-radius:7px;padding:9px 18px;color:var(--ink);font-size:15px;cursor:pointer}button:hover{background:#dfe7ed}#count{min-width:72px;text-align:center;color:#546271;font-size:15px}
-@media(max-width:720px){.slide{width:calc(100vw - 20px);height:calc(100dvh - 20px);margin:10px auto 0;padding:35px 25px;min-height:0}.grid{grid-template-columns:1fr;gap:9px}.card{min-height:0;padding:12px 15px}.card span{font-size:15px}.card strong{font-size:16px}.stats{gap:8px}.stat{padding:16px 10px}.stat b{font-size:33px}.stat span{font-size:14px}.flow{flex-direction:column;gap:6px}.step{padding:10px}.footer{left:25px;right:25px;bottom:14px}h2{margin-bottom:18px}.names{font-size:17px}}
+@media(max-width:720px){.slide{width:calc(100vw - 20px);height:calc(100dvh - 20px);margin:10px auto 0;padding:35px 25px;min-height:0}.grid{grid-template-columns:1fr;gap:9px}.card{min-height:0;padding:12px 15px}.card span{font-size:15px}.card strong{font-size:16px}.stats{gap:8px}.stat{padding:16px 10px}.stat b{font-size:33px}.stat span{font-size:14px}.flow{flex-direction:column;gap:6px}.step{padding:10px}.footer{left:25px;right:25px;bottom:14px}h2{margin-bottom:18px}.names{font-size:17px}.para{font-size:15px;padding-left:16px;text-align:left}}
 @media print{body{background:white}.slide,.slide.active{display:flex!important;width:100%;height:100vh;min-height:0;margin:0;box-shadow:none;break-after:page;page-break-after:always}@page{size:landscape;margin:0}}
 </style></head><body>
 <section class="slide active">
@@ -36,12 +37,8 @@ nav{display:flex;align-items:center;justify-content:center;gap:18px;height:56px}
 <section class="slide">
 <p class="eyebrow">Capítulo I · Planteamiento del problema</p>
 <h2>Situación identificada</h2>
-<div class="grid">
-<div class="card"><strong>Información</strong><span>Consultas frecuentes sobre horarios, profesionales, servicios y medicamentos.</span></div>
-<div class="card"><strong>Atención presencial</strong><span>Los usuarios deben acudir o comunicarse directamente con el personal.</span></div>
-<div class="card"><strong>Pacientes</strong><span>Traslados, esperas y dificultades para gestionar turnos.</span></div>
-<div class="card"><strong>Personal de salud</strong><span>Tiempo dedicado a responder solicitudes repetitivas.</span></div>
-</div><div class="footer"><span>Diagnóstico preliminar</span><span>Capítulo I</span></div>
+<p class="para">Los usuarios del Centro de Salud de Caraguatay necesitan acceder a información actualizada sobre servicios, médicos, horarios, medicamentos y procedimientos. Sin embargo, las consultas y la gestión de citas se realizan de forma presencial o por contacto directo con el personal, lo que genera traslados, esperas y costos para los pacientes, y una carga constante de solicitudes repetitivas para el personal. Esto dificulta el acceso oportuno a la información y a los turnos.</p>
+<div class="footer"><span>Diagnóstico preliminar</span><span>Capítulo I</span></div>
 </section>
 <section class="slide">
 <p class="eyebrow">Capítulo I · Pregunta general</p>
@@ -60,12 +57,7 @@ nav{display:flex;align-items:center;justify-content:center;gap:18px;height:56px}
 <section class="slide">
 <p class="eyebrow">Capítulo I · Justificación</p>
 <h2>¿Por qué es importante?</h2>
-<div class="grid">
-<div class="card"><strong>Acceso a la información</strong><span>Consultar datos institucionales de forma más sencilla.</span></div>
-<div class="card"><strong>Gestión de citas</strong><span>Orientar la solicitud de turnos y organizar procesos.</span></div>
-<div class="card"><strong>Apoyo al personal</strong><span>Potencial reducción de consultas repetitivas.</span></div>
-<div class="card"><strong>Viabilidad</strong><span>Herramientas de código abierto y recursos de bajo costo.</span></div>
-</div><p class="small">El trabajo propone un prototipo académico; no contempla su puesta en producción.</p>
+<p class="para">El diagnóstico preliminar mostró que los usuarios realizan consultas frecuentes sobre horarios, profesionales, servicios y agendamiento, que hoy generan desplazamientos, esperas y sobrecarga del personal. Una aplicación móvil con asistente virtual y un sistema web permitirían facilitar el acceso a la información y optimizar la gestión de turnos. Además, el proyecto es viable: utiliza herramientas de código abierto y recursos ya disponibles, y se desarrollará como prototipo en un entorno de laboratorio, por lo que sus beneficios son potenciales.</p>
 <div class="footer"><span>Beneficios potenciales, no resultados comprobados</span><span>Capítulo I</span></div>
 </section>
 <section class="slide">
