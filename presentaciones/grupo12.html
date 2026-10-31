@@ -1,17 +1,126 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupo 12 - pendiente</title>
-  <style>
-    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;font-family:system-ui,Arial,sans-serif;background:#e9eff1;color:#10232a}
-    h1{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 .4em}
-    p{font-size:1.3rem;color:#52646b}
-  </style>
-</head>
-<body>
-  <!-- Este archivo es un marcador. Reemplázalo por la presentación real del Grupo 12 (mismo nombre: grupo12.html). -->
-  <div><h1>Grupo 12</h1><p>Presentación pendiente</p></div>
-</body>
-</html>
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grupo 12 | Anteproyecto Piripatitas</title>
+<style>
+:root{--forest:#102b52;--forest2:#2365a0;--mint:#e6f1fc;--gold:#65b8f5;--ink:#193451;--muted:#637c97;--line:#d3e3f3;--paper:#fbfdff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 10% 5%,#d7eaff,transparent 36%),linear-gradient(145deg,#eef6ff,#d9e9f9);font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:var(--ink)}
+.slide{display:none;position:relative;width:min(1180px,calc(100vw - 64px));height:min(664px,calc(100vh - 48px));min-height:480px;margin:24px auto 0;padding:58px 76px 78px;background:var(--paper);border-radius:18px;box-shadow:0 22px 65px #102b5228;overflow:auto;scrollbar-width:thin}
+.slide.active{display:flex;flex-direction:column;justify-content:center}
+.slide:before{content:'';position:absolute;top:0;left:0;bottom:0;width:11px;background:linear-gradient(180deg,var(--forest2),var(--gold))}
+.slide:after{content:'';position:absolute;right:-90px;top:-115px;width:330px;height:330px;border:48px solid #e4f0ff;border-radius:50%;pointer-events:none;opacity:.6}
+.slide>*{position:relative;z-index:1}
+.slide:first-of-type{background:linear-gradient(120deg,#102b52 0%,#16416e 68%,#2476b5 100%);color:white}
+.slide:first-of-type:before{background:var(--gold)}
+.slide:first-of-type:after{border-color:#ffffff12;width:440px;height:440px;right:-130px;top:-180px}
+.slide:first-of-type .eyebrow{color:#a7d9ff}
+.slide:first-of-type .cover-sub,.slide:first-of-type .small{color:#d8eaff}
+.slide:first-of-type .names{border-left:4px solid var(--gold);padding-left:20px}
+.slide:first-of-type .footer{color:#d8eaff;border-color:#ffffff38}
+.eyebrow{font-size:14px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--forest2);margin:0 0 18px}
+h1{font-size:clamp(26px,3.1vw,42px);line-height:1.2;max-width:1020px;margin:0 0 24px;letter-spacing:-.025em}
+h2{font-size:clamp(30px,3.5vw,46px);line-height:1.12;margin:0 0 28px;letter-spacing:-.035em;color:var(--forest)}
+.lead{font-size:clamp(18px,2vw,25px);line-height:1.5;max-width:980px;margin:0}
+.para{font-size:clamp(16px,1.65vw,21px);line-height:1.62;max-width:1000px;margin:0 0 20px;text-align:left;background:#edf5ff;border-left:6px solid var(--forest2);border-radius:0 14px 14px 0;padding:20px 25px}
+.small{font-size:16px;color:var(--muted);line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:12px}
+.card{background:white;border:1px solid var(--line);border-radius:14px;padding:21px 23px;min-height:116px;box-shadow:0 6px 20px #153e6b12}
+.card:before{content:'';display:block;width:35px;height:5px;border-radius:9px;background:var(--gold);margin-bottom:14px}
+.card strong{display:block;color:var(--forest);font-size:19px;margin-bottom:8px}
+.card span{font-size:17px;line-height:1.45;color:#435c77}
+.bigquote{font-size:clamp(21px,2.3vw,29px);line-height:1.53;max-width:1000px;background:#edf5ff;border-radius:16px;padding:27px 30px;border-left:7px solid var(--gold);overflow-wrap:anywhere}
+.stats{display:flex;gap:22px;margin:20px 0 24px}
+.stat{flex:1;background:linear-gradient(135deg,#e4f0fc,#f8fbff);border:1px solid var(--line);border-radius:18px;padding:27px 26px}
+.stat b{display:block;font-size:clamp(40px,5vw,63px);color:var(--forest2);line-height:1.1;margin-bottom:10px}
+.stat span{font-size:18px;line-height:1.4}
+.flow{display:flex;gap:12px;margin-top:18px}
+.step{flex:1;min-width:0;padding:22px 13px;background:#edf5fd;border:1px solid var(--line);border-radius:14px;text-align:center;font-size:17px;line-height:1.42}
+.step b{display:block;color:var(--forest2);font-size:13px;letter-spacing:.055em;margin-bottom:10px}
+.footer{position:absolute;bottom:23px;left:76px;right:76px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:12px;color:#6b8097;font-size:13px}
+.cover-sub{font-size:19px;color:var(--muted);margin:0 0 18px}
+.names{font-size:19px;line-height:1.65;margin-top:8px}
+nav{display:flex;align-items:center;justify-content:center;gap:15px;min-height:56px;padding:8px 12px}
+button{border:1px solid #a5c4e4;background:var(--forest);color:white;border-radius:9px;padding:10px 17px;font-size:14px;cursor:pointer;font-weight:650}
+button:hover{background:var(--forest2)}
+#count{min-width:70px;text-align:center;color:var(--forest);font-weight:700}
+@media(max-width:720px){.slide{width:calc(100vw - 16px);height:calc(100dvh - 90px);min-height:0;margin:8px auto 0;padding:36px 23px 30px;border-radius:12px}.slide.active{justify-content:flex-start}.slide:before{width:6px}.grid{grid-template-columns:1fr;gap:10px}.card{min-height:0;padding:13px 16px}.card:before{margin-bottom:7px}.card strong{font-size:16px}.card span{font-size:14px}.stats{gap:9px}.stat{padding:15px 12px}.stat span{font-size:14px}.flow{flex-direction:column;gap:8px}.step{padding:10px;font-size:15px}.footer{position:static;margin-top:22px;font-size:11px}.para{font-size:15px;padding:14px 17px}.names{font-size:16px}.bigquote{padding:17px;font-size:19px}h2{margin-bottom:17px}nav{gap:6px;flex-wrap:wrap}button{padding:8px 10px;font-size:12px}}
+@media print{body{background:white}.slide,.slide.active{display:flex!important;width:100%;height:100vh;min-height:0;margin:0;border-radius:0;box-shadow:none;break-after:page;page-break-after:always}@page{size:landscape;margin:0}nav{display:none}}
+</style></head><body>
+<section class="slide active"><p class="eyebrow">Facultad de Ingeniería · Ingeniería Informática · Comunitaria de Caacupé</p><p class="cover-sub">Anteproyecto de Trabajo Final · 2026–2027</p><h1>Desarrollo de una plataforma web con IA para la identificación de posibles coincidencias, ubicación y gestión de animales en situación de extravío o abandono, incluyendo la difusión para su adopción, en la organización Piripatitas, Piribebuy, durante el año 2026.</h1><div class="names"><b>Integrantes</b><br>Aguilar Martínez, Dulce María<br>Martínez Centurión, Lucas Gabriel</div><p class="small">Caacupé, Paraguay · Director: Ing. Guido Guillermo Guillen</p><div class="footer"><span>Organización Piripatitas</span><span>Portada</span></div></section>
+<section class="slide">
+<p class="eyebrow">Capítulo I · Planteamiento del problema</p>
+<h2>Situación identificada</h2>
+<p class="para">La organización Piripatitas, en Piribebuy, recibe reportes de animales perdidos, encontrados y abandonados. Actualmente, gran parte de la información se difunde mediante redes sociales y publicaciones dispersas. Esto dificulta localizar reportes anteriores, dar seguimiento a los casos y reconocer posibles coincidencias entre animales perdidos y encontrados. También limita la difusión organizada de perros y gatos disponibles para adopción.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo I</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo I · Pregunta general</p>
+<h2>Pregunta de investigación</h2>
+<div class="bigquote">¿De qué manera el desarrollo de una plataforma web con IA contribuirá a la identificación de posibles coincidencias entre animales perdidos y encontrados, la ubicación y la gestión de animales en situación de extravío o abandono, así como a la difusión de animales disponibles para adopción, en la organización Piripatitas, Piribebuy, durante el año 2026?</div><p class="small">Pregunta general del anteproyecto.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo I</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo I · Objetivo general</p>
+<h2>¿Qué se busca desarrollar?</h2>
+<div class="bigquote">Desarrollar una plataforma web con inteligencia artificial para la identificación de posibles coincidencias entre animales perdidos y encontrados, la ubicación y la gestión de animales en situación de extravío o abandono, incluyendo la difusión de animales disponibles para adopción, en la organización Piripatitas, Piribebuy, durante el año 2026.</div><p class="small">Objetivo general según el anteproyecto actualizado.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo I</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo I · Justificación</p>
+<h2>¿Por qué es importante?</h2>
+<p class="para">La propuesta busca centralizar los reportes en una plataforma web con fotografías, características, ubicación y estado de cada caso. La inteligencia artificial apoyará la comparación de imágenes y sugerirá posibles coincidencias que serán revisadas por la organización. También facilitará la difusión de animales en adopción. El proyecto es viable como prototipo: se prevé utilizar herramientas accesibles y realizar pruebas técnicas en un entorno controlado, sin afirmar todavía resultados comprobados.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo I</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo III · Tipo de investigación</p>
+<h2>Enfoque del estudio</h2>
+<div class="grid"><div class="card"><strong>Aplicada</strong><span>Busca una solución concreta para organizar reportes de animales.</span></div><div class="card"><strong>Orientación tecnológica</strong><span>Prevé desarrollar y comprobar un prototipo web con IA.</span></div><div class="card"><strong>Enfoque mixto</strong><span>Combina entrevistas cualitativas y encuestas cuantitativas.</span></div><div class="card"><strong>Alcance descriptivo</strong><span>Caracteriza dificultades, procesos y necesidades de los participantes.</span></div></div>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo III</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo III · Diseño de investigación</p>
+<h2>Diseño mixto exploratorio secuencial</h2>
+<div class="flow"><div class="step"><b>01 · CUALITATIVO</b>Entrevistas a 5 responsables</div><div class="step"><b>02 · CUANTITATIVO</b>Encuestas a 50 posibles usuarios</div><div class="step"><b>03 · INTEGRACIÓN</b>Necesidades y requisitos del sistema</div><div class="step"><b>04 · TECNOLÓGICO</b>Prototipo y pruebas técnicas</div></div><p class="small">Diseño mixto exploratorio secuencial. Diagnóstico no experimental y transversal; desarrollo y pruebas previstos para 2027.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo III</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo III · Población</p>
+<h2>¿A quiénes comprende el estudio?</h2>
+<div class="stats"><div class="stat"><b>50</b><span>Ciudadanos delimitados como posibles usuarios</span></div><div class="stat"><b>5</b><span>Responsables o colaboradores de Piripatitas</span></div></div><p class="lead">55 personas en una población de estudio hipotética y provisional; no representa a todos los habitantes de Piribebuy.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo III</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo III · Muestra</p>
+<h2>Participantes previstos</h2>
+<div class="stats"><div class="stat"><b>50</b><span>Posibles usuarios para encuestas</span></div><div class="stat"><b>5</b><span>Responsables para entrevistas</span></div></div><p class="lead">Total previsto: 55 participantes, equivalentes al 100 % del grupo delimitado para el anteproyecto.</p><p class="small">Cantidades estimadas; la participación efectiva se confirmará en 2027.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo III</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Capítulo III · Muestreo</p>
+<h2>Cobertura censal</h2>
+<div class="grid"><div class="card"><strong>Grupo de ciudadanos</strong><span>Se prevé invitar a los 50 integrantes del grupo previamente delimitado.</span></div><div class="card"><strong>Organización Piripatitas</strong><span>Se prevé invitar a los 5 responsables o colaboradores considerados.</span></div><div class="card"><strong>Sin selección aleatoria</strong><span>Se incluye a la totalidad de la población de estudio definida.</span></div><div class="card"><strong>Participación voluntaria</strong><span>Se registrarán respuestas, ausencias y posibles rechazos.</span></div></div>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Capítulo III</span></div>
+</section>
+<section class="slide">
+<p class="eyebrow">Cierre</p>
+<h2>Del problema a la propuesta</h2>
+<div class="flow"><div class="step"><b>PROBLEMA</b>Reportes dispersos</div><div class="step"><b>ESTUDIO</b>Ciudadanos y Piripatitas</div><div class="step"><b>PROPUESTA</b>Plataforma web con IA</div><div class="step"><b>VERIFICACIÓN</b>Pruebas técnicas en 2027</div></div><p class="lead" style="margin-top:34px">Muchas gracias.</p>
+<div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Fin</span></div>
+</section><nav aria-label="Navegación"><button type="button" onclick="window.presentationPrev()">◀ Anterior</button><span id="count" aria-live="polite">1 / 11</span><button type="button" onclick="window.presentationNext()">Siguiente ▶</button><button type="button" onclick="document.documentElement.requestFullscreen?.()">Pantalla completa ⛶</button></nav><script>
+/* Navegación de la presentación (flechas del teclado y botones del visor) */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function avisar(){var c=document.getElementById('count');if(c)c.textContent=(cur+1)+' / '+slides.length;try{parent.postMessage({tipo:'diapositivas',actual:cur+1,total:slides.length},'*')}catch(e){}}
+  function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,i){s.classList.toggle('active',i===cur)});avisar()}
+  document.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(cur+1)}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(cur-1)}
+    else if(k==='Home'){show(0)}else if(k==='End'){show(slides.length-1)}});
+  window.addEventListener('message',function(e){var d=e.data;if(!d)return;
+    if(d.tipo==='hola')avisar();
+    else if(d.tipo==='ir'){if(d.accion==='sig')show(cur+1);else if(d.accion==='ant')show(cur-1)}});
+  window.presentationNext=function(){show(cur+1)};window.presentationPrev=function(){show(cur-1)};show(0);
+})();
+</script>
+</body></html>
