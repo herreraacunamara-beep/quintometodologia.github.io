@@ -1,17 +1,875 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupo 11 - pendiente</title>
-  <style>
-    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;font-family:system-ui,Arial,sans-serif;background:#e9eff1;color:#10232a}
-    h1{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 .4em}
-    p{font-size:1.3rem;color:#52646b}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anteproyecto | Nutrihara</title>
+
+<style>
+:root{
+  --ink:#193A36;
+  --muted:#657873;
+  --accent:#287A68;
+  --accent-dark:#174D45;
+  --accent-soft:#E4F1EC;
+  --coral:#E58B70;
+  --bg:#EAF0ED;
+  --line:#D8E5DF;
+  --paper:#FFFEFB;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 12% 12%,#DDECE5 0,transparent 28%),
+    radial-gradient(circle at 88% 86%,#F5E8DF 0,transparent 25%),
+    var(--bg);
+  font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+  color:var(--ink);
+}
+
+.slide{
+  display:none;
+  width:min(1180px,calc(100vw - 64px));
+  height:min(664px,calc(100vh - 48px));
+  min-height:480px;
+  margin:24px auto 0;
+  background:var(--paper);
+  box-shadow:0 24px 70px #193A361A,0 3px 12px #193A360A;
+  border:1px solid #FFFFFF;
+  border-radius:22px;
+  position:relative;
+  padding:58px 72px;
+  overflow:auto;
+}
+
+.slide.active{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.slide:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:8px;
+  background:linear-gradient(90deg,var(--accent-dark),var(--accent) 62%,var(--coral));
+}
+
+.slide:after{
+  content:"";
+  position:absolute;
+  right:-105px;
+  top:-125px;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:var(--accent-soft);
+  opacity:.52;
+  pointer-events:none;
+}
+
+.eyebrow{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.15em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin:0 0 18px;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  font-size:clamp(29px,3.25vw,45px);
+  line-height:1.16;
+  letter-spacing:-.035em;
+  margin:0 0 22px;
+  max-width:1000px;
+  color:var(--accent-dark);
+  position:relative;
+  z-index:1;
+}
+
+h2{
+  font-size:clamp(30px,3.15vw,42px);
+  line-height:1.12;
+  letter-spacing:-.03em;
+  margin:0 0 25px;
+  color:var(--accent-dark);
+  position:relative;
+  z-index:1;
+}
+
+.lead{
+  font-size:clamp(18px,1.8vw,23px);
+  line-height:1.5;
+  max-width:980px;
+  margin:0;
+  color:#365A51;
+  position:relative;
+  z-index:1;
+}
+
+.small{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.5;
+  position:relative;
+  z-index:1;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  margin-top:10px;
+  position:relative;
+  z-index:1;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-left:0;
+  border-top:3px solid var(--accent);
+  border-radius:13px;
+  padding:17px 21px;
+  background:linear-gradient(145deg,#FFFFFF,#F5F9F6);
+  min-height:105px;
+  box-shadow:0 5px 16px #193A3608;
+}
+
+.card strong{
+  display:block;
+  font-size:17px;
+  margin-bottom:7px;
+  color:var(--accent-dark);
+}
+
+.card span{
+  font-size:15px;
+  line-height:1.48;
+  color:#526760;
+}
+
+.bigquote{
+  border-left:5px solid var(--coral);
+  border-radius:0 14px 14px 0;
+  padding:17px 22px;
+  font-size:clamp(20px,2vw,27px);
+  line-height:1.45;
+  max-width:980px;
+  background:#F7F4EE;
+  color:#284A42;
+  position:relative;
+  z-index:1;
+}
+
+.stats{
+  display:flex;
+  gap:18px;
+  margin:20px 0;
+  position:relative;
+  z-index:1;
+}
+
+.stat{
+  flex:1;
+  padding:22px 20px;
+  background:linear-gradient(145deg,#EAF4EF,#F7FAF7);
+  border:1px solid #DCEAE3;
+  border-radius:15px;
+  border-top:4px solid var(--accent);
+}
+
+.stat b{
+  display:block;
+  font-size:43px;
+  color:var(--accent-dark);
+  margin-bottom:7px;
+  letter-spacing:-.04em;
+}
+
+.stat span{
+  font-size:15px;
+  line-height:1.4;
+  color:#526760;
+}
+
+.flow{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  position:relative;
+  z-index:1;
+}
+
+.step{
+  flex:1;
+  padding:18px 13px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:linear-gradient(145deg,#F7FAF8,#EAF3EE);
+  text-align:center;
+  font-size:14px;
+  line-height:1.45;
+  color:#526760;
+}
+
+.step b{
+  display:block;
+  font-size:12px;
+  letter-spacing:.08em;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+
+.footer{
+  position:absolute;
+  bottom:22px;
+  left:72px;
+  right:72px;
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid var(--line);
+  padding-top:11px;
+  color:#84958E;
+  font-size:11px;
+  z-index:1;
+}
+
+.cover-sub{
+  font-size:18px;
+  color:var(--coral);
+  font-weight:700;
+  margin:0 0 16px;
+  position:relative;
+  z-index:1;
+}
+
+.names{
+  font-size:18px;
+  line-height:1.6;
+  margin-top:12px;
+  color:#365A51;
+  position:relative;
+  z-index:1;
+}
+
+.names b{
+  color:var(--accent-dark);
+}
+
+.slide:first-of-type{
+  background:linear-gradient(125deg,#FFFEFB 0%,#F4F8F4 72%,#E5F0EA 100%);
+}
+
+.slide:first-of-type:after{
+  width:390px;
+  height:390px;
+  right:-110px;
+  top:auto;
+  bottom:-175px;
+  background:linear-gradient(145deg,#DCEDE4,#F5E4DA);
+  opacity:.85;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  height:62px;
+}
+
+button{
+  background:var(--accent-dark);
+  border:1px solid var(--accent-dark);
+  border-radius:999px;
+  padding:10px 21px;
+  color:white;
+  font-size:14px;
+  font-weight:650;
+  cursor:pointer;
+  transition:transform .2s,background .2s,box-shadow .2s;
+  box-shadow:0 5px 14px #174D4520;
+}
+
+button:hover{
+  background:var(--accent);
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px #174D4528;
+}
+
+#count{
+  min-width:72px;
+  text-align:center;
+  color:#657873;
+  font-size:14px;
+  font-weight:650;
+}
+
+@media(max-width:720px){
+  .slide{
+    width:calc(100vw - 20px);
+    height:calc(100dvh - 20px);
+    margin:10px auto 0;
+    padding:32px 23px;
+    min-height:0;
+    border-radius:16px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .card{
+    min-height:0;
+    padding:11px 14px;
+  }
+
+  .card span{font-size:13px}
+  .card strong{font-size:14px}
+
+  .stats{
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .stat{
+    padding:14px 9px;
+    min-width:28%;
+  }
+
+  .stat b{font-size:30px}
+  .stat span{font-size:12px}
+
+  .flow{
+    flex-direction:column;
+    gap:6px;
+  }
+
+  .step{
+    padding:9px;
+    font-size:13px;
+  }
+
+  .footer{
+    left:23px;
+    right:23px;
+    bottom:12px;
+  }
+
+  h2{margin-bottom:16px}
+  .names{font-size:15px}
+}
+
+@media print{
+  body{background:white}
+
+  .slide,.slide.active{
+    display:flex!important;
+    width:100%;
+    height:100vh;
+    min-height:0;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+    break-after:page;
+    page-break-after:always;
+  }
+
+  nav{display:none}
+
+  @page{
+    size:landscape;
+    margin:0;
+  }
+}
+</style>
 </head>
+
 <body>
-  <!-- Este archivo es un marcador. Reemplázalo por la presentación real del Grupo 11 (mismo nombre: grupo11.html). -->
-  <div><h1>Grupo 11</h1><p>Presentación pendiente</p></div>
+
+<!-- PORTADA -->
+<section class="slide active">
+<p class="eyebrow">Universidad del Norte · Ingeniería Informática</p>
+<p class="cover-sub">Anteproyecto de Trabajo Final · 2026</p>
+
+<h1>
+Desarrollo de un sistema web basado en Inteligencia Artificial para la personalización de planes alimentarios y la estimación de calorías mediante imágenes
+</h1>
+
+<p class="lead">
+Consultorio Nutricional “Nutrihara” · Ciudad de Caacupé
+</p>
+
+<div class="names">
+<b>Presentado por</b><br>
+María Luján Garcete Arréllaga
+</div>
+
+<p class="small">
+Director: Prof. Ing. Guido Guillermo Guillén Ferreira<br>
+Caacupé – Paraguay · Octubre, 2026
+</p>
+
+<div class="footer">
+<span>Consultorio Nutricional Nutrihara</span>
+<span>Portada</span>
+</div>
+</section>
+
+<!-- SITUACIÓN IDENTIFICADA -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Planteamiento del problema</p>
+<h2>Situación identificada</h2>
+
+<div class="grid">
+<div class="card">
+<strong>Elaboración manual</strong>
+<span>Los planes alimentarios semanales se elaboran manualmente por la profesional nutricionista.</span>
+</div>
+
+<div class="card">
+<strong>Personalización</strong>
+<span>Se deben analizar características, necesidades, preferencias y objetivos de cada paciente.</span>
+</div>
+
+<div class="card">
+<strong>Seguimiento</strong>
+<span>Los pacientes pueden consumir alimentos fuera del plan y necesitan registrar esos consumos.</span>
+</div>
+
+<div class="card">
+<strong>Oportunidad tecnológica</strong>
+<span>La IA y el análisis de imágenes pueden apoyar la identificación de alimentos y la estimación calórica.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Problema de investigación</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- PREGUNTA PRINCIPAL -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Pregunta de investigación</p>
+<h2>Pregunta principal</h2>
+
+<div class="bigquote">
+¿Cómo desarrollar un sistema web basado en Inteligencia Artificial para la personalización de planes alimentarios y la estimación de calorías mediante imágenes de alimentos en el Consultorio Nutricional Nutrihara de la ciudad de Caacupé?
+</div>
+
+<p class="small">Año 2026</p>
+
+<div class="footer">
+<span>Pregunta de investigación</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- SUBPREGUNTAS -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Subpreguntas</p>
+<h2>¿Qué se necesita conocer?</h2>
+
+<div class="grid">
+<div class="card">
+<strong>01 · Situación actual</strong>
+<span>¿Cuáles son las características, necesidades y dificultades de la elaboración y personalización de planes y del registro de alimentos?</span>
+</div>
+
+<div class="card">
+<strong>02 · Datos y criterios</strong>
+<span>¿Qué datos, criterios y características deben considerarse para personalizar planes y estimar calorías mediante imágenes?</span>
+</div>
+
+<div class="card">
+<strong>03 · Solución tecnológica</strong>
+<span>¿Qué funcionalidades y tecnologías debe incorporar el sistema web basado en IA?</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Subpreguntas de investigación</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- OBJETIVO GENERAL -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Objetivo general</p>
+<h2>Propósito del proyecto</h2>
+
+<div class="bigquote">
+Desarrollar un sistema web basado en Inteligencia Artificial para la personalización de planes alimentarios y la estimación de calorías mediante imágenes de alimentos en el Consultorio Nutricional Nutrihara de la ciudad de Caacupé.
+</div>
+
+<p class="small">Año 2026</p>
+
+<div class="footer">
+<span>Objetivo general</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- OBJETIVOS ESPECÍFICOS -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Objetivos específicos</p>
+<h2>Etapas para alcanzar el objetivo</h2>
+
+<div class="grid">
+<div class="card">
+<strong>01 · Identificar</strong>
+<span>Características, necesidades y dificultades de la elaboración y personalización de planes y del registro del consumo.</span>
+</div>
+
+<div class="card">
+<strong>02 · Determinar</strong>
+<span>Datos, criterios y características para generar planes personalizados y estimar calorías mediante imágenes.</span>
+</div>
+
+<div class="card">
+<strong>03 · Definir</strong>
+<span>Funcionalidades y tecnologías necesarias para desarrollar el sistema web basado en IA.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Objetivos específicos</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- JUSTIFICACIÓN: UN SOLO PÁRRAFO -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Justificación</p>
+<h2>Importancia de la propuesta</h2>
+
+<div class="bigquote" style="font-size:clamp(17px,1.55vw,21px);line-height:1.65;padding:25px 30px">
+En el Consultorio Nutricional Nutrihara, la elaboración manual de planes alimentarios semanales requiere analizar las características, necesidades y preferencias de cada paciente, además de organizar sus comidas y realizar el seguimiento de los alimentos consumidos. Por ello, se propone desarrollar un sistema web basado en Inteligencia Artificial que facilite la generación de propuestas personalizadas y permita registrar alimentos mediante fotografías para identificarlos y estimar de forma aproximada su contenido calórico. La herramienta busca apoyar el trabajo de la profesional nutricionista y mejorar el seguimiento nutricional, manteniendo siempre la revisión y validación de los planes y resultados por parte de la especialista, sin sustituir su criterio profesional.
+</div>
+
+<div class="footer">
+<span>Justificación del proyecto</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- DELIMITACIÓN -->
+<section class="slide">
+<p class="eyebrow">Capítulo I · Delimitación e impacto</p>
+<h2>Alcance del trabajo</h2>
+
+<div class="grid">
+<div class="card">
+<strong>Ubicación y período</strong>
+<span>Consultorio Nutricional Nutrihara, ciudad de Caacupé, año 2026.</span>
+</div>
+
+<div class="card">
+<strong>Participantes</strong>
+<span>Lic. en Nutrición Tihara Sequeira y pacientes atendidos en el consultorio.</span>
+</div>
+
+<div class="card">
+<strong>Funcionalidades</strong>
+<span>Planes semanales personalizados, registro fotográfico, identificación de alimentos y estimación aproximada de calorías.</span>
+</div>
+
+<div class="card">
+<strong>Límite</strong>
+<span>La estimación será orientativa y los resultados estarán sujetos a revisión profesional.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Delimitación e impacto esperado</span>
+<span>Capítulo I</span>
+</div>
+</section>
+
+<!-- TIPO DE INVESTIGACIÓN -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Tipo de investigación</p>
+<h2>Enfoque del estudio</h2>
+
+<div class="grid">
+<div class="card">
+<strong>Aplicada</strong>
+<span>Orienta la investigación al desarrollo de una solución tecnológica para una necesidad identificada.</span>
+</div>
+
+<div class="card">
+<strong>Descriptiva</strong>
+<span>Identifica características, necesidades y dificultades del proceso de elaboración de planes.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Tipo de investigación</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- DISEÑO Y ENFOQUE -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Diseño y enfoque</p>
+<h2>Cómo se desarrollará el estudio</h2>
+
+<div class="grid">
+<div class="card">
+<strong>No experimental</strong>
+<span>Las variables y características se observarán tal como se presentan, sin manipularlas.</span>
+</div>
+
+<div class="card">
+<strong>Transversal descriptivo</strong>
+<span>La recolección de datos se realizará durante un período determinado.</span>
+</div>
+
+<div class="card">
+<strong>Enfoque mixto</strong>
+<span>Combina información cualitativa y cuantitativa.</span>
+</div>
+
+<div class="card">
+<strong>Integración</strong>
+<span>Los resultados permitirán establecer los requerimientos del sistema web.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Diseño de investigación</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- POBLACIÓN Y MUESTRA -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Población y muestra</p>
+<h2>Participantes del estudio</h2>
+
+<div class="stats">
+<div class="stat">
+<b>1</b>
+<span>Profesional de nutrición: Lic. Tihara Sequeira (100 % de la población profesional)</span>
+</div>
+
+<div class="stat">
+<b>≈ 50</b>
+<span>Pacientes atendidos en el consultorio (población estimada)</span>
+</div>
+
+<div class="stat">
+<b>≈ 30</b>
+<span>Pacientes que conformarán la muestra</span>
+</div>
+</div>
+
+<p class="small">
+Los pacientes serán seleccionados por conveniencia, según disponibilidad y participación.
+</p>
+
+<div class="footer">
+<span>Población y muestra</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- TÉCNICAS E INSTRUMENTOS -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Técnicas e instrumentos</p>
+<h2>Recolección de datos</h2>
+
+<div class="grid">
+<div class="card">
+<strong>Entrevista semiestructurada</strong>
+<span>Dirigida a la profesional mediante una guía: proceso actual, criterios de personalización, datos del paciente, necesidades y funcionalidades esperadas.</span>
+</div>
+
+<div class="card">
+<strong>Encuesta</strong>
+<span>Dirigida a pacientes mediante un cuestionario: características, preferencias, necesidades, registro de alimentos y uso de fotografías.</span>
+</div>
+</div>
+
+<div class="footer">
+<span>Técnicas e instrumentos de medición</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- PROCESAMIENTO Y VALIDACIÓN -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Procesamiento y validación</p>
+<h2>Análisis de la información</h2>
+
+<div class="flow">
+<div class="step">
+<b>01 · ENCUESTA</b>
+Organización y tabulación en hoja de cálculo
+</div>
+
+<div class="step">
+<b>02 · ANÁLISIS</b>
+Tablas y gráficos descriptivos
+</div>
+
+<div class="step">
+<b>03 · ENTREVISTA</b>
+Análisis del proceso y requerimientos identificados
+</div>
+
+<div class="step">
+<b>04 · VALIDACIÓN</b>
+Revisión de instrumentos por expertos
+</div>
+</div>
+
+<p class="small">
+Se evaluará la claridad, coherencia y pertinencia de las preguntas; las observaciones se utilizarán para realizar ajustes.
+</p>
+
+<div class="footer">
+<span>Procesamiento y validación de instrumentos</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- DISEÑO DEL SISTEMA -->
+<section class="slide">
+<p class="eyebrow">Capítulo III · Diseño del sistema</p>
+<h2>Modelo iterativo e incremental</h2>
+
+<div class="flow">
+<div class="step">
+<b>INCREMENTO 01</b>
+Gestión de pacientes y registro de información
+</div>
+
+<div class="step">
+<b>INCREMENTO 02</b>
+Generación de planes mediante IA
+</div>
+
+<div class="step">
+<b>INCREMENTO 03</b>
+Carga e identificación de imágenes de alimentos
+</div>
+
+<div class="step">
+<b>INCREMENTO 04</b>
+Estimación calórica y revisión profesional
+</div>
+</div>
+
+<p class="small">
+El sistema se construirá mediante ciclos sucesivos, incorporando revisiones, ajustes y retroalimentación de la profesional.
+</p>
+
+<div class="footer">
+<span>Especificaciones de diseño</span>
+<span>Capítulo III</span>
+</div>
+</section>
+
+<!-- CIERRE -->
+<section class="slide">
+<p class="eyebrow">Cierre</p>
+<h2>Una propuesta tecnológica de apoyo nutricional</h2>
+
+<div class="flow">
+<div class="step">
+<b>NECESIDAD</b>
+Personalizar planes y registrar consumos
+</div>
+
+<div class="step">
+<b>INVESTIGACIÓN</b>
+Profesional y pacientes
+</div>
+
+<div class="step">
+<b>PROPUESTA</b>
+Sistema web basado en IA
+</div>
+
+<div class="step">
+<b>RESULTADO ESPERADO</b>
+Apoyo y seguimiento nutricional
+</div>
+</div>
+
+<p class="lead" style="margin-top:32px">
+Muchas gracias.
+</p>
+
+<div class="footer">
+<span>Anteproyecto · Nutrihara · Caacupé 2026</span>
+<span>Fin</span>
+</div>
+</section>
+
+<!-- NAVEGACIÓN -->
+<nav>
+<button id="prev">← Anterior</button>
+<span id="count">1 / 15</span>
+<button id="next">Siguiente →</button>
+</nav>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  let cur=0;
+  const count=document.getElementById('count');
+
+  function show(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+
+    slides.forEach((s,i)=>{
+      s.classList.toggle('active',i===cur);
+    });
+
+    count.textContent=(cur+1)+' / '+slides.length;
+  }
+
+  document.getElementById('prev').addEventListener('click',()=>{
+    show(cur-1);
+  });
+
+  document.getElementById('next').addEventListener('click',()=>{
+    show(cur+1);
+  });
+
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){
+      e.preventDefault();
+      show(cur+1);
+    }
+    else if(['ArrowLeft','PageUp'].includes(e.key)){
+      e.preventDefault();
+      show(cur-1);
+    }
+    else if(e.key==='Home'){
+      show(0);
+    }
+    else if(e.key==='End'){
+      show(slides.length-1);
+    }
+  });
+
+  show(0);
+})();
+</script>
+
 </body>
 </html>
