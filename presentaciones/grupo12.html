@@ -39,12 +39,8 @@ h2{font-size:clamp(30px,3.5vw,46px);line-height:1.12;margin:0 0 28px;letter-spac
 .footer{position:absolute;bottom:23px;left:76px;right:76px;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:12px;color:#6b8097;font-size:13px}
 .cover-sub{font-size:19px;color:var(--muted);margin:0 0 18px}
 .names{font-size:19px;line-height:1.65;margin-top:8px}
-nav{display:flex;align-items:center;justify-content:center;gap:15px;min-height:56px;padding:8px 12px}
-button{border:1px solid #a5c4e4;background:var(--forest);color:white;border-radius:9px;padding:10px 17px;font-size:14px;cursor:pointer;font-weight:650}
-button:hover{background:var(--forest2)}
-#count{min-width:70px;text-align:center;color:var(--forest);font-weight:700}
-@media(max-width:720px){.slide{width:calc(100vw - 16px);height:calc(100dvh - 90px);min-height:0;margin:8px auto 0;padding:36px 23px 30px;border-radius:12px}.slide.active{justify-content:flex-start}.slide:before{width:6px}.grid{grid-template-columns:1fr;gap:10px}.card{min-height:0;padding:13px 16px}.card:before{margin-bottom:7px}.card strong{font-size:16px}.card span{font-size:14px}.stats{gap:9px}.stat{padding:15px 12px}.stat span{font-size:14px}.flow{flex-direction:column;gap:8px}.step{padding:10px;font-size:15px}.footer{position:static;margin-top:22px;font-size:11px}.para{font-size:15px;padding:14px 17px}.names{font-size:16px}.bigquote{padding:17px;font-size:19px}h2{margin-bottom:17px}nav{gap:6px;flex-wrap:wrap}button{padding:8px 10px;font-size:12px}}
-@media print{body{background:white}.slide,.slide.active{display:flex!important;width:100%;height:100vh;min-height:0;margin:0;border-radius:0;box-shadow:none;break-after:page;page-break-after:always}@page{size:landscape;margin:0}nav{display:none}}
+@media(max-width:720px){.slide{width:calc(100vw - 16px);height:calc(100dvh - 16px);min-height:0;margin:8px auto 0;padding:36px 23px 30px;border-radius:12px}.slide.active{justify-content:flex-start}.slide:before{width:6px}.grid{grid-template-columns:1fr;gap:10px}.card{min-height:0;padding:13px 16px}.card:before{margin-bottom:7px}.card strong{font-size:16px}.card span{font-size:14px}.stats{gap:9px}.stat{padding:15px 12px}.stat span{font-size:14px}.flow{flex-direction:column;gap:8px}.step{padding:10px;font-size:15px}.footer{position:static;margin-top:22px;font-size:11px}.para{font-size:15px;padding:14px 17px}.names{font-size:16px}.bigquote{padding:17px;font-size:19px}h2{margin-bottom:17px}}
+@media print{body{background:white}.slide,.slide.active{display:flex!important;width:100%;height:100vh;min-height:0;margin:0;border-radius:0;box-shadow:none;break-after:page;page-break-after:always}@page{size:landscape;margin:0}}
 </style></head><body>
 <section class="slide active"><p class="eyebrow">Facultad de Ingeniería · Ingeniería Informática · Comunitaria de Caacupé</p><p class="cover-sub">Anteproyecto de Trabajo Final · 2026–2027</p><h1>Desarrollo de una plataforma web con IA para la identificación de posibles coincidencias, ubicación y gestión de animales en situación de extravío o abandono, incluyendo la difusión para su adopción, en la organización Piripatitas, Piribebuy, durante el año 2026.</h1><div class="names"><b>Integrantes</b><br>Aguilar Martínez, Dulce María<br>Martínez Centurión, Lucas Gabriel</div><p class="small">Caacupé, Paraguay · Director: Ing. Guido Guillermo Guillen</p><div class="footer"><span>Organización Piripatitas</span><span>Portada</span></div></section>
 <section class="slide">
@@ -106,11 +102,11 @@ button:hover{background:var(--forest2)}
 <h2>Del problema a la propuesta</h2>
 <div class="flow"><div class="step"><b>PROBLEMA</b>Reportes dispersos</div><div class="step"><b>ESTUDIO</b>Ciudadanos y Piripatitas</div><div class="step"><b>PROPUESTA</b>Plataforma web con IA</div><div class="step"><b>VERIFICACIÓN</b>Pruebas técnicas en 2027</div></div><p class="lead" style="margin-top:34px">Muchas gracias.</p>
 <div class="footer"><span>Anteproyecto Piripatitas · 2026–2027</span><span>Fin</span></div>
-</section><nav aria-label="Navegación"><button type="button" onclick="window.presentationPrev()">◀ Anterior</button><span id="count" aria-live="polite">1 / 11</span><button type="button" onclick="window.presentationNext()">Siguiente ▶</button><button type="button" onclick="document.documentElement.requestFullscreen?.()">Pantalla completa ⛶</button></nav><script>
+</section><script>
 /* Navegación de la presentación (flechas del teclado y botones del visor) */
 (function(){
   var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
-  function avisar(){var c=document.getElementById('count');if(c)c.textContent=(cur+1)+' / '+slides.length;try{parent.postMessage({tipo:'diapositivas',actual:cur+1,total:slides.length},'*')}catch(e){}}
+  function avisar(){try{parent.postMessage({tipo:'diapositivas',actual:cur+1,total:slides.length},'*')}catch(e){}}
   function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,i){s.classList.toggle('active',i===cur)});avisar()}
   document.addEventListener('keydown',function(e){
     var k=e.key;
@@ -120,7 +116,7 @@ button:hover{background:var(--forest2)}
   window.addEventListener('message',function(e){var d=e.data;if(!d)return;
     if(d.tipo==='hola')avisar();
     else if(d.tipo==='ir'){if(d.accion==='sig')show(cur+1);else if(d.accion==='ant')show(cur-1)}});
-  window.presentationNext=function(){show(cur+1)};window.presentationPrev=function(){show(cur-1)};show(0);
+  show(0);
 })();
 </script>
 </body></html>
