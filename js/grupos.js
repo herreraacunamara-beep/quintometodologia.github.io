@@ -22,7 +22,7 @@ const GRUPOS = [
   { numero: 5,  nombre: "", titulo: "", lista: false },
   { numero: 6,  nombre: "", titulo: "", lista: false },
   { numero: 7,  nombre: "", titulo: "", lista: false },
-  { numero: 8,  nombre: "", titulo: "", lista: false },
+  { numero: 8,  nombre: "Enrique Duarte, Juan Añazco", titulo: "DESARROLLO DE UN SISTEMA BASADO EN INTELIGENCIA ARTIFICIAL PARA LA GENERACIÓN AUTOMÁTICA DE TAREAS Y RECOMENDACIÓN DE ASIGNACIÓN EN PROYECTOS DE DESARROLLO WEB DE LA EMPRESA XNET - 2026.", lista: true },
   { numero: 9, nombre: "Luz Aguilera", titulo: "Predicción del rendimiento académico mediante aprendizaje automático", lista: true },
   { numero: 10, nombre: "", titulo: "", lista: false },
   { numero: 11, nombre: "Lujan Garcete", titulo: "DESARROLLO DE UN SISTEMA WEB BASADO EN INTELIGENCIA ARTIFICIAL PARA LA PERSONALIZACIÓN DE PLANES ALIMENTARIOS Y LA ESTIMACIÓN DE CALORÍAS MEDIANTE IMÁGENES EN EL CONSULTORIO NUTRICIONAL “NUTRITIHARA” DE LA CIUDAD DE CAACUPÉ, AÑO 2026", lista: true },
