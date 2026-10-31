@@ -16,7 +16,7 @@ const CLASE = {
 
 const GRUPOS = [
   { numero: 1,  nombre: "Ana Liz, Paloma Miranda", titulo: "Desarrollo de una aplicación móvil con asistente virtual inteligente y sistema web para consultas y agendamientos en el Centro de Salud de Caraguatay", lista: true  },
-  { numero: 2,  nombre: "", titulo: "", lista: false },
+  { numero: 2,  nombre: "Enzo Gabriel Calderón Martínez, Luis Angel Medina Cardozo", titulo: "Desarrollo de una Distribución Linux basada en Debian para la Administración Centralizada, Control de Software y Detección de Amenazas de Red", lista: true },
   { numero: 3,  nombre: "", titulo: "", lista: false },
   { numero: 4,  nombre: "", titulo: "", lista: false },
   { numero: 5,  nombre: "", titulo: "", lista: false },
