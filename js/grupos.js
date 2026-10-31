@@ -23,7 +23,7 @@ const GRUPOS = [
   { numero: 6,  nombre: "", titulo: "", lista: false },
   { numero: 7,  nombre: "", titulo: "", lista: false },
   { numero: 8,  nombre: "", titulo: "", lista: false },
-  { numero: 9,  nombre: "", titulo: "", lista: false },
+  { numero: 9, nombre: "Luz Aguilera", titulo: "Predicción del rendimiento académico mediante aprendizaje automático", lista: true },
   { numero: 10, nombre: "", titulo: "", lista: false },
   { numero: 11, nombre: "", titulo: "", lista: false },
   { numero: 12, nombre: "", titulo: "", lista: false },
