@@ -25,7 +25,7 @@ const GRUPOS = [
   { numero: 8,  nombre: "", titulo: "", lista: false },
   { numero: 9, nombre: "Luz Aguilera", titulo: "Predicción del rendimiento académico mediante aprendizaje automático", lista: true },
   { numero: 10, nombre: "", titulo: "", lista: false },
-  { numero: 11, nombre: "", titulo: "", lista: false },
+  { numero: 11, nombre: "Lujan Garcete", titulo: "DESARROLLO DE UN SISTEMA WEB BASADO EN INTELIGENCIA ARTIFICIAL PARA LA PERSONALIZACIÓN DE PLANES ALIMENTARIOS Y LA ESTIMACIÓN DE CALORÍAS MEDIANTE IMÁGENES EN EL CONSULTORIO NUTRICIONAL “NUTRITIHARA” DE LA CIUDAD DE CAACUPÉ, AÑO 2026", lista: true },
   { numero: 12, nombre: "", titulo: "", lista: false },
   { numero: 13, nombre: "", titulo: "", lista: false },
   { numero: 14, nombre: "", titulo: "", lista: false }
