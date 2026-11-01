@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Informática - SPYNet</title>
+
+<style>
+:root{
+    --fondo:#101827;
+    --panel:#192538;
+    --panel2:#202F43;
+    --texto:#F1F5F9;
+    --suave:#AAB8C8;
+    --cian:#35C6D8;
+    --verde:#A3D977;
+    --linea:#34465B;
+    --blanco:#FFFFFF;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:
+        radial-gradient(circle at 10% 15%,#1D3B50 0,transparent 30%),
+        radial-gradient(circle at 90% 85%,#203B36 0,transparent 28%),
+        var(--fondo);
+    color:var(--texto);
+    overflow:hidden;
+}
+
+.slide{
+    display:none;
+    width:min(1200px,calc(100vw - 60px));
+    height:min(680px,calc(100vh - 80px));
+    min-height:500px;
+    margin:20px auto 0;
+    padding:58px 70px;
+    position:relative;
+    overflow-y:auto;
+    background:linear-gradient(145deg,#192538,#142033);
+    border:1px solid #34465B;
+    border-radius:20px;
+    box-shadow:0 25px 70px #00000050;
+}
+
+.slide.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.slide::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    height:7px;
+    width:100%;
+    background:linear-gradient(90deg,var(--cian),var(--verde));
+}
+
+.slide::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    right:-130px;
+    top:-140px;
+    border-radius:50%;
+    border:1px solid #35C6D830;
+    box-shadow:0 0 0 30px #35C6D810,
+               0 0 0 60px #35C6D808;
+    pointer-events:none;
+}
+
+.eyebrow{
+    color:var(--cian);
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:18px;
+    position:relative;
+    z-index:1;
+}
+
+h1{
+    color:var(--blanco);
+    font-size:clamp(30px,3.5vw,47px);
+    line-height:1.17;
+    letter-spacing:-1.5px;
+    margin-bottom:22px;
+    max-width:1050px;
+    position:relative;
+    z-index:1;
+}
+
+h2{
+    font-size:clamp(30px,3vw,42px);
+    line-height:1.15;
+    letter-spacing:-1px;
+    color:var(--blanco);
+    margin-bottom:28px;
+    position:relative;
+    z-index:1;
+}
+
+.lead{
+    color:#C4D3E2;
+    font-size:clamp(18px,1.8vw,23px);
+    line-height:1.55;
+    max-width:950px;
+    position:relative;
+    z-index:1;
+}
+
+.subtitulo{
+    color:var(--verde);
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:16px;
+    position:relative;
+    z-index:1;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    position:relative;
+    z-index:1;
+}
+
+.card{
+    background:linear-gradient(145deg,#23354A,#1A293D);
+    border:1px solid var(--linea);
+    border-radius:14px;
+    padding:20px 22px;
+    border-left:4px solid var(--cian);
+    min-height:110px;
+    transition:.2s;
+}
+
+.card:nth-child(even){
+    border-left-color:var(--verde);
+}
+
+.card strong{
+    display:block;
+    color:var(--cian);
+    font-size:17px;
+    margin-bottom:9px;
+}
+
+.card:nth-child(even) strong{
+    color:var(--verde);
+}
+
+.card span{
+    color:#C1CDDA;
+    font-size:15px;
+    line-height:1.5;
+}
+
+.quote{
+    background:linear-gradient(120deg,#20364A,#1B2D40);
+    border:1px solid #3B586B;
+    border-left:5px solid var(--verde);
+    padding:25px 30px;
+    border-radius:5px 15px 15px 5px;
+    color:#E2EAF2;
+    font-size:clamp(18px,1.8vw,23px);
+    line-height:1.55;
+    position:relative;
+    z-index:1;
+}
+
+.stats{
+    display:flex;
+    gap:16px;
+    position:relative;
+    z-index:1;
+    margin:15px 0 20px;
+}
+
+.stat{
+    flex:1;
+    background:#213249;
+    border:1px solid var(--linea);
+    border-radius:15px;
+    padding:22px 18px;
+    border-top:4px solid var(--cian);
+}
+
+.stat:nth-child(2){
+    border-top-color:var(--verde);
+}
+
+.stat:nth-child(3){
+    border-top-color:#F0B45C;
+}
+
+.stat b{
+    display:block;
+    font-size:42px;
+    color:var(--cian);
+    margin-bottom:8px;
+}
+
+.stat:nth-child(2) b{
+    color:var(--verde);
+}
+
+.stat:nth-child(3) b{
+    color:#F0B45C;
+}
+
+.stat span{
+    color:#C1CDDA;
+    font-size:14px;
+    line-height:1.45;
+}
+
+.flow{
+    display:flex;
+    gap:10px;
+    position:relative;
+    z-index:1;
+    margin:15px 0;
+}
+
+.step{
+    flex:1;
+    padding:19px 13px;
+    background:#203249;
+    border:1px solid var(--linea);
+    border-radius:12px;
+    text-align:center;
+    color:#C1CDDA;
+    font-size:14px;
+    line-height:1.45;
+}
+
+.step b{
+    display:block;
+    color:var(--cian);
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.step:nth-child(even) b{
+    color:var(--verde);
+}
+
+.note{
+    color:var(--suave);
+    font-size:14px;
+    line-height:1.5;
+    margin-top:20px;
+    position:relative;
+    z-index:1;
+}
+
+.footer{
+    position:absolute;
+    bottom:22px;
+    left:70px;
+    right:70px;
+    border-top:1px solid var(--linea);
+    padding-top:12px;
+    display:flex;
+    justify-content:space-between;
+    color:#8294A8;
+    font-size:11px;
+    z-index:1;
+}
+
+.cover-tag{
+    display:inline-block;
+    color:var(--verde);
+    border:1px solid #A3D97770;
+    background:#A3D97712;
+    padding:9px 15px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:22px;
+    position:relative;
+    z-index:1;
+}
+
+.names{
+    margin-top:24px;
+    color:#D0DCE7;
+    font-size:17px;
+    line-height:1.7;
+    position:relative;
+    z-index:1;
+}
+
+.names b{
+    color:var(--cian);
+}
+
+.cover-line{
+    width:90px;
+    height:5px;
+    border-radius:5px;
+    background:linear-gradient(90deg,var(--cian),var(--verde));
+    margin:12px 0 22px;
+}
+
+nav{
+    height:60px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+button{
+    border:1px solid #35C6D8;
+    background:#1C3549;
+    color:var(--texto);
+    padding:11px 23px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:var(--cian);
+    color:#101827;
+    transform:translateY(-2px);
+}
+
+#count{
+    color:#B8C7D5;
+    font-size:14px;
+    min-width:70px;
+    text-align:center;
+}
+
+@media(max-width:750px){
+    .slide{
+        width:calc(100vw - 20px);
+        height:calc(100dvh - 80px);
+        min-height:0;
+        margin:10px auto 0;
+        padding:32px 22px;
+        border-radius:14px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+        gap:9px;
+    }
+
+    .card{
+        padding:13px 15px;
+        min-height:0;
+    }
+
+    .card strong{font-size:14px}
+    .card span{font-size:13px}
+
+    .stats{
+        flex-wrap:wrap;
+        gap:8px;
+    }
+
+    .stat{
+        min-width:28%;
+        padding:13px 9px;
+    }
+
+    .stat b{font-size:29px}
+    .stat span{font-size:11px}
+
+    .flow{
+        flex-direction:column;
+        gap:7px;
+    }
+
+    .step{
+        padding:11px;
+        font-size:13px;
+    }
+
+    .footer{
+        left:22px;
+        right:22px;
+        bottom:12px;
+    }
+
+    .quote{
+        padding:17px;
+        font-size:16px;
+    }
+}
+
+@media print{
+    body{background:white;overflow:visible}
+
+    .slide,.slide.active{
+        display:flex!important;
+        width:100%;
+        height:100vh;
+        min-height:0;
+        margin:0;
+        border-radius:0;
+        box-shadow:none;
+        break-after:page;
+        page-break-after:always;
+    }
+
+    nav{display:none}
+
+    @page{
+        size:landscape;
+        margin:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1. PORTADA -->
+<section class="slide active">
+    <p class="eyebrow">Universidad del Norte · Facultad de Ingeniería</p>
+
+    <span class="cover-tag">ANTEPROYECTO DE TRABAJO FINAL · 2027</span>
+
+    <h1>
+        Auditoría de la infraestructura tecnológica, de red, de seguridad informática y continuidad del servicio a la empresa SPYNet
+    </h1>
+
+    <div class="cover-line"></div>
+
+    <p class="lead">
+        Sucursal de la ciudad de Valenzuela, Paraguay
+    </p>
+
+    <div class="names">
+        <b>Presentado por:</b><br>
+        Mara Saribel Herrera Acuña<br><br>
+
+        <b>Director del trabajo:</b><br>
+        Ing. Guido Guillen
+    </div>
+
+    <p class="note">Caacupé – Paraguay · Agosto 2027</p>
+
+    <div class="footer">
+        <span>Auditoría informática · SPYNet</span>
+        <span>Portada</span>
+    </div>
+</section>
+
+<!-- 2. SITUACIÓN IDENTIFICADA -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Planteamiento del problema</p>
+    <h2>Situación identificada</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Servicio de conectividad</strong>
+            <span>SPYNet brinda Internet a hogares, negocios y comunidades mediante infraestructura de fibra óptica.</span>
+        </div>
+
+        <div class="card">
+            <strong>Crecimiento tecnológico</strong>
+            <span>La expansión de la cobertura requiere una adecuada administración de equipos, redes, sistemas e información.</span>
+        </div>
+
+        <div class="card">
+            <strong>Riesgos en la infraestructura</strong>
+            <span>Los trabajos externos sobre columnas y tendidos eléctricos podrían afectar temporalmente la infraestructura de fibra óptica.</span>
+        </div>
+
+        <div class="card">
+            <strong>Continuidad del servicio</strong>
+            <span>Las interrupciones pueden generar dificultades operativas, costos adicionales y demoras en la recuperación de la conectividad.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Problema de investigación</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 3. PREGUNTA PRINCIPAL -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Pregunta de investigación</p>
+    <h2>Pregunta principal</h2>
+
+    <div class="quote">
+        ¿De qué manera la auditoría de la infraestructura tecnológica, de seguridad informática y de los mecanismos de continuidad del servicio puede contribuir a mejorar la disponibilidad y recuperación del servicio de Internet de SPYNet, sucursal Valenzuela del año 2027, ante posibles afectaciones de su infraestructura de fibra óptica?
+    </div>
+
+    <div class="footer">
+        <span>Pregunta de investigación</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 4. PREGUNTAS ESPECÍFICAS -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Preguntas de investigación</p>
+    <h2>Aspectos que se investigarán</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>01 · Estado actual</strong>
+            <span>¿Cuál es el estado actual de la infraestructura tecnológica y de red utilizada por SPYNet para garantizar la continuidad del servicio?</span>
+        </div>
+
+        <div class="card">
+            <strong>02 · Riesgos</strong>
+            <span>¿Cuáles son los principales riesgos que podrían afectar la continuidad y disponibilidad del servicio ante daños o interrupciones en la fibra óptica?</span>
+        </div>
+
+        <div class="card">
+            <strong>03 · Mecanismos existentes</strong>
+            <span>¿Qué mecanismos de prevención, monitoreo, respaldo, gestión de incidentes y recuperación utiliza SPYNet?</span>
+        </div>
+
+        <div class="card">
+            <strong>04 · Recomendaciones</strong>
+            <span>¿Qué medidas podrían establecerse para reducir el tiempo de interrupción y fortalecer la continuidad del servicio?</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Preguntas específicas</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 5. OBJETIVO GENERAL -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Objetivo general</p>
+    <h2>Propósito de la investigación</h2>
+
+    <div class="quote">
+        Auditar la infraestructura tecnológica, seguridad informática y los mecanismos de continuidad del servicio, con el fin de contribuir a mejorar la disponibilidad y recuperación del servicio de Internet de SPYNet, sucursal Valenzuela del año 2027, ante posibles afectaciones de su infraestructura de fibra óptica.
+    </div>
+
+    <div class="footer">
+        <span>Objetivo general</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 6. OBJETIVOS ESPECÍFICOS -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Objetivos específicos</p>
+    <h2>Etapas de la investigación</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>01 · Determinar</strong>
+            <span>El estado actual de la infraestructura tecnológica y de red utilizada por SPYNet para garantizar la continuidad del servicio.</span>
+        </div>
+
+        <div class="card">
+            <strong>02 · Identificar</strong>
+            <span>Los principales riesgos que podrían afectar la continuidad y disponibilidad del servicio ante daños o interrupciones en la fibra óptica.</span>
+        </div>
+
+        <div class="card">
+            <strong>03 · Evaluar</strong>
+            <span>Los mecanismos de prevención, monitoreo, respaldo, gestión de incidentes y recuperación implementados por SPYNet.</span>
+        </div>
+
+        <div class="card">
+            <strong>04 · Proponer</strong>
+            <span>Medidas y recomendaciones orientadas a reducir el tiempo de interrupción y fortalecer la continuidad del servicio.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Objetivos específicos</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 7. JUSTIFICACIÓN EN UN SOLO PÁRRAFO -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Justificación</p>
+    <h2>Importancia de la investigación</h2>
+
+    <div class="quote" style="font-size:clamp(16px,1.55vw,20px);line-height:1.7;padding:25px 30px">
+        La presente investigación se justifica por la importancia de mantener una infraestructura tecnológica, de red y seguridad informática adecuada en SPYNet, sucursal Valenzuela, considerando que la disponibilidad del servicio de Internet es fundamental para los hogares, negocios y comunidades de la zona. El crecimiento de la cobertura y la dependencia de la conectividad hacen necesario evaluar los equipos, sistemas, redes, mecanismos de respaldo y procedimientos de recuperación, con el propósito de identificar posibles vulnerabilidades y riesgos que puedan ocasionar interrupciones o costos adicionales. Mediante la auditoría se buscará conocer el estado actual de los recursos tecnológicos, analizar los mecanismos de prevención, monitoreo y respuesta ante incidentes, y formular recomendaciones que contribuyan a fortalecer la continuidad del servicio. Asimismo, los resultados podrán servir de apoyo para la toma de decisiones de la empresa, beneficiar a los usuarios que dependen de Internet para sus actividades educativas, laborales y comerciales, y permitir la aplicación práctica de los conocimientos adquiridos durante la formación en Ingeniería Informática.
+    </div>
+
+    <div class="footer">
+        <span>Justificación del proyecto</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 8. DELIMITACIÓN E IMPACTO -->
+<section class="slide">
+    <p class="eyebrow">Capítulo I · Delimitación e impacto</p>
+    <h2>Alcance de la auditoría</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Ubicación</strong>
+            <span>Empresa SPYNet, sucursal Valenzuela y su infraestructura de fibra óptica extendida por la ciudad.</span>
+        </div>
+
+        <div class="card">
+            <strong>Período</strong>
+            <span>Desarrollo previsto desde febrero hasta agosto del año 2027.</span>
+        </div>
+
+        <div class="card">
+            <strong>Componentes</strong>
+            <span>Equipos, redes, fibra óptica, respaldos, monitoreo, seguridad, documentación y procedimientos.</span>
+        </div>
+
+        <div class="card">
+            <strong>Impacto esperado</strong>
+            <span>Mejoras técnicas, sociales, económicas e institucionales relacionadas con la continuidad del servicio.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Delimitación e impacto</span>
+        <span>Capítulo I</span>
+    </div>
+</section>
+
+<!-- 9. TIPO DE INVESTIGACIÓN -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Tipo de investigación</p>
+    <h2>Enfoque del estudio</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Investigación aplicada</strong>
+            <span>Utiliza conocimientos y procedimientos de auditoría informática para analizar una situación concreta y elaborar recomendaciones para SPYNet.</span>
+        </div>
+
+        <div class="card">
+            <strong>Alcance descriptivo</strong>
+            <span>Busca caracterizar el estado de los equipos, infraestructura de red, fibra óptica, respaldos, monitoreo y procedimientos de recuperación.</span>
+        </div>
+
+        <div class="card">
+            <strong>Enfoque mixto</strong>
+            <span>Combina información cualitativa y cuantitativa para comprender la situación de la empresa.</span>
+        </div>
+
+        <div class="card">
+            <strong>Predominio cualitativo</strong>
+            <span>Se analizarán experiencias, procedimientos y prácticas del personal, con apoyo de datos cuantitativos.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Tipo de investigación</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 10. DISEÑO DE INVESTIGACIÓN -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Diseño de la investigación</p>
+    <h2>Características metodológicas</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>No experimental</strong>
+            <span>Los componentes tecnológicos y las variables se observarán en sus condiciones habituales, sin provocar fallas ni introducir cambios.</span>
+        </div>
+
+        <div class="card">
+            <strong>De campo</strong>
+            <span>La información principal se obtendrá directamente en la sucursal SPYNet de Valenzuela.</span>
+        </div>
+
+        <div class="card">
+            <strong>Transversal</strong>
+            <span>La recopilación de información se realizará durante el período previsto de febrero a agosto de 2027.</span>
+        </div>
+
+        <div class="card">
+            <strong>Fenomenológico</strong>
+            <span>Se buscará comprender las experiencias y percepciones de usuarios y personal respecto a la infraestructura y continuidad del servicio.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Diseño metodológico</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 11. POBLACIÓN Y MUESTRA -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Población y muestra</p>
+    <h2>Participantes del estudio</h2>
+
+    <div class="stats">
+        <div class="stat">
+            <b>200</b>
+            <span>Personas que integran la población total considerada.</span>
+        </div>
+
+        <div class="stat">
+            <b>30</b>
+            <span>Integrantes del personal administrativo y técnico de SPYNet.</span>
+        </div>
+
+        <div class="stat">
+            <b>170</b>
+            <span>Usuarios del servicio de fibra óptica de la sucursal Valenzuela.</span>
+        </div>
+    </div>
+
+    <h2 style="font-size:25px;margin-top:12px">Muestra prevista</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>132 participantes</strong>
+            <span>Muestra calculada para una población de 200 personas, con 95 % de confianza y 5 % de margen de error.</span>
+        </div>
+
+        <div class="card">
+            <strong>Distribución</strong>
+            <span>20 integrantes del personal de SPYNet y 112 usuarios del servicio de Internet.</span>
+        </div>
+    </div>
+
+    <p class="note">
+        Se prevé realizar al menos 147 invitaciones considerando una tasa estimada de respuesta del 90 %.
+    </p>
+
+    <div class="footer">
+        <span>Población y muestra</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 12. TIPO DE MUESTREO Y RECOLECCIÓN -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Muestreo y recolección</p>
+    <h2>Obtención de información</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Muestreo no probabilístico</strong>
+            <span>La selección dependerá de la relación de los participantes con el objeto de estudio, su disponibilidad y la autorización de la empresa.</span>
+        </div>
+
+        <div class="card">
+            <strong>Personal administrativo y técnico</strong>
+            <span>Selección intencional o por criterio, considerando sus funciones y conocimientos sobre los procesos auditados.</span>
+        </div>
+
+        <div class="card">
+            <strong>Usuarios</strong>
+            <span>Selección por conveniencia entre clientes accesibles de la zona de Valenzuela que acepten participar.</span>
+        </div>
+
+        <div class="card">
+            <strong>Equipos y documentos</strong>
+            <span>Selección intencional según criticidad, relación con la continuidad del servicio y disponibilidad para inspección.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Tipo de muestreo</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 13. TÉCNICAS E INSTRUMENTOS -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Instrumentos de recolección</p>
+    <h2>Técnicas para recopilar datos</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Observación directa</strong>
+            <span>Permitirá examinar los equipos, la infraestructura de red y las condiciones de funcionamiento autorizadas.</span>
+        </div>
+
+        <div class="card">
+            <strong>Entrevista</strong>
+            <span>Se utilizará para conocer procedimientos de trabajo, experiencias del personal y prácticas de prevención y respuesta.</span>
+        </div>
+
+        <div class="card">
+            <strong>Encuesta</strong>
+            <span>Permitirá recopilar información de los usuarios sobre el servicio y sus experiencias ante posibles interrupciones.</span>
+        </div>
+
+        <div class="card">
+            <strong>Revisión documental</strong>
+            <span>Se analizarán documentos, registros e información autorizada relacionada con la infraestructura y los incidentes.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Técnicas e instrumentos</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 14. VALIDACIÓN Y VARIABLES -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Validación y operacionalización</p>
+    <h2>Análisis y validación</h2>
+
+    <div class="grid">
+        <div class="card">
+            <strong>Validación por expertos</strong>
+            <span>Los instrumentos serán revisados por profesionales de metodología, auditoría informática, redes o seguridad informática.</span>
+        </div>
+
+        <div class="card">
+            <strong>Criterios de revisión</strong>
+            <span>Se evaluará la claridad, pertinencia, coherencia y correspondencia con los objetivos específicos.</span>
+        </div>
+
+        <div class="card">
+            <strong>Variables principales</strong>
+            <span>Estado de la infraestructura tecnológica y de red; riesgos para la continuidad; controles de prevención, monitoreo y recuperación.</span>
+        </div>
+
+        <div class="card">
+            <strong>Verificación</strong>
+            <span>Observación, listas de verificación, entrevistas, cuestionarios, revisión documental y matriz de riesgos.</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Validación y operacionalización</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 15. ESPECIFICACIONES DE DISEÑO -->
+<section class="slide">
+    <p class="eyebrow">Capítulo III · Especificaciones de diseño</p>
+    <h2>Fases de la auditoría</h2>
+
+    <div class="flow">
+        <div class="step">
+            <b>01 · PLANIFICACIÓN</b>
+            Definir objetivos, alcance, criterios, recursos y autorización.
+        </div>
+
+        <div class="step">
+            <b>02 · INFORMACIÓN</b>
+            Identificar participantes y recopilar documentos y datos.
+        </div>
+
+        <div class="step">
+            <b>03 · EJECUCIÓN</b>
+            Aplicar entrevistas, encuestas, observación y listas de verificación.
+        </div>
+    </div>
+
+    <div class="flow">
+        <div class="step">
+            <b>04 · EVALUACIÓN</b>
+            Clasificar hallazgos, analizar riesgos y contrastar información.
+        </div>
+
+        <div class="step">
+            <b>05 · INFORME</b>
+            Elaborar resultados, conclusiones y recomendaciones priorizadas.
+        </div>
+
+        <div class="step">
+            <b>06 · CIERRE</b>
+            Presentar el informe y documentar el alcance y las limitaciones.
+        </div>
+    </div>
+
+    <div class="footer">
+        <span>Fases de diseño de la auditoría</span>
+        <span>Capítulo III</span>
+    </div>
+</section>
+
+<!-- 16. CIERRE -->
+<section class="slide">
+    <p class="eyebrow">Cierre de la presentación</p>
+    <h2>Fortalecer la infraestructura es proteger la continuidad</h2>
+
+    <p class="lead">
+        La auditoría permitirá conocer el estado de la infraestructura tecnológica de SPYNet, identificar riesgos y formular recomendaciones para mejorar la disponibilidad y recuperación del servicio de Internet.
+    </p>
+
+    <div class="cover-line" style="margin-top:30px"></div>
+
+    <div class="flow">
+        <div class="step">
+            <b>ANALIZAR</b>
+            Infraestructura tecnológica
+        </div>
+
+        <div class="step">
+            <b>IDENTIFICAR</b>
+            Riesgos y vulnerabilidades
+        </div>
+
+        <div class="step">
+            <b>EVALUAR</b>
+            Controles y procedimientos
+        </div>
+
+        <div class="step">
+            <b>RECOMENDAR</b>
+            Medidas de mejora
+        </div>
+    </div>
+
+    <p class="subtitulo" style="margin-top:35px;font-size:22px">
+        Muchas gracias.
+    </p>
+
+    <div class="footer">
+        <span>SPYNet · Valenzuela · 2027</span>
+        <span>Fin</span>
+    </div>
+</section>
+
+<!-- CONTROLES DE NAVEGACIÓN -->
+<nav>
+    <button id="prev">← Anterior</button>
+    <span id="count">1 / 16</span>
+    <button id="next">Siguiente →</button>
+</nav>
+
+<script>
+(function(){
+
+    const slides = [...document.querySelectorAll(".slide")];
+    const count = document.getElementById("count");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let current = 0;
+
+    function showSlide(index){
+
+        current = Math.max(0,Math.min(slides.length - 1,index));
+
+        slides.forEach((slide,i)=>{
+            slide.classList.toggle("active",i === current);
+        });
+
+        count.textContent = (current + 1) + " / " + slides.length;
+
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+
+        prev.style.opacity = current === 0 ? ".4" : "1";
+        next.style.opacity = current === slides.length - 1 ? ".4" : "1";
+    }
+
+    prev.addEventListener("click",()=>{
+        showSlide(current - 1);
+    });
+
+    next.addEventListener("click",()=>{
+        showSlide(current + 1);
+    });
+
+    document.addEventListener("keydown",(event)=>{
+
+        if(["ArrowRight","PageDown"," "].includes(event.key)){
+            event.preventDefault();
+            showSlide(current + 1);
+        }
+
+        if(["ArrowLeft","PageUp"].includes(event.key)){
+            event.preventDefault();
+            showSlide(current - 1);
+        }
+
+        if(event.key === "Home"){
+            showSlide(0);
+        }
+
+        if(event.key === "End"){
+            showSlide(slides.length - 1);
+        }
+
+    });
+
+    showSlide(0);
+
+})();
+</script>
+
+</body>
+</html>
