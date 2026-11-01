@@ -17,7 +17,7 @@ const CLASE = {
 const GRUPOS = [
   { numero: 1,  nombre: "Ana Liz, Paloma Miranda", titulo: "Desarrollo de una aplicación móvil con asistente virtual inteligente y sistema web para consultas y agendamientos en el Centro de Salud de Caraguatay", lista: true  },
   { numero: 2,  nombre: "Enzo Gabriel Calderón Martínez, Luis Angel Medina Cardozo", titulo: "Desarrollo de una Distribución Linux basada en Debian para la Administración Centralizada, Control de Software y Detección de Amenazas de Red", lista: true },
-  { numero: 3,  nombre: "", titulo: "", lista: false },
+  { numero: 3,  nombre: "Manuel José Sosa Cristaldo, Sergio José Sosa Cristaldo", titulo: "Desarrollo de un videojuego de simulación de ataques informáticos para la capacitación en ciberseguridad de estudiantes de Ingeniería Informática del 4.°", lista: true },
   { numero: 4,  nombre: "Mara Saribel Herrera Acuña", titulo: "Auditoría De La Infraestructura Tecnológica, De Red, De Seguridad Informática Y Continuidad Del Servicio A La Empresa Spynet De La Ciudad De Valenzuela, Valenzuela 2027.", lista: true },
   { numero: 5,  nombre: "Martin Duarte, Diego Peña", titulo: "Desarrollo de un Sistema de Supervisión Digital mediante Visión por Computadora e Inteligencia Artificial para la Detección de Fraude Académico en Exámenes Virtuales en el Instituto de Formación Docente Virgen del Rosario, Año 2026.", lista: true },
   { numero: 6,  nombre: "", titulo: "", lista: false },
