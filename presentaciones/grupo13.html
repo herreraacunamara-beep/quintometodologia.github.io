@@ -1,17 +1,258 @@
 <!DOCTYPE html>
+<!-- Grupo 13 · Farmacia Piripoty · Compatible con los botones originales de ver.html -->
+
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupo 13 - pendiente</title>
-  <style>
-    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;font-family:system-ui,Arial,sans-serif;background:#e9eff1;color:#10232a}
-    h1{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 .4em}
-    p{font-size:1.3rem;color:#52646b}
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#071b24" name="theme-color"/>
+<title>Grupo 13 | Farmacia Piripoty · Anteproyecto 2026</title>
+<style>
+  :root{
+    --bg:#071b24;--bg2:#0b2731;--surface:#123541;--surface2:#143d48;
+    --text:#effcf6;--muted:#aac7c7;--mint:#6bf0bd;--aqua:#7edbe9;
+    --gold:#eec983;--line:rgba(179,232,215,.16);--shadow:0 28px 90px rgba(0,0,0,.2);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI",Arial,sans-serif}
+  button{font:inherit}
+  .slide{display:none;position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;padding:30px 6.4vw 54px;
+    background:radial-gradient(ellipse 57% 53% at 92% 4%,rgba(24,118,113,.24),transparent 66%),
+      radial-gradient(ellipse 46% 60% at 2% 100%,rgba(30,88,115,.27),transparent 65%),
+      linear-gradient(135deg,#061922 0%,#082631 48%,#061921 100%)}
+  .slide.active{display:flex;align-items:center}
+  .slide::before{content:"";pointer-events:none;position:fixed;inset:0;opacity:.26;
+    background-image:radial-gradient(rgba(184,248,217,.28) .7px,transparent .7px);background-size:25px 25px;
+    mask-image:linear-gradient(to right,transparent 20%,black)}
+  .slide::after{content:"";pointer-events:none;position:fixed;right:-190px;top:-280px;width:640px;height:640px;border:1px solid rgba(111,242,195,.10);border-radius:50%;box-shadow:0 0 0 100px rgba(111,242,195,.022),0 0 0 200px rgba(111,242,195,.015)}
+  .deck{width:min(1250px,100%);margin:auto;position:relative;z-index:1}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:32px}
+  .brand{display:inline-flex;align-items:center;gap:12px;letter-spacing:.15em;font-size:12px;font-weight:850;color:var(--text)}
+  .brandmark{width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,var(--mint),var(--aqua));color:#062a2c;font-size:21px;font-weight:950;box-shadow:0 0 28px rgba(107,240,189,.15)}
+  .chapter{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--mint);text-transform:uppercase;border:1px solid rgba(107,240,189,.23);border-radius:30px;padding:9px 15px;background:rgba(107,240,189,.055);white-space:nowrap}
+  .eyebrow{font-size:12px;color:var(--mint);text-transform:uppercase;font-weight:850;letter-spacing:.21em;margin:0 0 17px}
+  h1,h2,h3,p{margin-top:0}
+  h1{font-size:clamp(44px,5vw,82px);line-height:1.04;letter-spacing:-.055em;margin-bottom:20px;max-width:850px}
+  h2{font-size:clamp(32px,3.6vw,57px);line-height:1.12;letter-spacing:-.044em;margin-bottom:22px;max-width:940px}
+  h3{font-size:clamp(17px,1.7vw,23px);margin-bottom:11px;line-height:1.25}
+  .subhead{font-size:clamp(16px,1.42vw,21px);line-height:1.56;color:var(--muted);max-width:880px;margin:0}
+  .highlight{color:var(--mint)}.highlight-alt{color:var(--gold)}
+  .hero-layout,.two-col{display:grid;grid-template-columns:1.28fr .82fr;gap:clamp(24px,4vw,70px);align-items:center}
+  .two-col{grid-template-columns:1fr 1fr}
+  .hero-caption{max-width:775px;color:#cfebea;font-size:clamp(17px,1.64vw,22px);line-height:1.54;margin-bottom:22px}
+  .hero-official{max-width:710px;font-size:12px;line-height:1.55;color:#a9cdce;border-left:3px solid var(--mint);padding-left:14px;margin:0 0 26px}
+  .author-row{display:flex;gap:26px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:22px;font-size:14px;line-height:1.7;color:#dbeeed}
+  .author-row b{display:block;color:var(--mint);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:2px}
+  .large-icon{width:235px;height:235px;display:grid;place-items:center;border-radius:56px;background:linear-gradient(140deg,#1e726d,#123d50);border:1px solid rgba(107,240,189,.22);box-shadow:var(--shadow),inset 0 0 50px rgba(107,240,189,.04);position:relative;margin:auto}
+  .large-icon svg{width:138px;height:138px;stroke:var(--mint);fill:none;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+  .large-icon:before,.large-icon:after{content:"";position:absolute;inset:-20px;border:1px dashed rgba(107,240,189,.25);border-radius:70px;transform:rotate(15deg)}
+  .large-icon:after{inset:-47px;border-color:rgba(126,219,233,.08);transform:rotate(-12deg)}
+  .mini-foot{display:flex;justify-content:space-between;align-items:center;margin-top:35px;padding-top:16px;border-top:1px solid var(--line);color:rgba(209,233,228,.64);font-size:12px;letter-spacing:.045em}
+  .mini-foot b{font-weight:750;color:#b5f6d9}
+  .label{font-size:11px;text-transform:uppercase;letter-spacing:.19em;font-weight:800;color:var(--mint);margin-bottom:12px}
+  .panel{border:1px solid var(--line);border-radius:22px;padding:24px 26px;background:linear-gradient(145deg,rgba(34,87,94,.68),rgba(13,51,64,.65));box-shadow:0 10px 45px rgba(0,0,0,.07)}
+  .panel-soft{background:rgba(14,54,65,.47)}
+  .panel-number{font-size:12px;color:var(--mint);font-weight:900;letter-spacing:.15em;margin-bottom:15px}
+  .panel p{color:#bfdcdb;font-size:clamp(14px,1.32vw,18px);line-height:1.55;margin:0}
+  .panel strong{color:var(--text)}
+  .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+  .tiles.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile{background:rgba(14,49,60,.69);padding:22px 25px;border:1px solid var(--line);border-radius:19px;min-width:0;position:relative;overflow:hidden}
+  .tile::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mint),transparent)}
+  .tile .num{font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--mint);margin-bottom:17px}
+  .tile p{font-size:clamp(14px,1.2vw,17px);line-height:1.55;color:var(--muted);margin:0}
+  .quote{border-left:5px solid var(--mint);padding:18px 0 20px 32px;font-size:clamp(22px,2.55vw,38px);font-weight:760;line-height:1.35;letter-spacing:-.025em;max-width:1080px;margin:25px 0;color:#f2fff9}
+  .rule-caption{display:inline-flex;gap:9px;align-items:center;font-size:13px;color:#a9c9c9;margin-top:16px}
+  .rule-caption::before{content:"";height:1px;width:30px;background:var(--gold)}
+  .section-stat{font-size:clamp(52px,6vw,94px);line-height:1;font-weight:900;letter-spacing:-.065em;color:var(--mint)}
+  .section-stat span{font-size:clamp(13px,1.16vw,18px);font-weight:650;letter-spacing:0;color:#bed9da;display:block;line-height:1.4;margin-top:10px}
+  .visual-column{display:flex;flex-direction:column;gap:14px}
+  .signal{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 20px;background:rgba(5,23,28,.38);border-radius:14px;border:1px solid var(--line);font-size:clamp(14px,1.15vw,17px);font-weight:700}
+  .signal b{font-size:13px;color:var(--gold)}
+  .signal i{display:inline-grid;place-items:center;flex:none;width:36px;height:36px;border-radius:11px;color:#052d2b;background:var(--mint);font-style:normal;font-weight:900}
+  .approach{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:28px 0 24px}
+  .phase{background:rgba(14,54,65,.65);border:1px solid var(--line);border-radius:18px;padding:20px 17px;min-width:0}
+  .phase .phase-n{font-size:36px;letter-spacing:-.055em;font-weight:900;color:var(--mint);margin-bottom:17px}
+  .phase p{font-size:clamp(13px,1.07vw,16px);line-height:1.46;color:#bdd9da;margin-bottom:0}
+  .phase h3{font-size:clamp(15px,1.32vw,19px);margin-bottom:8px}
+  .tag-row{display:flex;flex-wrap:wrap;gap:11px;margin-top:24px}
+  .tag{font-size:13px;color:#d8f9e7;padding:10px 14px;border-radius:30px;border:1px solid rgba(107,240,189,.24);background:rgba(107,240,189,.065)}
+  .tag.warm{border-color:rgba(238,201,131,.27);background:rgba(238,201,131,.06);color:#f3d8a7}
+  .timeline{display:flex;align-items:stretch;gap:12px;margin-top:30px}
+  .timeline .node{flex:1;position:relative;min-width:0;background:rgba(18,58,69,.69);border:1px solid rgba(107,240,189,.14);border-radius:19px;padding:23px 20px}
+  .timeline .node:not(:last-child)::after{content:"→";position:absolute;right:-20px;top:42%;z-index:3;font-size:20px;color:var(--mint);font-weight:900}
+  .node .circle{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:rgba(107,240,189,.11);color:var(--mint);font-weight:900;margin-bottom:15px}
+  .node p{font-size:clamp(13px,1.06vw,16px);line-height:1.5;color:var(--muted);margin:0}
+  .notice{display:flex;align-items:start;gap:12px;padding:17px 20px;border-radius:13px;border:1px solid rgba(238,201,131,.3);background:rgba(238,201,131,.065);font-size:clamp(13px,1.05vw,16px);line-height:1.5;color:#eadabd}
+  .notice b{color:var(--gold)}
+  .bar-stack{display:grid;gap:15px;margin-top:18px}
+  .bar-item{display:grid;grid-template-columns:80px 1fr;gap:14px;align-items:center}
+  .bar-item label{font-size:12px;font-weight:750;color:#a5cccc}
+  .track{height:12px;border-radius:20px;background:rgba(255,255,255,.06);position:relative;overflow:hidden}
+  .track::before{content:"";display:block;position:absolute;inset:0 auto 0 0;width:var(--w);background:linear-gradient(90deg,var(--mint),var(--aqua));border-radius:20px}
+  .workflow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .workflow span{border:1px solid rgba(107,240,189,.22);border-radius:12px;padding:16px 17px;background:rgba(107,240,189,.07);color:#defaed;font-weight:750;font-size:clamp(12px,1.07vw,15px)}
+  .workflow b{color:var(--mint);font-size:20px}
+  .divider{height:1px;width:100%;background:var(--line);margin:23px 0}
+  .takeaway{font-size:clamp(24px,2.75vw,41px);line-height:1.3;letter-spacing:-.025em;font-weight:700;max-width:1030px;margin:30px 0}
+  .thanks{font-size:clamp(40px,5.2vw,78px);font-weight:900;letter-spacing:-.055em;margin:25px 0 8px;color:var(--mint)}
+  @media(max-height:760px) and (min-width:900px){.slide{padding-top:20px;padding-bottom:65px}.topline{margin-bottom:18px}.mini-foot{margin-top:22px}.tiles{margin-top:24px}.panel{padding:18px 22px}.phase{padding:15px}.phase .phase-n{margin-bottom:10px}.timeline{margin-top:16px}}
+  @media(max-width:1000px){.hero-layout{grid-template-columns:1fr .65fr}.large-icon{width:170px;height:170px;border-radius:43px}.large-icon svg{width:110px;height:110px}.tiles{gap:10px}.tile{padding:16px 17px}.timeline{gap:10px}.timeline .node{padding:16px}}
+  @media(max-width:710px){.slide{position:fixed;padding:20px 22px 55px;align-items:start}.slide.active{display:block}.deck{margin:0 auto}.topline{margin-bottom:32px}.brand{font-size:11px;letter-spacing:.08em}.chapter{font-size:10px;padding:8px 10px}.hero-layout,.two-col{display:grid;grid-template-columns:1fr;gap:25px}.cover .large-icon{display:none}h1{font-size:clamp(40px,9vw,56px)}h2{font-size:clamp(30px,8vw,42px)}.eyebrow{font-size:10px}.subhead{font-size:16px}.hero-caption{font-size:17px}.author-row{display:block;font-size:13px}.author-row>div{margin-bottom:9px}.tiles,.tiles.two{grid-template-columns:1fr;gap:12px;margin-top:25px}.tile{padding:18px}.quote{font-size:25px;padding-left:17px}.panel{padding:20px}.approach{grid-template-columns:1fr 1fr;gap:10px}.phase{padding:16px}.phase .phase-n{font-size:27px;margin-bottom:6px}.phase p{font-size:13px}.timeline{display:grid;grid-template-columns:1fr;gap:11px}.timeline .node:not(:last-child)::after{content:"↓";top:auto;bottom:-19px;right:50%}.timeline .node{padding:18px}.mini-foot{margin-top:26px;gap:10px;font-size:10px}.section-stat{font-size:63px}.workflow span{padding:12px 13px}.slide::after{right:-500px}}
+  @media(max-width:400px){.approach{grid-template-columns:1fr}.slide{padding:19px 16px 50px}.brand{font-size:9px}.topline{gap:6px}h2{font-size:29px}.author-row{font-size:12px}}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  @media print{@page{size:landscape;margin:0}html,body{background:#071b24!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.slide,.slide.active{position:relative;display:flex!important;break-after:page;height:100vh;min-height:0;page-break-after:always;overflow:hidden;padding-bottom:42px}}
+
+  /* Más protagonismo para títulos y palabras clave, en lugar de bloques extensos. */
+  .tile.minimal{min-height:154px;display:flex;flex-direction:column;justify-content:center}
+  .tile.minimal .num{margin-bottom:11px}
+  .tile.minimal h3{font-size:clamp(19px,1.9vw,27px);margin-bottom:6px}
+  .tile.minimal p{font-size:clamp(13px,1.09vw,16px)}
+  .population{min-height:220px;display:flex;flex-direction:column;justify-content:center}
+  .population h3{font-size:clamp(24px,2.7vw,36px)}
+  .population .section-stat span{max-width:380px}
+  @media(max-width:750px){.tile.minimal,.population{min-height:auto}}
+</style>
 </head>
 <body>
-  <!-- Este archivo es un marcador. Reemplázalo por la presentación real del Grupo 13 (mismo nombre: grupo13.html). -->
-  <div><h1>Grupo 13</h1><p>Presentación pendiente</p></div>
+<!-- 01 / 11: PORTADA -->
+<section aria-label="Portada" class="slide active cover">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> PIRIPOTY <span style="opacity:.4">/</span> INVESTIGACIÓN</div><span class="chapter">GRUPO 13 · ANTEPROYECTO</span></div><div class="hero-layout">
+<div>
+<p class="eyebrow">Ingeniería Informática · Anteproyecto 2026</p>
+<h1>Farmacia <span class="highlight">Piripoty.</span></h1>
+<p class="hero-caption">Predicción de demanda y recomendación de reposición de medicamentos.</p>
+<div class="author-row">
+<div><b>Integrantes</b>Cuenca González, Fernando David<br/>Cuenca Ferreira, Jose Ivan</div>
+<div><b>Director</b>Guillen, Guido</div>
+</div>
+</div>
+<div aria-hidden="true" class="large-icon">
+<svg viewbox="0 0 150 150"><rect height="90" rx="19" width="94" x="28" y="30"></rect><path d="M57 75h36M75 57v36"></path><path d="M46 30V19M104 30V19M43 119v12M108 119v12"></path></svg>
+</div>
+</div><div class="mini-foot"><span>Capítulos I y III · Síntesis para exposición</span><b>01 / 11</b></div></div>
+</section>
+<!-- 02 / 11: PROBLEMA -->
+<section aria-label="Problema identificado" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO I · PROBLEMA</span></div><p class="eyebrow">01 · Situación identificada</p>
+<h2>El desafío: <span class="highlight">reponer a tiempo.</span></h2>
+<p class="subhead">El diagnóstico preliminar detectó dificultades para anticipar los pedidos.</p>
+<div class="tiles">
+<div class="tile minimal"><div class="num">01</div><h3>Pedidos tardíos</h3><p>Reposición fuera de tiempo.</p></div>
+<div class="tile minimal"><div class="num">02</div><h3>Comunicación</h3><p>Coordinación insuficiente.</p></div>
+<div class="tile minimal"><div class="num">03</div><h3>Faltantes</h3><p>Riesgo de desabastecimiento.</p></div>
+</div><div class="mini-foot"><span>Fuente: diagnóstico preliminar del anteproyecto</span><b>02 / 11</b></div></div>
+</section>
+<!-- 03 / 11: PREGUNTA Y OPORTUNIDAD -->
+<section aria-label="Pregunta de investigación" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO I · INVESTIGACIÓN</span></div><p class="eyebrow">02 · Pregunta general</p>
+<h2>¿Cómo <span class="highlight">anticipar la reposición?</span></h2>
+<div class="quote">¿De qué manera un sistema predictivo puede apoyar la reposición de medicamentos en la Farmacia Piripoty?</div>
+<div class="tag-row"><span class="tag">Punto de partida: registros históricos desde 2023</span></div><div class="mini-foot"><span>Pregunta general · versión resumida para la exposición</span><b>03 / 11</b></div></div>
+</section>
+<!-- 04 / 11: OBJETIVOS -->
+<section aria-label="Objetivos" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO I · OBJETIVOS</span></div><p class="eyebrow">03 · Objetivos</p>
+<h2>Predecir la demanda. <span class="highlight">Recomendar la reposición.</span></h2>
+<p class="subhead">Objetivo general: desarrollar un sistema inteligente de apoyo a las decisiones.</p>
+<div class="approach">
+<div class="phase"><div class="phase-n">01</div><h3>Diagnosticar</h3><p>Detectar dificultades.</p></div>
+<div class="phase"><div class="phase-n">02</div><h3>Diseñar</h3><p>Definir el sistema.</p></div>
+<div class="phase"><div class="phase-n">03</div><h3>Desarrollar</h3><p>Generar pronósticos.</p></div>
+<div class="phase"><div class="phase-n">04</div><h3>Evaluar</h3><p>Contrastar con ventas.</p></div>
+</div><div class="mini-foot"><span>Cuatro objetivos específicos · síntesis</span><b>04 / 11</b></div></div>
+</section>
+<!-- 05 / 11: JUSTIFICACIÓN Y ALCANCE -->
+<section aria-label="Justificación y alcance" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO I · JUSTIFICACIÓN</span></div><p class="eyebrow">04 · Justificación</p>
+<h2>¿Por qué <span class="highlight">es importante?</span></h2>
+<div class="tiles">
+<div class="tile minimal"><div class="num">DISPONIBILIDAD</div><h3>Menos riesgo de faltantes</h3><p>Mediante una mejor planificación.</p></div>
+<div class="tile minimal"><div class="num">DECISIONES</div><h3>Reposición informada</h3><p>Basada en estimaciones.</p></div>
+<div class="tile minimal"><div class="num">VIABILIDAD</div><h3>Datos desde 2023</h3><p>Historial de ventas e inventario.</p></div>
+</div>
+<div class="rule-caption">El sistema sugiere; el personal decide. No genera compras automáticas.</div><div class="mini-foot"><span>Beneficios previstos, no resultados obtenidos</span><b>05 / 11</b></div></div>
+</section>
+<!-- 06 / 11: TIPO DE INVESTIGACIÓN -->
+<section aria-label="Enfoque metodológico" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO III · METODOLOGÍA</span></div><p class="eyebrow">05 · Tipo de investigación</p>
+<h2>Investigación <span class="highlight">aplicada y mixta.</span></h2>
+<div class="tiles two">
+<div class="tile minimal"><div class="num">TIPO</div><h3>Aplicada</h3><p>Solución a un problema real.</p></div>
+<div class="tile minimal"><div class="num">ENFOQUE</div><h3>Mixto</h3><p>Entrevistas y datos de ventas.</p></div>
+<div class="tile minimal"><div class="num">DISEÑO</div><h3>Exploratorio secuencial</h3><p>Primero diagnóstico, luego análisis.</p></div>
+<div class="tile minimal"><div class="num">CARÁCTER</div><h3>No experimental</h3><p>Sin intervenir en las ventas.</p></div>
+</div><div class="mini-foot"><span>Metodología prevista para el anteproyecto</span><b>06 / 11</b></div></div>
+</section>
+<!-- 07 / 11: RECOPILACIÓN Y FASES -->
+<section aria-label="Cómo se realizará el estudio" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO III · PROCEDIMIENTO</span></div><p class="eyebrow">06 · Procedimiento</p>
+<h2>Del diagnóstico al <span class="highlight">sistema propuesto.</span></h2>
+<div class="timeline">
+<div class="node"><div class="circle">01</div><h3>Entrevistas</h3><p>Conocer las dificultades.</p></div>
+<div class="node"><div class="circle">02</div><h3>Registros</h3><p>Revisar ventas e inventario.</p></div>
+<div class="node"><div class="circle">03</div><h3>Diseño</h3><p>Definir las funciones.</p></div>
+<div class="node"><div class="circle">04</div><h3>Evaluación</h3><p>Pruebas previstas.</p></div>
+</div>
+<div class="tag-row"><span class="tag">Entrevista semiestructurada</span><span class="tag">Revisión documental</span></div><div class="mini-foot"><span>Secuencia metodológica propuesta</span><b>07 / 11</b></div></div>
+</section>
+<!-- 08 / 11: POBLACIÓN -->
+<section aria-label="Población de estudio" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO III · POBLACIÓN</span></div><p class="eyebrow">07 · Población</p>
+<h2>Dos fuentes de <span class="highlight">información.</span></h2>
+<div class="two-col">
+<div class="panel population"><div class="label">PERSONAS</div><div class="section-stat">Personal<span>Vinculado al inventario y a los pedidos.</span></div></div>
+<div class="panel population"><div class="label">REGISTROS</div><div class="section-stat">2023<span>Datos históricos de ventas e inventario desde ese año.</span></div></div>
+</div>
+<div class="rule-caption">Las cantidades definitivas están pendientes de verificación.</div><div class="mini-foot"><span>Población documental y personal involucrado</span><b>08 / 11</b></div></div>
+</section>
+<!-- 09 / 11: MUESTRA Y MUESTREO -->
+<section aria-label="Muestra y selección" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO III · MUESTRA Y MUESTREO</span></div><p class="eyebrow">08 · Muestra y muestreo</p>
+<h2>Selección <span class="highlight">intencional.</span></h2>
+<div class="two-col">
+<div class="panel population"><div class="label">PERSONAL</div><h3>Informantes clave</h3><p>Personas que conocen el proceso de reposición.</p></div>
+<div class="panel population"><div class="label">REGISTROS</div><h3>Datos autorizados</h3><p>Información histórica disponible y verificable.</p></div>
+</div>
+<div class="rule-caption">El tamaño de la muestra se definirá tras comprobar la información disponible.</div><div class="mini-foot"><span>Selección prevista · sin mediciones ficticias</span><b>09 / 11</b></div></div>
+</section>
+<!-- 10 / 11: DISEÑO Y EVALUACIÓN -->
+<section aria-label="Diseño del sistema y evaluación" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">CAPÍTULO III · DISEÑO TÉCNICO</span></div><p class="eyebrow">09 · Diseño técnico</p>
+<h2>¿Cómo funcionaría <span class="highlight">el sistema?</span></h2>
+<div aria-label="Flujo conceptual del sistema" class="workflow">
+<span>Ventas históricas</span><b>→</b><span>Predicción</span><b>→</b><span>Recomendación</span><b>→</b><span>Decisión humana</span>
+</div>
+<div class="tiles two">
+<div class="tile minimal"><div class="num">ARQUITECTURA PREVISTA</div><h3>Web · Python · MySQL</h3><p>Herramientas propuestas, sujetas a evaluación.</p></div>
+<div class="tile minimal"><div class="num">EVALUACIÓN FUTURA</div><h3>Pronóstico vs. ventas</h3><p>Comparar estimaciones con datos reales.</p></div>
+</div><div class="mini-foot"><span>Diseño y evaluación previstos · no resultados</span><b>10 / 11</b></div></div>
+</section>
+<!-- 11 / 11: CIERRE -->
+<section aria-label="Conclusión" class="slide">
+<div class="deck"><div class="topline"><div class="brand"><span class="brandmark">✚</span> FARMACIA PIRIPOTY</div><span class="chapter">SÍNTESIS · CIERRE</span></div><p class="eyebrow">10 · Cierre</p>
+<h2>Anticiparse para <span class="highlight">reponer mejor.</span></h2>
+<p class="takeaway">De los datos históricos a decisiones de reposición <span class="highlight-alt">más informadas.</span></p>
+<div class="workflow"><span>Datos</span><b>→</b><span>Pronóstico</span><b>→</b><span>Recomendación</span></div>
+<div class="thanks">¡Muchas gracias!</div>
+<p class="subhead">Fernando David Cuenca González · Jose Ivan Cuenca Ferreira</p><div class="mini-foot"><span>Farmacia Piripoty · Piribebuy · Anteproyecto 2026</span><b>11 / 11</b></div></div>
+</section>
+<script>
+/* Navegación de la presentación (flechas del teclado y botones del visor) */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function avisar(){try{parent.postMessage({tipo:'diapositivas',actual:cur+1,total:slides.length},'*')}catch(e){}}
+  function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,i){s.classList.toggle('active',i===cur)});avisar()}
+  document.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(cur+1)}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(cur-1)}
+    else if(k==='Home')show(0);else if(k==='End')show(slides.length-1)});
+  window.addEventListener('message',function(e){var d=e.data;if(!d)return;
+    if(d.tipo==='hola')avisar();
+    else if(d.tipo==='ir'){if(d.accion==='sig')show(cur+1);else if(d.accion==='ant')show(cur-1)}});
+  show(0);
+})();
+</script>
 </body>
 </html>
