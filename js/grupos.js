@@ -18,7 +18,7 @@ const GRUPOS = [
   { numero: 1,  nombre: "Ana Liz, Paloma Miranda", titulo: "Desarrollo de una aplicación móvil con asistente virtual inteligente y sistema web para consultas y agendamientos en el Centro de Salud de Caraguatay", lista: true  },
   { numero: 2,  nombre: "Enzo Gabriel Calderón Martínez, Luis Angel Medina Cardozo", titulo: "Desarrollo de una Distribución Linux basada en Debian para la Administración Centralizada, Control de Software y Detección de Amenazas de Red", lista: true },
   { numero: 3,  nombre: "", titulo: "", lista: false },
-  { numero: 4,  nombre: "", titulo: "", lista: false },
+  { numero: 4,  nombre: "Mara Saribel Herrera Acuña", titulo: "Auditoría De La Infraestructura Tecnológica, De Red, De Seguridad Informática Y Continuidad Del Servicio A La Empresa Spynet De La Ciudad De Valenzuela, Valenzuela 2027.", lista: true },
   { numero: 5,  nombre: "", titulo: "", lista: false },
   { numero: 6,  nombre: "", titulo: "", lista: false },
   { numero: 7,  nombre: "", titulo: "", lista: false },
