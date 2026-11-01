@@ -1,17 +1,85 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupo 5 - pendiente</title>
-  <style>
-    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;font-family:system-ui,Arial,sans-serif;background:#e9eff1;color:#10232a}
-    h1{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 .4em}
-    p{font-size:1.3rem;color:#52646b}
-  </style>
-</head>
-<body>
-  <!-- Este archivo es un marcador. Reemplázalo por la presentación real del Grupo 5 (mismo nombre: grupo5.html). -->
-  <div><h1>Grupo 5</h1><p>Presentación pendiente</p></div>
-</body>
-</html>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Defensa académica de los capítulos I y III del anteproyecto de supervisión digital de exámenes virtuales."><title>Anteproyecto · Supervisión digital de exámenes virtuales</title><style>
+
+:root{color-scheme:dark;--bg:#101D32;--surface:#101D32;--text:#F5F8FC;--muted:#91A4BE;--accent:#23C8BE;--nav:#192B45;--line:#304560;--body:#D9E3F0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}button,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:var(--nav);color:var(--text);border-radius:3px;padding:9px 13px;min-height:40px}button:hover:not(:disabled){background:#223B58;border-color:var(--accent);color:var(--accent)}button:active:not(:disabled){background:var(--accent);border-color:var(--accent);color:var(--bg)}button:disabled{opacity:.4;cursor:default}button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.shell{min-height:100svh;display:flex;flex-direction:column}.top{padding:18px 4vw;display:flex;justify-content:space-between;gap:15px;font-size:12px;letter-spacing:.1em;color:var(--muted)}.brand{display:flex;align-items:center;gap:12px}.dot{width:7px;height:7px;background:var(--accent)}
+#deck{min-width:0;padding:12px 4vw 24px;align-items:stretch}.slide{display:none;min-width:0;width:min(1328px,100%);margin:0 auto;padding:clamp(30px,4.5vw,64px) clamp(26px,6vw,80px);background:var(--surface);border:1px solid transparent;overflow-wrap:break-word}.slide.active{display:flex;flex-direction:column;justify-content:flex-start}.kicker{color:var(--accent);font-size:16px;letter-spacing:1px;margin:0 0 28px;line-height:1.4;padding-bottom:18px;border-bottom:1px solid var(--accent)}
+h1,h2{color:var(--text);font-weight:700;letter-spacing:-.6px;margin:0 0 35px;line-height:1.2}h1{font-size:clamp(30px,3.3vw,46px);max-width:1130px}h2{font-size:clamp(30px,3.2vw,43px)}.lead{font-size:clamp(23px,2.05vw,28px);line-height:1.5;color:var(--body);margin:0;max-width:1140px;text-align:left}.content{padding-bottom:28px}.small{font-size:18px;line-height:1.5;color:var(--muted);margin:24px 0 0}.authors{margin-top:8px}.authors p{font-size:22px;color:var(--body);line-height:1.6;margin:0}.chapter.active{justify-content:center;align-items:center}.chapter h1{font-size:clamp(44px,6vw,80px);margin:0}em{font-style:normal;color:var(--accent)}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 4vw;border-top:1px solid var(--line)}.controls{display:flex;gap:8px;align-items:center}.controls .small{font-size:13px}.count{color:var(--accent);font-size:14px;min-width:60px;text-align:center;font-variant-numeric:tabular-nums}select{background:var(--nav);color:var(--text);border:1px solid var(--line);border-radius:3px;padding:9px;min-height:40px;max-width:210px;accent-color:var(--accent)}select:hover{border-color:var(--accent)}select option:checked{background:var(--accent);color:var(--bg)}.progress{height:3px;background:var(--line)}.progress div{height:100%;background:var(--accent);transition:width .2s}#status{font-size:13px;color:var(--muted);text-align:center}#status:empty{display:none}
+@media(max-width:1000px){.footer{flex-wrap:wrap}.controls{flex-wrap:wrap}.slide{padding:32px 40px}.top-right{display:none}.kicker{margin-bottom:24px}h1,h2{margin-bottom:28px}}
+@media(max-width:600px){.top{font-size:10px;padding:14px 5vw}#deck{padding:6px 4vw 16px}.slide{padding:26px 24px}.lead{font-size:21px;line-height:1.5}.kicker{font-size:13px}h1,h2{font-size:30px}.authors p{font-size:19px}.small{font-size:16px}.footer{padding:12px 4vw}.controls{gap:6px}select{max-width:155px}#full,#print{font-size:13px}}
+@media(max-height:700px) and (min-width:1001px){.top{padding:12px 4vw}.slide{padding:30px 60px}.kicker{margin-bottom:22px;padding-bottom:14px}h1,h2{margin-bottom:24px}.lead{font-size:24px}.footer{padding:10px 4vw}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@page{size:A4 landscape;margin:10mm}@media print{:root{color-scheme:light}body{background:white;color:#111}.shell{display:block}.top,.footer,.progress,#status{display:none!important}#deck{display:block!important;padding:0}.slide,.slide.active{display:flex;width:100%;height:185mm;min-height:185mm;padding:12mm 15mm;border:0;background:white;break-after:page}.slide:last-child{break-after:auto}h1,h2{color:#111;font-size:32px}.lead{font-size:23px;color:#222}.authors p{color:#222}.kicker,.small{color:#555}.chapter.active,.chapter{justify-content:center;align-items:center}.chapter h1{font-size:60px}}
+</style></head><body><div class="shell"><header class="top"><span class="brand"><span class="dot"></span> INGENIERÍA INFORMÁTICA · ANTEPROYECTO</span><span class="top-right">CAPÍTULOS I + III &nbsp; / &nbsp; 2026</span></header><main id="deck" style="display:flex;flex:1" aria-label="Presentación académica">
+<section class="slide active" data-title="Portada" aria-label="1. Portada">
+<p class="kicker">ANTEPROYECTO · INGENIERÍA INFORMÁTICA</p>
+<h1>Propuesta de supervisión digital de exámenes virtuales mediante visión por computadora e inteligencia artificial</h1>
+<div class="authors"><p>José Martin Duarte Aranda<br>Diego Sebastián Peña Román</p></div>
+<p class="small">Instituto de Formación Docente Virgen del Rosario · Caacupé, 2026<br>Director del trabajo: Guido Guillen</p>
+</section>
+<section class="slide chapter" data-title="CAPÍTULO I" aria-label="2. CAPÍTULO I" hidden>
+<h1>CAPÍTULO <em>I</em></h1>
+</section>
+<section class="slide" data-title="Planteamiento del problema" aria-label="3. Planteamiento del problema" hidden>
+<p class="kicker">CAPÍTULO I</p>
+<h2>Planteamiento del problema</h2>
+<div class="content"><p class="lead">Durante los exámenes virtuales, el docente puede tener dificultades para verificar el trabajo individual y el uso de recursos autorizados. Situaciones como el uso de celulares, la presencia de otras personas o los cambios de pestaña requieren interpretación y no demuestran fraude por sí solas. Por ello, se buscará conocer las dificultades y necesidades de supervisión del instituto.</p></div>
+</section>
+<section class="slide" data-title="Pregunta general" aria-label="4. Pregunta general" hidden>
+<p class="kicker">CAPÍTULO I</p>
+<h2>Pregunta general</h2>
+<div class="content"><p class="lead">¿De qué manera un sistema de supervisión digital mediante visión por computadora e inteligencia artificial puede ayudar a detectar posibles indicios de fraude académico durante los exámenes virtuales en el Instituto de Formación Docente Virgen del Rosario, Caacupé, en el año 2026?</p></div>
+</section>
+<!-- Objetivo adaptado a la indicación del profesor: propuesta académica sin desarrollo obligatorio; el documento original utiliza Desarrollar. -->
+<section class="slide" data-title="Objetivo general" aria-label="5. Objetivo general" hidden>
+<p class="kicker">CAPÍTULO I</p>
+<h2>Objetivo general</h2>
+<div class="content"><p class="lead">Proponer un sistema de supervisión digital mediante visión por computadora e inteligencia artificial que ayude a detectar posibles indicios de fraude académico durante los exámenes virtuales en el Instituto de Formación Docente Virgen del Rosario, Caacupé, en 2026, como apoyo a la revisión y a las decisiones del docente.</p></div>
+</section>
+<section class="slide" data-title="Justificación" aria-label="6. Justificación" hidden>
+<p class="kicker">CAPÍTULO I</p>
+<h2>Justificación</h2>
+<div class="content"><p class="lead">La investigación se justifica por la necesidad de apoyar la supervisión de exámenes virtuales y disponer de información sobre situaciones que requieran revisión. La propuesta contempla el registro de posibles indicios mediante visión por computadora e inteligencia artificial, utilizando recursos tecnológicos accesibles. Su utilidad prevista consiste en facilitar el análisis docente, manteniendo la interpretación y la decisión académica bajo responsabilidad humana.</p></div>
+</section>
+<section class="slide chapter" data-title="CAPÍTULO III" aria-label="7. CAPÍTULO III" hidden>
+<h1>CAPÍTULO <em>III</em></h1>
+</section>
+<section class="slide" data-title="Tipo de investigación" aria-label="8. Tipo de investigación" hidden>
+<p class="kicker">CAPÍTULO III</p>
+<h2>Tipo de investigación</h2>
+<div class="content"><p class="lead">La investigación tendrá un enfoque cuantitativo, porque se orientará a la medición de variables y al análisis de datos numéricos. Su alcance será descriptivo, al caracterizar las dificultades y necesidades de supervisión de exámenes virtuales. Asimismo, tendrá una finalidad aplicada, al orientar la información obtenida hacia una propuesta tecnológica de apoyo docente en la institución.</p></div>
+</section>
+<section class="slide" data-title="Diseño de investigación" aria-label="9. Diseño de investigación" hidden>
+<p class="kicker">CAPÍTULO III</p>
+<h2>Diseño de investigación</h2>
+<div class="content"><p class="lead">En su etapa de diagnóstico, la investigación tendrá un diseño no experimental y transversal. Se analizarán las dificultades y necesidades de supervisión sin manipular deliberadamente las variables, y la información se recogerá en un momento determinado. Para ello, se prevé aplicar encuestas a docentes y estudiantes, cuyos datos permitirán orientar los requerimientos de la propuesta.</p></div>
+</section>
+<section class="slide" data-title="Población" aria-label="10. Población" hidden>
+<p class="kicker">CAPÍTULO III</p>
+<h2>Población</h2>
+<div class="content"><p class="lead">La población estará conformada por docentes y estudiantes del Instituto de Formación Docente Virgen del Rosario, Caacupé, durante 2026, vinculados con la enseñanza y la evaluación académica. Se considerará a los docentes por su intervención en la elaboración, aplicación y supervisión de evaluaciones, y a los estudiantes por su participación en ellas. La cantidad total se determinará mediante registros institucionales.</p></div>
+</section>
+<section class="slide" data-title="Muestra" aria-label="11. Muestra" hidden>
+<p class="kicker">CAPÍTULO III</p>
+<h2>Muestra</h2>
+<div class="content"><p class="lead">La muestra estará integrada por un grupo seleccionado de docentes y estudiantes de la institución. Se considerarán su vinculación con los procesos de enseñanza y evaluación, su disponibilidad y su aceptación voluntaria. El tamaño se determinará cuando se conozca la población institucional y se apliquen los criterios de inclusión. Sus aportes permitirán identificar dificultades y necesidades de supervisión.</p></div>
+</section>
+<section class="slide" data-title="Tipo de muestreo" aria-label="12. Tipo de muestreo" hidden>
+<p class="kicker">CAPÍTULO III</p>
+<h2>Tipo de muestreo</h2>
+<div class="content"><p class="lead">Se utilizará un muestreo no probabilístico intencional, mediante la selección de participantes según criterios relacionados con los objetivos del estudio, sin procedimientos aleatorios. Se considerarán la vinculación con la enseñanza y la evaluación académica, la disponibilidad y la participación voluntaria. Los resultados describirán las experiencias y necesidades del grupo seleccionado, sin pretender generalizarlos estadísticamente a toda la población institucional.</p></div>
+</section>
+</main><footer class="footer"><div class="controls"><label for="index" class="small" style="margin:0">Índice</label><select id="index" aria-label="Seleccionar diapositiva"></select><button id="prev" aria-label="Diapositiva anterior">←</button><span class="count" id="count" role="status" aria-live="polite"></span><button id="next" aria-label="Diapositiva siguiente">→</button><button id="full" title="Pantalla completa (F)">Pantalla completa</button><button id="print" title="Imprimir o guardar como PDF">PDF / Imprimir</button></div></footer><div id="status" role="status"></div><div class="progress" role="progressbar" aria-label="Progreso de diapositivas" aria-valuemin="1" aria-valuemax="12"><div id="bar"></div></div></div><script>
+'use strict';
+const slides=[...document.querySelectorAll('.slide')], index=document.querySelector('#index'), prev=document.querySelector('#prev'), next=document.querySelector('#next'), full=document.querySelector('#full'), status=document.querySelector('#status');
+let current=0;
+slides.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${i+1}. ${s.dataset.title}`;index.append(o)});
+function show(n,hash=true){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle('active',i===current)});index.value=current;prev.disabled=current===0;next.disabled=current===slides.length-1;document.querySelector('#count').textContent=`${String(current+1).padStart(2,'0')} / ${slides.length}`;document.querySelector('#bar').style.width=`${(current+1)/slides.length*100}%`;document.querySelector('.progress').setAttribute('aria-valuenow',current+1);if(hash)history.replaceState(null,'',`#${current+1}`);}
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));index.addEventListener('change',()=>show(Number(index.value)));
+async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else status.textContent='Usá F11 en Chrome para activar pantalla completa.';}catch(e){status.textContent='Usá F11 en Chrome para activar pantalla completa.'}}
+full.addEventListener('click',fullscreen);document.addEventListener('fullscreenchange',()=>{full.textContent=document.fullscreenElement?'Salir de pantalla completa':'Pantalla completa';status.textContent=''});
+document.querySelector('#print').addEventListener('click',()=>window.print());
+document.addEventListener('keydown',e=>{if(e.target.matches('select,input,textarea,button')||e.ctrlKey||e.metaKey||e.altKey)return;if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key==='Home'){e.preventDefault();show(0)}else if(e.key==='End'){e.preventDefault();show(slides.length-1)}else if(e.key.toLowerCase()==='f'){e.preventDefault();fullscreen()}});
+function fromHash(){const n=Number(location.hash.slice(1));show(Number.isInteger(n)&&n>=1&&n<=slides.length?n-1:0,false)}window.addEventListener('hashchange',fromHash);fromHash();
+</script></body></html>
