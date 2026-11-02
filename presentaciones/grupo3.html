@@ -1,265 +1,1146 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Anteproyecto de Trabajo Final — Capítulo I y III</title>
+<title>Anteproyecto de Trabajo Final — Ciberseguridad</title>
+
 <style>
-:root{
-  --dk1:#0D1B2A; --lt1:#FFFFFF; --dk2:#13293D; --lt2:#EAF4F6;
-  --a1:#0096C7; --a2:#00B4D8; --a3:#48CAE4; --a4:#90E0EF; --a5:#023E8A;
-  --chrome-bg:#0A1522; --chrome-fg:#CFE8EE; --chrome-fg-dim:#7B95A3;
-  color-scheme: dark;
+:root {
+  --navy: #10213b;
+  --navy2: #193454;
+  --blue: #2463a6;
+  --cyan: #42bed1;
+  --light: #f3f6fa;
+  --white: #ffffff;
+  --pale: #eaf3f7;
+  --ink: #1b2d45;
+  --muted: #64748b;
+  --line: #dce5ed;
+  --chrome-bg: #0b1728;
+  --chrome-fg: #e2edf5;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){ --chrome-bg:#101826; --chrome-fg:#E7F2F5; --chrome-fg-dim:#8CA0AC; }
+
+* {
+  box-sizing: border-box;
 }
-:root[data-theme="dark"]{ --chrome-bg:#0A1522; --chrome-fg:#CFE8EE; --chrome-fg-dim:#7B95A3; }
-*{box-sizing:border-box;}
-html,body{height:100%;margin:0;}
-body{
-  background:var(--chrome-bg);
-  font-family:Georgia,'Cambria',serif;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-  overflow:hidden;
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
-.stage{
-  width:min(96vw,1280px); aspect-ratio:16/9; max-height:84vh;
-  position:relative; border-radius:14px; overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,0.45);
+
+body {
+  background: var(--chrome-bg);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  overflow: hidden;
 }
-.slide{
-  position:absolute; inset:0; display:none;
-  font-family:'Calibri',Arial,sans-serif;
+
+/* CONTENEDOR PRINCIPAL */
+
+.stage {
+  width: min(96vw, 1280px);
+  aspect-ratio: 16 / 9;
+  max-height: 84vh;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--light);
+  box-shadow: 0 22px 65px #0006;
 }
-.slide.active{display:block;}
-.slide.dark{background:var(--dk1); color:var(--lt1);}
-.slide.light{background:var(--lt1); color:var(--dk1);}
-.pad{padding:5.5% 6%; height:100%;}
 
-/* TITLE */
-.s-title .kicker{color:var(--a3);font-weight:700;letter-spacing:3px;font-size:.78rem;margin-bottom:18px;}
-.s-title h1{font-family:Georgia,serif;font-size:clamp(1.3rem,2.6vw,2.1rem);line-height:1.25;margin:0 0 20px;}
-.s-title .sub{color:var(--a4);font-size:.95rem;margin-bottom:34px;}
-.s-title .by-label{color:var(--a3);font-weight:700;font-size:.85rem;margin-bottom:6px;}
-.s-title .by{font-size:.92rem;margin-bottom:4px;}
-.s-title .foot{position:absolute;bottom:5%;left:6%;right:6%;color:var(--a3);font-size:.68rem;}
-.deco{position:absolute;border-radius:50%;}
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-/* DIVIDER */
-.s-div .eyebrow{color:var(--a2);font-weight:700;letter-spacing:3px;font-size:.85rem;margin-bottom:14px;}
-.s-div h2{font-family:Georgia,serif;font-size:clamp(1.6rem,3.4vw,2.6rem);margin:0 0 20px;}
-.s-div p{color:var(--a4);font-size:.95rem;max-width:70%;}
-.s-div .pad{display:flex;flex-direction:column;justify-content:center;}
+.slide.active {
+  display: block;
+  animation: appear .3s ease;
+}
 
-/* CONTENT */
-.s-content .kicker{color:var(--a1);font-weight:700;letter-spacing:2px;font-size:.62rem;margin-bottom:10px;}
-.s-content h2{font-family:Georgia,serif;font-size:clamp(1.1rem,2.2vw,1.55rem);margin:0 0 14px;}
-.s-content hr{border:none;border-top:1px solid #D7E3E6;margin-bottom:3%;}
-.s-content .body{font-size:.85rem;line-height:1.55;}
-.s-content .body p{margin:0 0 10px;}
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
-.chip{background:var(--a1);color:#fff;font-size:.72rem;font-weight:700;padding:8px 16px;border-radius:20px;}
+.slide.dark {
+  background:
+    radial-gradient(circle at 85% 15%, #28547a 0, transparent 32%),
+    linear-gradient(135deg, var(--navy), var(--navy2));
+  color: white;
+}
 
-.grid{display:grid;gap:14px;margin-top:10px;}
-.grid.c2{grid-template-columns:1fr 1fr;}
-.grid.c3{grid-template-columns:1fr 1fr 1fr;}
-.grid.c5{grid-template-columns:repeat(5,1fr);}
-.card{background:var(--lt2);border-radius:10px;padding:16px;}
-.card.dk{background:var(--dk1);color:#fff;}
-.card .badge{width:34px;height:34px;border-radius:50%;background:var(--a1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;margin-bottom:10px;}
-.card h3{font-family:Georgia,serif;font-size:.95rem;margin:0 0 8px;color:var(--a5);}
-.card.dk h3{color:var(--a3);}
-.card p{font-size:.74rem;line-height:1.4;margin:0;}
-.card.center{text-align:center;}
-.card.center .badge{margin-left:auto;margin-right:auto;}
+.slide.light {
+  background: var(--light);
+  color: var(--ink);
+}
 
-.quote{background:var(--dk1);color:#fff;border-radius:12px;padding:5% 6%;position:relative;}
-.quote .mark{width:46px;height:34px;border-radius:6px;background:var(--a1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;margin-bottom:14px;}
-.quote.lt{background:var(--lt2);color:var(--dk1);}
-.quote.lt .mark{background:var(--a1);color:#fff;}
-.quote p{font-style:italic;font-size:1rem;line-height:1.45;font-family:Georgia,serif;margin:0;}
+.pad {
+  padding: 5.5% 6%;
+  height: 100%;
+}
 
-/* NAV CHROME */
-.chrome{display:flex;align-items:center;gap:16px;margin-top:18px;color:var(--chrome-fg);font-size:.78rem;font-family:Calibri,Arial,sans-serif;}
-.navbtn{background:transparent;border:1px solid #2A4256;color:var(--chrome-fg);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
-.navbtn:hover{background:#17293B;}
-.navbtn:disabled{opacity:.3;cursor:default;}
-.dots{display:flex;gap:6px;}
-.dot{width:6px;height:6px;border-radius:50%;background:#2A4256;cursor:pointer;}
-.dot.on{background:var(--a2);width:16px;border-radius:3px;}
-.counter{color:var(--chrome-fg-dim);min-width:48px;text-align:center;}
+/* PORTADA */
+
+.s-title .kicker {
+  color: var(--cyan);
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: .8rem;
+  margin-bottom: 20px;
+}
+
+.s-title h1 {
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  line-height: 1.22;
+  max-width: 950px;
+  margin: 0 0 22px;
+  font-weight: 750;
+}
+
+.s-title .sub {
+  color: #b9d8e9;
+  font-size: clamp(.8rem, 1.3vw, 1.05rem);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.s-title .by-label {
+  color: var(--cyan);
+  font-weight: 800;
+  font-size: .9rem;
+  margin-bottom: 9px;
+}
+
+.s-title .by {
+  font-size: .95rem;
+  margin-bottom: 5px;
+  color: #e7f0f8;
+}
+
+.s-title .foot {
+  position: absolute;
+  bottom: 5%;
+  left: 6%;
+  right: 6%;
+  color: #9dbbd0;
+  font-size: .72rem;
+}
+
+.deco {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* SEPARADORES */
+
+.s-div {
+  background: linear-gradient(135deg, #10213b, #1d4568);
+}
+
+.s-div .eyebrow {
+  color: var(--cyan);
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-size: .9rem;
+  margin-bottom: 18px;
+}
+
+.s-div h2 {
+  color: white;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1.15;
+  max-width: 800px;
+  margin: 0 0 22px;
+}
+
+.s-div p {
+  color: #c7dce9;
+  font-size: clamp(.9rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  max-width: 650px;
+}
+
+.s-div .pad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* CONTENIDO */
+
+.s-content {
+  background: var(--light);
+}
+
+.s-content .kicker {
+  color: var(--blue);
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  font-size: .72rem;
+  margin-bottom: 12px;
+}
+
+.s-content h2 {
+  color: var(--navy);
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  margin: 0 0 17px;
+  font-weight: 750;
+}
+
+.s-content hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin-bottom: 3%;
+}
+
+.s-content .body {
+  font-size: clamp(.85rem, 1.2vw, 1rem);
+  line-height: 1.65;
+  color: #43546b;
+}
+
+.s-content .body p {
+  margin: 0 0 12px;
+}
+
+/* ETIQUETAS */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  background: #e1f2f6;
+  color: #12647c;
+  border: 1px solid #c7e8ee;
+  font-size: .76rem;
+  font-weight: 750;
+  padding: 9px 15px;
+  border-radius: 30px;
+}
+
+/* TARJETAS */
+
+.grid {
+  display: grid;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.grid.c2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid.c3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid.c5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 19px;
+  box-shadow: 0 4px 14px #17274708;
+}
+
+.card.dk {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+
+.card .badge {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: #e0f3f7;
+  color: #14718b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: .85rem;
+  margin-bottom: 12px;
+}
+
+.card.dk .badge {
+  background: #24547a;
+  color: #8de1eb;
+}
+
+.card h3 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+  color: var(--navy);
+}
+
+.card.dk h3 {
+  color: var(--cyan);
+}
+
+.card p {
+  font-size: clamp(.76rem, 1vw, .9rem);
+  line-height: 1.5;
+  color: #53647a;
+  margin: 0;
+}
+
+.card.dk p {
+  color: #d3e3ed;
+}
+
+.card.center {
+  text-align: center;
+}
+
+.card.center .badge {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* PREGUNTA Y OBJETIVO */
+
+.quote {
+  background: var(--navy);
+  color: white;
+  border-radius: 16px;
+  padding: 5% 6%;
+  position: relative;
+  box-shadow: 0 9px 25px #10213b18;
+}
+
+.quote .mark {
+  width: 43px;
+  height: 37px;
+  border-radius: 9px;
+  background: var(--cyan);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.quote.lt {
+  background: var(--pale);
+  color: var(--navy);
+}
+
+.quote.lt .mark {
+  background: var(--blue);
+  color: white;
+}
+
+.quote p {
+  font-size: clamp(.95rem, 1.5vw, 1.2rem);
+  line-height: 1.55;
+  font-weight: 500;
+  margin: 0;
+  font-family: Georgia, serif;
+}
+
+/* NAVEGACIÓN */
+
+.chrome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 17px;
+  color: var(--chrome-fg);
+  font-size: .8rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.navbtn {
+  background: #192d48;
+  border: 1px solid #36516e;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbtn:hover {
+  background: #28527a;
+}
+
+.navbtn:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #36516e;
+  cursor: pointer;
+}
+
+.dot.on {
+  background: var(--cyan);
+  width: 18px;
+  border-radius: 5px;
+}
+
+.counter {
+  color: #a7bdcf;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* BARRA DE PROGRESO */
+
+.progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background: var(--cyan);
+  transition: width .25s;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:760px) {
+  body {
+    padding: 8px;
+  }
+
+  .stage {
+    width: 100%;
+    height: calc(100vh - 90px);
+    aspect-ratio: auto;
+    max-height: none;
+  }
+
+  .pad {
+    padding: 25px 22px;
+    overflow-y: auto;
+  }
+
+  .grid.c5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid.c3,
+  .grid.c2 {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 13px;
+  }
+
+  .s-title h1 {
+    font-size: 1.6rem;
+  }
+
+  .s-div h2 {
+    font-size: 2rem;
+  }
+
+  .chrome {
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .dots {
+    gap: 4px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .dot.on {
+    width: 13px;
+  }
+}
+
+/* IMPRESIÓN Y PDF */
+
+@media print {
+  html, body {
+    height: auto;
+    overflow: visible;
+    background: white;
+  }
+
+  body {
+    display: block;
+    padding: 0;
+  }
+
+  .stage {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .slide {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .chrome,
+  .progress {
+    display: none !important;
+  }
+}
 </style>
 </head>
+
 <body>
+
+<!-- DIAPOSITIVAS -->
+
 <div class="stage" id="stage"></div>
+
+<!-- CONTROLES -->
+
 <div class="chrome">
-  <button class="navbtn" id="prev" aria-label="Anterior">&#8592;</button>
+  <button class="navbtn" id="prev" aria-label="Anterior">←</button>
   <div class="dots" id="dots"></div>
-  <button class="navbtn" id="next" aria-label="Siguiente">&#8594;</button>
+  <button class="navbtn" id="next" aria-label="Siguiente">→</button>
   <span class="counter" id="counter">1/11</span>
+  <button class="navbtn" id="fullscreen" title="Pantalla completa">⛶</button>
+  <button class="navbtn" id="print" title="Guardar como PDF">↓</button>
 </div>
 
+<div class="progress" id="progress"></div>
+
 <script>
+
 const slides = [
-// 1 TITLE
+
+/* 1. PORTADA */
+
 `<div class="pad">
   <div class="kicker">ANTEPROYECTO DE TRABAJO FINAL</div>
+
   <h1>Desarrollo de un videojuego de simulación de ataques informáticos para la capacitación en ciberseguridad de estudiantes de Ingeniería Informática del 4.° año</h1>
-  <div class="sub">Capítulo I — Planteamiento del Problema · Capítulo III — Marco Metodológico</div>
+
+  <div class="sub">
+    Capítulo I — Planteamiento del Problema ·
+    Capítulo III — Marco Metodológico
+  </div>
+
   <div class="by-label">Presentado por:</div>
+
   <div class="by">Manuel José Sosa Cristaldo</div>
   <div class="by">Sergio José Sosa Cristaldo</div>
 </div>`,
-// 2 DIVIDER CAP I
+
+/* 2. SEPARADOR CAPÍTULO I */
+
 `<div class="pad">
   <div class="eyebrow">CAPÍTULO I</div>
+
   <h2>Planteamiento del Problema</h2>
-  <p>Problema, pregunta general, objetivo general y justificación de la investigación.</p>
+
+  <p>
+    Problema, pregunta general, objetivo general y
+    justificación de la investigación.
+  </p>
 </div>`,
-// 3 PROBLEMA
+
+/* 3. PROBLEMA */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO I · 3.1 PROBLEMA DE INVESTIGACIÓN</div>
-  <h2>Definición del Problema</h2><hr>
-  <div class="body"><p>Los estudiantes usan constantemente dispositivos, redes sociales y plataformas educativas, pero no siempre cuentan con los conocimientos para identificar y actuar ante amenazas informáticas. En UNINORTE, sede Caacupé, surge la necesidad de una herramienta práctica que complemente la capacitación tradicional en ciberseguridad.</p></div>
-  <div class="kicker" style="margin-top:14px;">CINCO ÁREAS DE CIBERSEGURIDAD A ABORDAR</div>
+  <div class="kicker">
+    CAPÍTULO I · 3.1 PROBLEMA DE INVESTIGACIÓN
+  </div>
+
+  <h2>Definición del Problema</h2>
+  <hr>
+
+  <div class="body">
+    <p>
+      Los estudiantes usan constantemente dispositivos,
+      redes sociales y plataformas educativas, pero no
+      siempre cuentan con los conocimientos para
+      identificar y actuar ante amenazas informáticas.
+      En UNINORTE, sede Caacupé, surge la necesidad de
+      una herramienta práctica que complemente la
+      capacitación tradicional en ciberseguridad.
+    </p>
+  </div>
+
+  <div class="kicker" style="margin-top:14px;">
+    CINCO ÁREAS DE CIBERSEGURIDAD A ABORDAR
+  </div>
+
   <div class="grid c5">
-    <div class="card center"><div class="badge" style="margin:0 auto 8px;">1</div><p>Contraseñas y autenticación</p></div>
-    <div class="card center"><div class="badge" style="margin:0 auto 8px;">2</div><p>Phishing y correo electrónico</p></div>
-    <div class="card center"><div class="badge" style="margin:0 auto 8px;">3</div><p>Ingeniería social</p></div>
-    <div class="card center"><div class="badge" style="margin:0 auto 8px;">4</div><p>Malware</p></div>
-    <div class="card center"><div class="badge" style="margin:0 auto 8px;">5</div><p>Incidentes de seguridad</p></div>
+    <div class="card center">
+      <div class="badge">1</div>
+      <p>Contraseñas y autenticación</p>
+    </div>
+
+    <div class="card center">
+      <div class="badge">2</div>
+      <p>Phishing y correo electrónico</p>
+    </div>
+
+    <div class="card center">
+      <div class="badge">3</div>
+      <p>Ingeniería social</p>
+    </div>
+
+    <div class="card center">
+      <div class="badge">4</div>
+      <p>Malware</p>
+    </div>
+
+    <div class="card center">
+      <div class="badge">5</div>
+      <p>Incidentes de seguridad</p>
+    </div>
   </div>
 </div>`,
-// 4 PREGUNTA GENERAL
+
+/* 4. PREGUNTA GENERAL */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO I · 3.2 PREGUNTA GENERAL DE INVESTIGACIÓN</div>
-  <h2>Pregunta General de Investigación</h2><hr>
-  <div class="quote"><div class="mark">&#8220;</div>
-    <p>¿De qué manera el desarrollo de un videojuego de simulación de ataques informáticos puede mejorar la interacción, los conocimientos y la capacidad de respuesta de los estudiantes de Ingeniería Informática de 4.° año de la Universidad del Norte, sede Caacupé, ante amenazas de ciberseguridad?</p>
+  <div class="kicker">
+    CAPÍTULO I · 3.2 PREGUNTA GENERAL DE INVESTIGACIÓN
+  </div>
+
+  <h2>Pregunta General de Investigación</h2>
+  <hr>
+
+  <div class="quote">
+    <div class="mark">&#8220;</div>
+
+    <p>
+      ¿De qué manera el desarrollo de un videojuego de
+      simulación de ataques informáticos puede mejorar
+      la interacción, los conocimientos y la capacidad
+      de respuesta de los estudiantes de Ingeniería
+      Informática de 4.° año de la Universidad del Norte,
+      sede Caacupé, ante amenazas de ciberseguridad?
+    </p>
   </div>
 </div>`,
-// 5 OBJETIVO GENERAL
+
+/* 5. OBJETIVO GENERAL */
+
 `<div class="pad">
   <div class="kicker">CAPÍTULO I · 4. OBJETIVOS</div>
-  <h2>Objetivo General</h2><hr>
-  <div class="quote"><div class="mark">&#8220;</div>
-    <p>Desarrollar un videojuego de simulación de ataques informáticos que permita mejorar la interacción, los conocimientos y la capacidad de respuesta de los estudiantes de Ingeniería Informática de 4.° año de la Universidad del Norte, sede Caacupé, ante amenazas de ciberseguridad, mediante escenarios simulados en un entorno seguro y controlado.</p>
+
+  <h2>Objetivo General</h2>
+  <hr>
+
+  <div class="quote">
+    <div class="mark">&#8220;</div>
+
+    <p>
+      Desarrollar un videojuego de simulación de ataques
+      informáticos que permita mejorar la interacción,
+      los conocimientos y la capacidad de respuesta de
+      los estudiantes de Ingeniería Informática de 4.° año
+      de la Universidad del Norte, sede Caacupé, ante
+      amenazas de ciberseguridad, mediante escenarios
+      simulados en un entorno seguro y controlado.
+    </p>
   </div>
 </div>`,
-// 6 JUSTIFICACION
+
+/* 6. JUSTIFICACIÓN */
+
 `<div class="pad">
   <div class="kicker">CAPÍTULO I · 6. JUSTIFICACIÓN</div>
-  <h2>Justificación</h2><hr>
+
+  <h2>Justificación</h2>
+  <hr>
+
   <div class="grid c3">
-    <div class="card"><div class="badge">1</div><h3>Necesidad</h3><p>Fortalecer conocimientos y habilidades prácticas de los estudiantes de 4.° año en ciberseguridad, ante su exposición diaria a amenazas digitales.</p></div>
-    <div class="card dk"><div class="badge">2</div><h3>Aporte</h3><p>Complementa la capacitación tradicional con escenarios interactivos donde los estudiantes identifican amenazas y toman decisiones.</p></div>
-    <div class="card"><div class="badge">3</div><h3>Viabilidad</h3><p>Dirigido a estudiantes de los turnos mañana, tarde y noche, en un entorno seguro, sin comprometer dispositivos ni datos reales.</p></div>
+
+    <div class="card">
+      <div class="badge">1</div>
+      <h3>Necesidad</h3>
+      <p>
+        Fortalecer conocimientos y habilidades prácticas
+        de los estudiantes de 4.° año en ciberseguridad,
+        ante su exposición diaria a amenazas digitales.
+      </p>
+    </div>
+
+    <div class="card dk">
+      <div class="badge">2</div>
+      <h3>Aporte</h3>
+      <p>
+        Complementa la capacitación tradicional con
+        escenarios interactivos donde los estudiantes
+        identifican amenazas y toman decisiones.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="badge">3</div>
+      <h3>Viabilidad</h3>
+      <p>
+        Dirigido a estudiantes de los turnos mañana,
+        tarde y noche, en un entorno seguro, sin
+        comprometer dispositivos ni datos reales.
+      </p>
+    </div>
+
   </div>
 </div>`,
-// 7 DIVIDER CAP III
+
+/* 7. SEPARADOR CAPÍTULO III */
+
 `<div class="pad">
   <div class="eyebrow">CAPÍTULO III</div>
+
   <h2>Marco Metodológico</h2>
-  <p>Tipo y diseño de investigación, población y muestra, y tipo de muestreo.</p>
+
+  <p>
+    Tipo y diseño de investigación, población y muestra,
+    y tipo de muestreo.
+  </p>
 </div>`,
-// 8 TIPO DE INVESTIGACION
+
+/* 8. TIPO DE INVESTIGACIÓN */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO III · TIPO DE INVESTIGACIÓN</div>
+  <div class="kicker">
+    CAPÍTULO III · TIPO DE INVESTIGACIÓN
+  </div>
+
   <h2>Tipo de Investigación</h2>
+
   <div class="chips">
-    <span class="chip">Aplicada</span><span class="chip">Enfoque mixto</span><span class="chip">Tecnológica</span><span class="chip">Alcance descriptivo</span>
+    <span class="chip">Aplicada</span>
+    <span class="chip">Enfoque mixto</span>
+    <span class="chip">Tecnológica</span>
+    <span class="chip">Alcance descriptivo</span>
   </div>
+
   <div class="card" style="padding:4% 5%;">
-    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">Esta investigación será de tipo aplicada, ya que busca dar respuesta a una necesidad relacionada con la capacitación en ciberseguridad de los estudiantes de Ingeniería Informática de 4.° año, mediante el desarrollo de un videojuego de simulación de ataques informáticos.</p>
-    <p style="font-size:.82rem;line-height:1.55;margin:0;">Tendrá un enfoque mixto, ya que se recogerán datos cuantitativos (encuestas y evaluaciones) y cualitativos (entrevista). Su orientación será tecnológica, pues se diseñará y desarrollará una herramienta informática con fines educativos, y su alcance cuantitativo será descriptivo, al buscar conocer los conocimientos de los estudiantes antes y después de utilizar el videojuego.</p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">
+      Esta investigación será de tipo aplicada, ya que
+      busca dar respuesta a una necesidad relacionada
+      con la capacitación en ciberseguridad de los
+      estudiantes de Ingeniería Informática de 4.° año,
+      mediante el desarrollo de un videojuego de
+      simulación de ataques informáticos.
+    </p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0;">
+      Tendrá un enfoque mixto, ya que se recogerán datos
+      cuantitativos (encuestas y evaluaciones) y
+      cualitativos (entrevista). Su orientación será
+      tecnológica, pues se diseñará y desarrollará una
+      herramienta informática con fines educativos,
+      y su alcance cuantitativo será descriptivo, al
+      buscar conocer los conocimientos de los estudiantes
+      antes y después de utilizar el videojuego.
+    </p>
+
   </div>
 </div>`,
-// 9 DISEÑO DE INVESTIGACION
+
+/* 9. DISEÑO DE INVESTIGACIÓN */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO III · DISEÑO DE LA INVESTIGACIÓN</div>
+  <div class="kicker">
+    CAPÍTULO III · DISEÑO DE LA INVESTIGACIÓN
+  </div>
+
   <h2>Diseño de la Investigación</h2>
-  <div class="chips"><span class="chip">Preexperimental</span></div>
+
+  <div class="chips">
+    <span class="chip">Preexperimental</span>
+  </div>
+
   <div class="card dk" style="padding:4% 5%;">
-    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">La investigación tendrá un diseño preexperimental, ya que se trabajará con un solo grupo de estudiantes: primero se realizará una evaluación inicial para conocer sus conocimientos previos, y luego una segunda evaluación después de utilizar el videojuego.</p>
-    <p style="font-size:.82rem;line-height:1.55;margin:0;">Con los resultados de ambas evaluaciones se podrán comparar las respuestas de los participantes y observar los cambios en sus conocimientos, en el reconocimiento de amenazas y en las decisiones tomadas. Las actividades se realizarán en un entorno educativo controlado, sin utilizar ataques informáticos reales ni poner en riesgo dispositivos, redes o información de los participantes.</p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">
+      La investigación tendrá un diseño preexperimental,
+      ya que se trabajará con un solo grupo de estudiantes:
+      primero se realizará una evaluación inicial para
+      conocer sus conocimientos previos, y luego una
+      segunda evaluación después de utilizar el videojuego.
+    </p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0;">
+      Con los resultados de ambas evaluaciones se podrán
+      comparar las respuestas de los participantes y
+      observar los cambios en sus conocimientos, en el
+      reconocimiento de amenazas y en las decisiones
+      tomadas. Las actividades se realizarán en un
+      entorno educativo controlado, sin utilizar ataques
+      informáticos reales ni poner en riesgo dispositivos,
+      redes o información de los participantes.
+    </p>
+
   </div>
 </div>`,
-// 10 POBLACION Y MUESTRA
+
+/* 10. POBLACIÓN Y MUESTRA */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO III · POBLACIÓN Y MUESTRA</div>
-  <h2>Población y Muestra</h2><hr>
+  <div class="kicker">
+    CAPÍTULO III · POBLACIÓN Y MUESTRA
+  </div>
+
+  <h2>Población y Muestra</h2>
+  <hr>
+
   <div class="grid c2">
-    <div class="card"><div class="badge">1</div><h3>Población</h3><p>Estudiantes de la Universidad del Norte (UNINORTE), sede Caacupé, de las diferentes carreras y años académicos durante el periodo 2027. Cada estudiante matriculado es considerado una unidad de análisis.</p></div>
-    <div class="card"><div class="badge">2</div><h3>Muestra</h3><p>Estudiantes de 4.° año de Ingeniería Informática de UNINORTE, sede Caacupé, correspondientes a los turnos mañana, tarde y noche, durante el periodo académico 2027.</p></div>
+
+    <div class="card">
+      <div class="badge">1</div>
+      <h3>Población</h3>
+      <p>
+        Estudiantes de la Universidad del Norte (UNINORTE),
+        sede Caacupé, de las diferentes carreras y años
+        académicos durante el periodo 2027. Cada estudiante
+        matriculado es considerado una unidad de análisis.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="badge">2</div>
+      <h3>Muestra</h3>
+      <p>
+        Estudiantes de 4.° año de Ingeniería Informática
+        de UNINORTE, sede Caacupé, correspondientes a los
+        turnos mañana, tarde y noche, durante el periodo
+        académico 2027.
+      </p>
+    </div>
+
   </div>
 </div>`,
-// 11 TIPO DE MUESTREO
+
+/* 11. TIPO DE MUESTREO */
+
 `<div class="pad">
-  <div class="kicker">CAPÍTULO III · TIPO DE MUESTREO</div>
+  <div class="kicker">
+    CAPÍTULO III · TIPO DE MUESTREO
+  </div>
+
   <h2>Tipo de Muestreo</h2>
-  <div class="chips"><span class="chip">Muestreo censal</span></div>
+
+  <div class="chips">
+    <span class="chip">Muestreo censal</span>
+  </div>
+
   <div class="card" style="padding:4% 5%;">
-    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">Se invitará a participar a todos los estudiantes de 4.° año de Ingeniería Informática de los turnos mañana, tarde y noche. Por ello se trabajará con una estrategia censal, buscando incluir a la totalidad de los estudiantes de ese grupo, sin realizar una selección individual de participantes.</p>
-    <p style="font-size:.82rem;line-height:1.55;margin:0;">Durante el desarrollo del estudio se registrará cuántos estudiantes fueron invitados y cuántos participaron efectivamente.</p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0 0 10px;">
+      Se invitará a participar a todos los estudiantes
+      de 4.° año de Ingeniería Informática de los turnos
+      mañana, tarde y noche. Por ello se trabajará con
+      una estrategia censal, buscando incluir a la
+      totalidad de los estudiantes de ese grupo, sin
+      realizar una selección individual de participantes.
+    </p>
+
+    <p style="font-size:.82rem;line-height:1.55;margin:0;">
+      Durante el desarrollo del estudio se registrará
+      cuántos estudiantes fueron invitados y cuántos
+      participaron efectivamente.
+    </p>
+
   </div>
 </div>`
+
 ];
 
-const types = ['title','div','content','content','content','content','div','content','content','content','content'];
+/* CONFIGURACIÓN DE DIAPOSITIVAS */
+
+const types = [
+  'title',
+  'div',
+  'content',
+  'content',
+  'content',
+  'content',
+  'div',
+  'content',
+  'content',
+  'content',
+  'content'
+];
+
 const stage = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
+
 let cur = 0;
 
-function slideClass(i){
-  if(types[i]==='title') return 'slide dark s-title';
-  if(types[i]==='div') return 'slide dark s-div';
+/* CLASES DE CADA DIAPOSITIVA */
+
+function slideClass(i) {
+  if (types[i] === 'title') {
+    return 'slide dark s-title';
+  }
+
+  if (types[i] === 'div') {
+    return 'slide dark s-div';
+  }
+
   return 'slide light s-content';
 }
 
-stage.innerHTML = slides.map((html,i)=>`<div class="${slideClass(i)}" id="sl${i}">${html}</div>`).join('');
+/* GENERAR DIAPOSITIVAS */
 
-if(types[0]==='title'){
+stage.innerHTML = slides.map((html, i) =>
+  `<div class="${slideClass(i)}" id="sl${i}">${html}</div>`
+).join('');
+
+/* DECORACIÓN DE PORTADA */
+
+if (types[0] === 'title') {
+
   const t = document.getElementById('sl0');
+
   t.insertAdjacentHTML('beforeend', `
-    <div class="deco" style="width:220px;height:220px;top:-80px;right:-40px;background:var(--dk2);"></div>
-    <div class="deco" style="width:130px;height:130px;top:20px;right:60px;border:1.5px solid var(--a1);"></div>
-    <div class="deco" style="width:170px;height:170px;bottom:-60px;left:-70px;border:1px solid var(--a3);"></div>`);
+
+    <div class="deco"
+      style="
+        width:220px;
+        height:220px;
+        top:-80px;
+        right:-40px;
+        background:var(--navy2);
+      ">
+    </div>
+
+    <div class="deco"
+      style="
+        width:130px;
+        height:130px;
+        top:20px;
+        right:60px;
+        border:1.5px solid var(--blue);
+      ">
+    </div>
+
+    <div class="deco"
+      style="
+        width:170px;
+        height:170px;
+        bottom:-60px;
+        left:-70px;
+        border:1px solid var(--cyan);
+      ">
+    </div>
+
+  `);
 }
 
-dotsEl.innerHTML = slides.map((_,i)=>`<div class="dot" data-i="${i}"></div>`).join('');
+/* GENERAR PUNTOS DE NAVEGACIÓN */
 
-function render(){
-  document.querySelectorAll('.slide').forEach((el,i)=>el.classList.toggle('active', i===cur));
-  document.querySelectorAll('.dot').forEach((el,i)=>el.classList.toggle('on', i===cur));
-  document.getElementById('counter').textContent = (cur+1)+'/'+slides.length;
-  document.getElementById('prev').disabled = cur===0;
-  document.getElementById('next').disabled = cur===slides.length-1;
-  try{ localStorage.setItem('deck-slide-sosa', String(cur)); }catch(e){}
+dotsEl.innerHTML = slides.map((_, i) =>
+  `<div class="dot" data-i="${i}" title="Diapositiva ${i+1}"></div>`
+).join('');
+
+/* ACTUALIZAR PRESENTACIÓN */
+
+function render() {
+
+  document.querySelectorAll('.slide').forEach((el, i) => {
+    el.classList.toggle('active', i === cur);
+  });
+
+  document.querySelectorAll('.dot').forEach((el, i) => {
+    el.classList.toggle('on', i === cur);
+  });
+
+  document.getElementById('counter').textContent =
+    (cur + 1) + '/' + slides.length;
+
+  document.getElementById('prev').disabled = cur === 0;
+
+  document.getElementById('next').disabled =
+    cur === slides.length - 1;
+
+  document.getElementById('progress').style.width =
+    ((cur + 1) / slides.length * 100) + '%';
+
+  try {
+    localStorage.setItem('deck-slide-sosa', String(cur));
+  } catch(e) {}
 }
-function go(i){ cur = Math.max(0, Math.min(slides.length-1, i)); render(); }
 
-document.getElementById('prev').addEventListener('click', ()=>go(cur-1));
-document.getElementById('next').addEventListener('click', ()=>go(cur+1));
-dotsEl.addEventListener('click', e=>{ const d=e.target.closest('.dot'); if(d) go(+d.dataset.i); });
-window.addEventListener('keydown', e=>{
-  if(e.key==='ArrowRight'||e.key===' ') go(cur+1);
-  if(e.key==='ArrowLeft') go(cur-1);
+/* CAMBIAR DE DIAPOSITIVA */
+
+function go(i) {
+  cur = Math.max(0, Math.min(slides.length - 1, i));
+  render();
+}
+
+/* BOTONES */
+
+document.getElementById('prev').addEventListener('click', () => {
+  go(cur - 1);
 });
-let touchX=null;
-stage.addEventListener('touchstart', e=>touchX=e.touches[0].clientX);
-stage.addEventListener('touchend', e=>{
-  if(touchX===null) return;
+
+document.getElementById('next').addEventListener('click', () => {
+  go(cur + 1);
+});
+
+/* NAVEGACIÓN POR PUNTOS */
+
+dotsEl.addEventListener('click', e => {
+
+  const d = e.target.closest('.dot');
+
+  if (d) {
+    go(Number(d.dataset.i));
+  }
+
+});
+
+/* NAVEGACIÓN CON TECLADO */
+
+window.addEventListener('keydown', e => {
+
+  if (
+    e.key === 'ArrowRight' ||
+    e.key === 'PageDown' ||
+    e.key === ' '
+  ) {
+    e.preventDefault();
+    go(cur + 1);
+  }
+
+  if (
+    e.key === 'ArrowLeft' ||
+    e.key === 'PageUp'
+  ) {
+    e.preventDefault();
+    go(cur - 1);
+  }
+
+  if (e.key === 'Home') {
+    go(0);
+  }
+
+  if (e.key === 'End') {
+    go(slides.length - 1);
+  }
+
+});
+
+/* NAVEGACIÓN TÁCTIL */
+
+let touchX = null;
+
+stage.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+});
+
+stage.addEventListener('touchend', e => {
+
+  if (touchX === null) return;
+
   const dx = e.changedTouches[0].clientX - touchX;
-  if(dx>40) go(cur-1); else if(dx<-40) go(cur+1);
-  touchX=null;
+
+  if (dx > 40) {
+    go(cur - 1);
+  } else if (dx < -40) {
+    go(cur + 1);
+  }
+
+  touchX = null;
+
 });
+
+/* PANTALLA COMPLETA */
+
+document.getElementById('fullscreen').addEventListener('click', () => {
+
+  if (!document.fullscreenElement) {
+
+    document.documentElement.requestFullscreen?.();
+
+  } else {
+
+    document.exitFullscreen?.();
+
+  }
+
+});
+
+/* IMPRIMIR O GUARDAR COMO PDF */
+
+document.getElementById('print').addEventListener('click', () => {
+  window.print();
+});
+
+/* RECUPERAR ÚLTIMA DIAPOSITIVA */
 
 let start = 0;
-try{ const saved = localStorage.getItem('deck-slide-sosa'); if(saved!==null) start = +saved; }catch(e){}
+
+try {
+
+  const saved = localStorage.getItem('deck-slide-sosa');
+
+  if (saved !== null) {
+    start = Number(saved);
+  }
+
+} catch(e) {}
+
+/* INICIAR PRESENTACIÓN */
+
 go(start);
+
 </script>
+
 </body>
 </html>
