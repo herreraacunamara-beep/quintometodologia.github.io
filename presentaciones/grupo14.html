@@ -1,17 +1,320 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupo 14 - pendiente</title>
-  <style>
-    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;font-family:system-ui,Arial,sans-serif;background:#e9eff1;color:#10232a}
-    h1{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 .4em}
-    p{font-size:1.3rem;color:#52646b}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f0e8">
+<title>Anteproyecto | Aprendizaje adaptativo en Lógica de Programación</title>
+<style>
+:root{
+  --paper:#f5f0e8;--ink:#17241f;--muted:#64716a;--green:#b9f36a;--green-dark:#244d37;
+  --orange:#ff805c;--blue:#c7d8ff;--line:rgba(23,36,31,.17);--card:#fffdf8;
+}
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{margin:0;min-height:100vh;overflow:hidden;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.27;background-image:radial-gradient(rgba(23,36,31,.2) .7px,transparent .7px);background-size:7px 7px;mask-image:linear-gradient(120deg,black,transparent 80%)}
+
+.deck{width:min(1320px,100%);height:100dvh;margin:auto;padding:22px 26px 16px;display:flex;flex-direction:column;gap:13px;position:relative}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:35px}
+
+.brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+
+.brand-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:var(--ink);font-size:16px}
+
+.top-note{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.stage{flex:1;min-height:0;position:relative}
+
+.slide{display:none;position:absolute;inset:0;overflow:auto;padding:clamp(28px,5vw,70px);border:1px solid var(--line);border-radius:4px 34px 4px 34px;background:rgba(255,253,248,.91);box-shadow:0 20px 60px rgba(40,47,34,.09);scrollbar-width:thin;scrollbar-color:#a5b3a0 transparent}
+
+.slide:before{content:"";position:absolute;top:0;right:0;width:110px;height:110px;background:var(--green);clip-path:polygon(100% 0,100% 100%,0 0);opacity:.8}
+
+.slide.active{display:flex;flex-direction:column;justify-content:center;animation:appear .4s ease both}
+
+.slide.active>*{animation:lift .45s ease both}
+
+.slide.active>*:nth-child(2){animation-delay:.04s}
+
+.slide.active>*:nth-child(3){animation-delay:.08s}
+
+.slide.active>*:nth-child(4){animation-delay:.12s}
+
+.eyebrow{margin:0 0 18px;color:var(--green-dark);font-size:11px;font-weight:900;letter-spacing:.17em;text-transform:uppercase;display:flex;align-items:center;gap:9px}
+
+.eyebrow:before{content:"";width:25px;height:3px;background:var(--orange)}
+
+h1{
+  font-size:clamp(22px,2.7vw,40px);
+  line-height:1.12;
+  letter-spacing:-.035em;
+  max-width:1000px;
+  margin:0 0 22px;
+}
+
+h2{font-size:clamp(28px,3.4vw,45px);line-height:1.06;letter-spacing:-.05em;max-width:1000px;margin:0 0 25px}
+
+.lead{font-size:clamp(17px,1.8vw,23px);line-height:1.48;max-width:990px;margin:0;color:#36453c}
+
+.para{font-size:clamp(15px,1.35vw,19px);line-height:1.65;max-width:1040px;margin:0 0 15px;color:#45534b}
+
+.sub{font-size:13px;line-height:1.55;color:var(--muted)}
+
+.names{font-size:16px;line-height:1.8;margin-top:22px}
+
+.pill{display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:8px 13px;background:var(--green);color:var(--ink);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin:0 0 20px;transform:rotate(-1deg)}
+
+.cover-layout{display:grid;grid-template-columns:minmax(0,1fr) 170px;align-items:center;gap:28px}
+
+.cover-art{width:155px;height:205px;position:relative;transform:rotate(5deg)}
+
+.cover-art .sheet{position:absolute;inset:8px 12px;border:2px solid var(--ink);background:var(--blue);border-radius:3px;transform:rotate(-10deg)}
+
+.cover-art .sheet:nth-child(2){background:var(--orange);transform:rotate(8deg)}
+
+.cover-art .sheet:nth-child(3){inset:0;background:var(--green);transform:rotate(-2deg);display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:950;box-shadow:8px 8px 0 var(--ink)}
+
+.cover-art .sheet:nth-child(3):after{content:"IA / 27";position:absolute;bottom:14px;left:14px;font-size:11px;letter-spacing:.14em}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+
+.card{position:relative;padding:20px 21px;background:var(--card);border:1px solid var(--line);border-radius:3px 18px 3px 18px;transition:transform .22s,box-shadow .22s}
+
+.card:hover{transform:translateY(-3px) rotate(-.3deg);box-shadow:5px 7px 0 rgba(23,36,31,.12)}
+
+.card strong{display:block;color:var(--green-dark);font-size:16px;margin-bottom:8px}
+
+.card span{display:block;font-size:15px;line-height:1.5;color:#46534a}
+
+.quote{font-size:clamp(19px,2.05vw,28px);line-height:1.5;padding:23px 25px;background:var(--green);border:1px solid var(--ink);box-shadow:7px 7px 0 var(--ink);max-width:1030px}
+
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:12px 0 22px;counter-reset:step}
+
+.step{counter-increment:step;position:relative;min-height:124px;padding:18px 14px;border:1px solid var(--ink);background:var(--blue);font-size:14px;line-height:1.5;color:var(--ink);transition:transform .2s}
+
+.step:nth-child(2){background:#ffd3c5}
+
+.step:nth-child(3){background:var(--green)}
+
+.step:nth-child(4){background:#e8e1d5}
+
+.step:hover{transform:translateY(-4px) rotate(-1deg)}
+
+.step b{display:block;font-size:10px;letter-spacing:.12em;margin-bottom:12px}
+
+.biglabel{font-size:clamp(35px,5vw,64px);line-height:1.02;font-weight:950;letter-spacing:-.06em;max-width:900px;margin-bottom:16px}
+
+.biglabel:after{content:"";display:block;width:95px;height:8px;background:var(--orange);margin-top:15px}
+
+.footer{position:absolute;bottom:21px;left:clamp(28px,5vw,70px);right:clamp(28px,5vw,70px);display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:10px;color:#6d786e;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+
+.controls{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:47px}
+
+.control-group{display:flex;align-items:center;gap:9px}
+
+button{font:inherit;background:var(--ink);color:#fffdf8;border:1px solid var(--ink);border-radius:3px 12px 3px 12px;padding:11px 15px;font-size:12px;font-weight:800;cursor:pointer;transition:transform .2s,background .2s}
+
+button:hover:not(:disabled){background:var(--green-dark);transform:translateY(-2px)}
+
+button:disabled{opacity:.35;cursor:not-allowed}
+
+#count{min-width:58px;text-align:center;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+
+.progress{height:5px;flex:1;max-width:300px;background:#ddd8cc;overflow:hidden}
+
+#bar{height:100%;width:0;background:var(--green-dark);transition:width .3s}
+
+.dots{display:flex;justify-content:center;gap:6px;flex:1}
+
+.dot{width:7px;height:7px;border:0;padding:0;border-radius:50%;background:#b6b9ac;transition:width .2s,background .2s}
+
+.dot.active{width:23px;border-radius:8px;background:var(--orange)}
+
+button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+@keyframes appear{from{opacity:0;transform:translateY(8px)}
+
+to{opacity:1;transform:translateY(0)}}
+
+@keyframes lift{from{opacity:0;transform:translateY(7px)}
+
+to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:760px){
+ .deck{padding:10px;gap:8px}
+
+.topbar{padding:0 2px}
+
+.top-note{display:none}
+
+.slide{padding:28px 20px 65px;border-radius:4px 22px 4px 22px}
+
+.cover-layout{grid-template-columns:1fr}
+
+.cover-art{display:none}
+
+.grid{grid-template-columns:1fr;gap:8px}
+
+.card{padding:13px 15px}
+
+.card span{font-size:14px}
+
+.card strong{font-size:15px}
+
+.flow{grid-template-columns:1fr 1fr;gap:8px}
+
+.step{min-height:90px;padding:12px 10px;font-size:13px}
+
+.footer{left:20px;right:20px;bottom:13px;font-size:9px}
+
+.quote{font-size:18px;padding:17px 18px;box-shadow:4px 4px 0 var(--ink)}
+
+.para{font-size:14px}
+
+.names{font-size:15px}
+
+.dots{display:none}
+
+.controls{gap:7px}
+
+.control-group{gap:5px}
+
+button{padding:10px 11px}
+}
+
+@media(max-height:650px) and (min-width:761px){.slide{padding-top:30px;padding-bottom:50px}
+
+.card{padding:13px 16px}
+
+.flow{margin:7px 0 12px}
+
+.step{min-height:90px;padding:12px}
+
+.para{line-height:1.45;margin-bottom:9px}
+
+.footer{bottom:13px}}
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+@media print{
+ body{overflow:visible;background:white}
+
+.deck{display:block;width:100%;height:auto;padding:0}
+
+.topbar,.controls{display:none!important}
+
+.stage{display:block}
+
+.slide,.slide.active{display:flex!important;position:relative;width:100%;height:100vh;min-height:0;overflow:hidden;border-radius:0;box-shadow:none;break-after:page;page-break-after:always;background:#fffdf8;animation:none}
+
+.slide>*{animation:none!important}
+
+@page{size:landscape;margin:0}
+}
+</style>
 </head>
 <body>
-  <!-- Este archivo es un marcador. Reemplázalo por la presentación real del Grupo 14 (mismo nombre: grupo14.html). -->
-  <div><h1>Grupo 14</h1><p>Presentación pendiente</p></div>
+<main class="deck">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">∴</span><span>Universidad del Norte · Ingeniería Informática</span></div>
+    <div class="top-note">Anteproyecto de investigación / 2027</div>
+  </header>
+  <div class="stage" aria-live="polite">
+    <section class="slide active" aria-label="Diapositiva 1: Portada">
+      <div class="cover-layout"><div>
+        <p class="eyebrow">Universidad del Norte · Ingeniería Informática</p>
+        <div class="pill">Anteproyecto de Trabajo Final</div>
+        <h1>Desarrollo de una plataforma de aprendizaje adaptativo mediante Inteligencia Artificial para la evaluación y nivelación personalizada en Lógica de Programación de los alumnos de Ingeniería Informática de la Universidad del Norte, sede Caacupé, 2027.</h1>
+        <div class="names"><b>Integrantes</b><br>Fernando Damian Ayala Gonzalez</div>
+        <p class="sub">Sede Comunitaria Caacupé · 2027 · Director: Ing. Guido Guillen</p>
+      </div><div class="cover-art" aria-hidden="true"><div class="sheet"></div><div class="sheet"></div><div class="sheet">AI</div></div></div>
+      <div class="footer"><span>Anteproyecto de investigación</span><span>Portada · 01</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 2: Planteamiento del problema">
+      <p class="eyebrow">Capítulo I · Planteamiento del problema</p><h2>¿Qué situación se busca resolver?</h2>
+      <p class="para">Los alumnos pueden comenzar la materia de Lógica de Programación con distintos niveles de conocimiento. Identificar las dificultades de cada estudiante, analizar sus resultados y preparar refuerzos individualizados puede demandar mucho tiempo al docente.</p>
+      <div class="grid"><div class="card"><strong>Situación actual</strong><span>El seguimiento individual se vuelve más complejo cuando hay varios estudiantes.</span></div><div class="card"><strong>Necesidad</strong><span>Reconocer fortalezas y debilidades para orientar la nivelación según cada diagnóstico.</span></div></div>
+      <div class="footer"><span>Problema de investigación</span><span>Capítulo I · 02</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 3: Pregunta de investigación">
+      <p class="eyebrow">Capítulo I · Pregunta general</p><h2>Pregunta de investigación</h2>
+      <div class="quote">¿Cómo contribuiría una plataforma de aprendizaje adaptativo mediante Inteligencia Artificial a la evaluación y la nivelación personalizada en Lógica de Programación de los alumnos de Ingeniería Informática de la Universidad del Norte, Sede Comunitaria Caacupé, durante el año 2027?</div>
+      <div class="footer"><span>Pregunta principal</span><span>Capítulo I · 03</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 4: Objetivo general">
+      <p class="eyebrow">Capítulo I · Objetivo general</p><h2>¿Qué se propone lograr?</h2>
+      <div class="quote">Desarrollar una plataforma de aprendizaje adaptativo mediante Inteligencia Artificial para la evaluación y la nivelación personalizada en Lógica de Programación de los alumnos de Ingeniería Informática de la Universidad del Norte, Sede Comunitaria Caacupé, durante el año 2027.</div>
+      <div class="footer"><span>Objetivo general</span><span>Capítulo I · 04</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 5: Justificación">
+      <p class="eyebrow">Capítulo I · Justificación</p><h2>¿Por qué es importante?</h2>
+      <p class="para">La lógica es una base para aprender programación. Una evaluación inicial permitiría detectar qué contenidos domina cada alumno y cuáles necesita reforzar.</p>
+      <p class="para">La plataforma analizará los resultados y utilizará IA para proponer un plan personalizado. El docente podrá revisar, modificar y aprobar cada plan antes de asignarlo.</p>
+      <div class="grid"><div class="card"><strong>Apoyo al docente</strong><span>Organiza resultados y facilita el seguimiento individual.</span></div><div class="card"><strong>Apoyo al alumno</strong><span>Ofrece actividades acordes con sus necesidades identificadas.</span></div></div>
+      <div class="footer"><span>Beneficios esperados, aún por evaluar</span><span>Capítulo I · 05</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 6: Tipo de investigación">
+      <p class="eyebrow">Capítulo III · Tipo de investigación</p><h2>Características del estudio</h2>
+      <div class="grid"><div class="card"><strong>Aplicada</strong><span>Busca atender una necesidad concreta de nivelación en Lógica de Programación.</span></div><div class="card"><strong>Cuantitativa</strong><span>Analiza resultados de evaluaciones, indicadores y cumplimiento de requisitos.</span></div><div class="card"><strong>Descriptiva</strong><span>Describe el desempeño inicial y las dificultades por contenido.</span></div><div class="card"><strong>Orientación tecnológica</strong><span>Desarrolla y comprueba el funcionamiento de una plataforma web.</span></div></div>
+      <div class="footer"><span>Tipo de investigación</span><span>Capítulo III · 06</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 7: Diseño de investigación">
+      <p class="eyebrow">Capítulo III · Diseño de investigación</p><h2>¿Cómo se desarrollará?</h2>
+      <div class="flow"><div class="step"><b>01 · DIAGNÓSTICO</b>Aplicar una evaluación inicial</div><div class="step"><b>02 · ANÁLISIS</b>Identificar fortalezas y dificultades</div><div class="step"><b>03 · DESARROLLO</b>Construir la plataforma e integrar IA</div><div class="step"><b>04 · VALIDACIÓN</b>Probar funciones y tareas de uso</div></div>
+      <p class="para">El diagnóstico será no experimental y transversal: se observará el nivel inicial en una etapa, sin modificar deliberadamente la enseñanza para medir efectos. Las pruebas del sistema se realizarán por separado, en un entorno controlado.</p>
+      <div class="footer"><span>Diseño previsto para 2027</span><span>Capítulo III · 07</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 8: Población">
+      <p class="eyebrow">Capítulo III · Población</p><h2>¿A quiénes comprende?</h2>
+      <div class="biglabel">Alumnos de Lógica de Programación</div>
+      <p class="lead">Carrera de Ingeniería Informática · Universidad del Norte · Sede Comunitaria Caacupé</p>
+      <p class="para" style="margin-top:20px">La población estará formada por los alumnos matriculados en la asignatura durante el periodo académico de 2027 elegido para el diagnóstico.</p>
+      <div class="footer"><span>Población principal del estudio</span><span>Capítulo III · 08</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 9: Muestra">
+      <p class="eyebrow">Capítulo III · Muestra</p><h2>¿Cuántos participarán?</h2><div class="biglabel">Cobertura censal</div>
+      <p class="lead">Se invitará a todos los alumnos matriculados en la materia elegibles, en lugar de seleccionar solo una parte de la población.</p>
+      <div class="grid" style="margin-top:22px"><div class="card"><strong>N</strong><span>Total de alumnos elegibles según la matrícula oficial.</span></div><div class="card"><strong>n</strong><span>Alumnos que completen una evaluación diagnóstica válida.</span></div></div>
+      <p class="sub" style="margin-top:16px">La participación efectiva y la cobertura se informarán una vez finalizada la recolección de datos.</p>
+      <div class="footer"><span>Muestra prevista</span><span>Capítulo III · 09</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 10: Tipo de muestreo">
+      <p class="eyebrow">Capítulo III · Tipo de muestreo</p><h2>¿Cómo se seleccionarán los participantes?</h2>
+      <div class="grid"><div class="card"><strong>Estudiantes</strong><span>No habrá selección muestral: se realizará una convocatoria censal a todos los alumnos elegibles.</span></div><div class="card"><strong>Docentes y revisores técnicos</strong><span>Se seleccionarán intencionalmente según su responsabilidad, experiencia o función relacionada con el proyecto.</span></div></div>
+      <p class="para" style="margin-top:18px">La participación será voluntaria. Se registrarán las respuestas, ausencias y negativas, sin afectar las calificaciones.</p>
+      <div class="footer"><span>Procedimiento de selección</span><span>Capítulo III · 10</span></div>
+    </section>
+    <section class="slide" aria-label="Diapositiva 11: Cierre">
+      <p class="eyebrow">Cierre</p><h2>De la evaluación a la nivelación personalizada</h2>
+      <div class="flow"><div class="step"><b>EVALUAR</b>Conocer el nivel inicial</div><div class="step"><b>IDENTIFICAR</b>Detectar dificultades</div><div class="step"><b>PROPONER</b>Generar un plan con IA</div><div class="step"><b>REVISAR</b>Docente aprueba el plan</div></div>
+      <p class="lead" style="margin-top:18px">La propuesta será evaluada mediante pruebas funcionales; no se afirmará una mejora académica sin evidencia.</p>
+      <p class="lead" style="margin-top:20px;color:var(--green-dark);font-weight:900">Muchas gracias.</p>
+      <div class="footer"><span>Anteproyecto · Caacupé · 2027</span><span>Fin · 11</span></div>
+    </section>
+  </div>
+  <nav class="controls" aria-label="Controles de presentación">
+    <div class="control-group"><button id="prev" type="button" aria-label="Diapositiva anterior">← Anterior</button><span id="count" aria-live="polite">01 / 11</span></div>
+    <div class="dots" id="dots" aria-label="Ir a una diapositiva"></div>
+    <div class="progress" id="progress" role="progressbar" aria-label="Progreso de la presentación" aria-valuemin="1" aria-valuemax="11" aria-valuenow="1"><div id="bar"></div></div>
+    <button id="next" type="button" aria-label="Diapositiva siguiente">Siguiente →</button>
+  </nav>
+</main>
+<script>
+(() => {
+ const slides=[...document.querySelectorAll('.slide')],prev=document.getElementById('prev'),next=document.getElementById('next');
+ const count=document.getElementById('count'),bar=document.getElementById('bar'),progress=document.getElementById('progress'),dots=document.getElementById('dots');
+ let current=0;
+ slides.forEach((_,i)=>{const d=document.createElement('button');d.type='button';d.className='dot'+(!i?' active':'');d.setAttribute('aria-label',`Ir a la diapositiva ${i+1}`);d.addEventListener('click',()=>show(i));dots.appendChild(d)});
+ const dotButtons=[...dots.querySelectorAll('.dot')];
+ function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.setAttribute('aria-hidden',i===current?'false':'true');if(i===current)s.scrollTop=0});dotButtons.forEach((d,i)=>{d.classList.toggle('active',i===current);d.setAttribute('aria-current',i===current?'step':'false')});count.textContent=`${String(current+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;bar.style.width=`${(current+1)/slides.length*100}%`;progress.setAttribute('aria-valuenow',String(current+1));prev.disabled=current===0;next.disabled=current===slides.length-1}
+ prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));
+ document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+ let startX=0;const stage=document.querySelector('.stage');stage.addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX},{passive:true});stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-startX;if(Math.abs(d)>65)show(current+(d<0?1:-1))},{passive:true});show(0);
+})();
+</script>
 </body>
 </html>
