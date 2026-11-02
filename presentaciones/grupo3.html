@@ -1,783 +1,266 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Videojuego de simulación para capacitación en ciberseguridad</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anteproyecto de Trabajo Final — Capítulo I y III</title>
 <style>
-* {
-    box-sizing: border-box;
+:root{
+  --dk1:#0D1B2A; --lt1:#FFFFFF; --dk2:#13293D; --lt2:#EAF4F6;
+  --a1:#0096C7; --a2:#00B4D8; --a3:#48CAE4; --a4:#90E0EF; --a5:#023E8A;
+  --chrome-bg:#0A1522; --chrome-fg:#CFE8EE; --chrome-fg-dim:#7B95A3;
+  color-scheme: dark;
 }
-
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #071624;
-    color: #f5f8fc;
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --chrome-bg:#101826; --chrome-fg:#E7F2F5; --chrome-fg-dim:#8CA0AC; }
 }
-
-body {
-    background:
-        radial-gradient(ellipse at 85% 15%, #17455b, transparent 52%),
-        #071624;
+:root[data-theme="dark"]{ --chrome-bg:#0A1522; --chrome-fg:#CFE8EE; --chrome-fg-dim:#7B95A3; }
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;}
+body{
+  background:var(--chrome-bg);
+  font-family:Georgia,'Cambria',serif;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  overflow:hidden;
 }
-
-/* ENCABEZADO */
-
-header {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 16px 5vw;
-    background: #071624ef;
-    border-bottom: 1px solid #365063;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    color: #b7cbd8;
-    font-size: 13px;
+.stage{
+  width:min(96vw,1280px); aspect-ratio:16/9; max-height:84vh;
+  position:relative; border-radius:14px; overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.45);
 }
-
-header strong {
-    color: white;
-    letter-spacing: 1px;
+.slide{
+  position:absolute; inset:0; display:none;
+  font-family:'Calibri',Arial,sans-serif;
 }
+.slide.active{display:block;}
+.slide.dark{background:var(--dk1); color:var(--lt1);}
+.slide.light{background:var(--lt1); color:var(--dk1);}
+.pad{padding:5.5% 6%; height:100%;}
 
-/* CONTENEDOR */
+/* TITLE */
+.s-title .kicker{color:var(--a3);font-weight:700;letter-spacing:3px;font-size:.9rem;margin-bottom:18px;}
+.s-title h1{font-family:Georgia,serif;font-size:clamp(1.55rem,3vw,2.5rem);line-height:1.25;margin:0 0 20px;}
+.s-title .sub{color:var(--a4);font-size:1.1rem;margin-bottom:34px;}
+.s-title .by-label{color:var(--a3);font-weight:700;font-size:1rem;margin-bottom:6px;}
+.s-title .by{font-size:1.08rem;margin-bottom:4px;}
+.s-title .foot{position:absolute;bottom:5%;left:6%;right:6%;color:var(--a3);font-size:.8rem;}
+.deco{position:absolute;border-radius:50%;}
 
-main {
-    height: 100dvh;
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 64px 18px 72px;
-}
+/* DIVIDER */
+.s-div .eyebrow{color:var(--a2);font-weight:700;letter-spacing:3px;font-size:1rem;margin-bottom:14px;}
+.s-div h2{font-family:Georgia,serif;font-size:clamp(1.9rem,3.8vw,3rem);margin:0 0 20px;}
+.s-div p{color:var(--a4);font-size:1.12rem;max-width:70%;}
+.s-div .pad{display:flex;flex-direction:column;justify-content:center;}
 
-/* DIAPOSITIVAS */
+/* CONTENT */
+.s-content .kicker{color:var(--a1);font-weight:700;letter-spacing:2px;font-size:.74rem;margin-bottom:10px;}
+.s-content h2{font-family:Georgia,serif;font-size:clamp(1.3rem,2.6vw,1.85rem);margin:0 0 14px;}
+.s-content hr{border:none;border-top:1px solid #D7E3E6;margin-bottom:3%;}
+.s-content .body{font-size:1rem;line-height:1.55;}
+.s-content .body p{margin:0 0 10px;}
 
-.slide {
-    display: none;
-    position: relative;
-    width: min(1100px, 100%);
-    height: 100%;
-    max-height: none;
-    overflow: hidden;
-    flex-direction: column;
-    justify-content: center;
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;}
+.chip{background:var(--a1);color:#fff;font-size:.85rem;font-weight:700;padding:8px 16px;border-radius:20px;}
 
-    border: 1px solid #33576c;
-    border-radius: 22px;
+.grid{display:grid;gap:14px;margin-top:10px;}
+.grid.c2{grid-template-columns:1fr 1fr;}
+.grid.c3{grid-template-columns:1fr 1fr 1fr;}
+.grid.c5{grid-template-columns:repeat(5,1fr);}
+.card{background:var(--lt2);border-radius:10px;padding:16px;}
+.card.dk{background:var(--dk1);color:#fff;}
+.card .badge{width:34px;height:34px;border-radius:50%;background:var(--a1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;margin-bottom:10px;}
+.card h3{font-family:Georgia,serif;font-size:1.1rem;margin:0 0 8px;color:var(--a5);}
+.card.dk h3{color:var(--a3);}
+.card p{font-size:.88rem;line-height:1.4;margin:0;}
+.card.center{text-align:center;}
+.card.center .badge{margin-left:auto;margin-right:auto;}
 
-    background: #10283cf0;
-    box-shadow: 0 18px 70px #0005;
+.quote{background:var(--dk1);color:#fff;border-radius:12px;padding:5% 6%;position:relative;}
+.quote .mark{width:46px;height:34px;border-radius:6px;background:var(--a1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;margin-bottom:14px;}
+.quote.lt{background:var(--lt2);color:var(--dk1);}
+.quote.lt .mark{background:var(--a1);color:#fff;}
+.quote p{font-style:italic;font-size:1.2rem;line-height:1.5;font-family:Georgia,serif;margin:0;}
 
-    padding: clamp(15px, 3vh, 35px)
-             clamp(19px, 5vw, 64px)
-             38px;
-
-    --fit: 1;
-}
-
-.slide.active {
-    display: flex;
-}
-
-/* TEXTOS */
-
-.chapter {
-    color: #70e5c7;
-    text-transform: uppercase;
-    letter-spacing: .16em;
-    font-size: calc(13px * var(--fit));
-    font-weight: 800;
-    margin-bottom: calc(13px * var(--fit));
-    flex-shrink: 0;
-}
-
-h1 {
-    font-size: calc(clamp(27px, 3.5vw, 47px) * var(--fit));
-    line-height: 1.14;
-    letter-spacing: -.03em;
-    margin: 0 0 calc(18px * var(--fit));
-    overflow-wrap: anywhere;
-    flex-shrink: 0;
-}
-
-p {
-    max-width: none;
-    font-size: calc(clamp(15px, 1.6vw, 21px) * var(--fit));
-    line-height: 1.38;
-    color: #e5eff5;
-    margin: 0 0 calc(14px * var(--fit));
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-strong {
-    color: #70e5c7;
-}
-
-/* PORTADA */
-
-.cover-credits {
-    margin-top: calc(15px * var(--fit));
-    padding-top: calc(12px * var(--fit));
-    border-top: 1px solid #ffffff35;
-}
-
-.cover-credits p {
-    font-size: calc(clamp(14px, 1.45vw, 19px) * var(--fit));
-    margin: 5px 0;
-}
-
-/* NUMERACIÓN */
-
-.num {
-    position: absolute;
-    bottom: 13px;
-    right: 29px;
-    color: #9eb9c8;
-    font-size: 12px;
-}
-
-/* CIERRE */
-
-.closing-slide {
-    align-items: center;
-    text-align: center;
-}
-
-.closing-slide h1 {
-    font-size: clamp(38px, 6vw, 78px);
-    color: #70e5c7;
-    margin: 0;
-}
-
-/* PIE DE PÁGINA */
-
-footer {
-    position: fixed;
-    z-index: 10;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-
-    background: #071624f5;
-    border-top: 1px solid #365063;
-    padding: 11px 5vw;
-}
-
-button {
-    border: 1px solid #3e6a7c;
-    background: #1b4054;
-    color: white;
-    border-radius: 11px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: .2s;
-}
-
-button:hover:not(:disabled) {
-    background: #286078;
-    border-color: #70e5c7;
-}
-
-button:disabled {
-    opacity: .35;
-    cursor: default;
-}
-
-.controls {
-    display: flex;
-    gap: 9px;
-}
-
-.hint {
-    font-size: 12px;
-    color: #a9c3d1;
-}
-
-#count {
-    color: #b7cbd8;
-    font-size: 13px;
-    white-space: nowrap;
-}
-
-/* BARRA DE PROGRESO */
-
-#progress {
-    height: 3px;
-    width: 10%;
-    background: #70e5c7;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 20;
-    transition: width .2s;
-}
-
-/* PANTALLA FINAL */
-
-body.end-screen header,
-body.end-screen footer,
-body.end-screen #progress {
-    display: none;
-}
-
-body.end-screen main {
-    padding: 5vh 5vw;
-}
-
-body.end-screen .closing-slide {
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-}
-
-/* MÓVILES */
-
-@media(max-width: 700px) {
-
-    header {
-        padding: 13px 16px;
-    }
-
-    header span,
-    .hint {
-        display: none;
-    }
-
-    main {
-        padding: 58px 10px 65px;
-        align-items: center;
-    }
-
-    .slide {
-        padding: 12px 17px 34px;
-        border-radius: 15px;
-        height: 100%;
-    }
-
-    .slide h1 {
-        font-size: calc(31px * var(--fit));
-        margin-bottom: calc(12px * var(--fit));
-    }
-
-    .slide p {
-        font-size: calc(16px * var(--fit));
-        line-height: 1.32;
-        margin-bottom: calc(11px * var(--fit));
-    }
-
-    .slide .chapter {
-        margin-bottom: calc(9px * var(--fit));
-    }
-
-    footer {
-        padding: 9px 13px;
-    }
-
-    button {
-        padding: 9px 12px;
-        font-size: 12px;
-    }
-
-    #count {
-        font-size: 12px;
-    }
-}
-
-/* IMPRESIÓN Y PDF */
-
-@media print {
-
-    html, body {
-        height: auto;
-        overflow: visible;
-        background: white;
-        color: #172b3d;
-    }
-
-    header, footer, #progress {
-        display: none !important;
-    }
-
-    main {
-        height: auto;
-        display: block;
-        padding: 0;
-    }
-
-    .slide,
-    .slide.active {
-        display: flex !important;
-        height: 100vh;
-        max-height: none;
-        overflow: visible;
-        break-after: page;
-        page-break-after: always;
-
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-        background: white;
-        padding: 12vh 9vw;
-    }
-
-    .slide p,
-    .slide h1 {
-        color: #172b3d;
-    }
-
-    .chapter,
-    strong {
-        color: #007963;
-    }
-
-    body.end-screen header,
-    body.end-screen footer {
-        display: none !important;
-    }
-
-    .closing-slide {
-        background: white !important;
-    }
-}
+/* NAV CHROME */
+.chrome{display:flex;align-items:center;gap:16px;margin-top:18px;color:var(--chrome-fg);font-size:.92rem;font-family:Calibri,Arial,sans-serif;}
+.navbtn{background:transparent;border:1px solid #2A4256;color:var(--chrome-fg);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.navbtn:hover{background:#17293B;}
+.navbtn:disabled{opacity:.3;cursor:default;}
+.dots{display:flex;gap:6px;}
+.dot{width:6px;height:6px;border-radius:50%;background:#2A4256;cursor:pointer;}
+.dot.on{background:var(--a2);width:16px;border-radius:3px;}
+.counter{color:var(--chrome-fg-dim);min-width:48px;text-align:center;}
 </style>
 </head>
-
 <body>
-
-<header>
-    <strong>UNINORTE</strong>
-    <span>Presentación académica · Caacupé · 2027</span>
-</header>
-
-<main>
-
-<!-- DIAPOSITIVA 1: PORTADA -->
-
-<section class="slide active">
-
-    <div class="chapter">Proyecto de investigación</div>
-
-    <h1>
-        Desarrollo de un videojuego de simulación de ataques informáticos
-        para la capacitación en ciberseguridad de estudiantes de Ingeniería
-        Informática del 4.º año
-    </h1>
-
-    <p>
-        Universidad del Norte · Sede Caacupé · Año 2027
-    </p>
-
-    <div class="cover-credits">
-        <p><strong>Integrantes:</strong> Sergio José Sosa Cristaldo y Manuel José Sosa Cristaldo</p>
-        <p><strong>Carrera:</strong> Ingeniería Informática</p>
-        <p><strong>Área:</strong> Ciberseguridad</p>
-    </div>
-
-    <div class="num">01 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 2: PLANTEAMIENTO DEL PROBLEMA -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo I</div>
-
-    <h1>Planteamiento del problema</h1>
-
-    <p>
-        En la actualidad, los estudiantes de Ingeniería Informática utilizan
-        constantemente computadoras, teléfonos celulares, redes sociales,
-        correos electrónicos y plataformas digitales. Sin embargo, no siempre
-        cuentan con los conocimientos prácticos necesarios para reconocer y
-        prevenir las distintas amenazas informáticas.
-    </p>
-
-    <p>
-        Esta situación puede generar dificultades para identificar intentos
-        de phishing, ataques de ingeniería social, programas maliciosos y
-        otros incidentes de seguridad.
-    </p>
-
-    <p>
-        Además, la capacitación tradicional puede resultar insuficiente
-        cuando no permite poner en práctica los conocimientos adquiridos
-        mediante situaciones simuladas.
-    </p>
-
-    <div class="num">02 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 3: PREGUNTA GENERAL -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo I</div>
-
-    <h1>Pregunta general</h1>
-
-    <p>
-        ¿De qué manera el desarrollo de un videojuego de simulación de ataques
-        informáticos puede contribuir a la capacitación en ciberseguridad de
-        los estudiantes de Ingeniería Informática del 4.º año de la Universidad
-        del Norte, sede Caacupé, durante el año 2027?
-    </p>
-
-    <div class="num">03 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 4: OBJETIVO GENERAL -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo I</div>
-
-    <h1>Objetivo general</h1>
-
-    <p>
-        Desarrollar un videojuego de simulación de ataques informáticos para
-        la capacitación en ciberseguridad de los estudiantes de Ingeniería
-        Informática del 4.º año de la Universidad del Norte, sede Caacupé,
-        durante el año 2027.
-    </p>
-
-    <div class="num">04 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 5: JUSTIFICACIÓN -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo I</div>
-
-    <h1>Justificación</h1>
-
-    <p>
-        La ciberseguridad constituye un aspecto importante en el uso de las
-        tecnologías digitales, debido al crecimiento de las amenazas
-        informáticas y a la necesidad de contar con usuarios capaces de
-        reconocer situaciones de riesgo.
-    </p>
-
-    <p>
-        Por esta razón, se propone desarrollar un videojuego de simulación
-        que permita a los estudiantes aprender mediante actividades
-        interactivas y escenarios controlados relacionados con la seguridad
-        informática.
-    </p>
-
-    <p>
-        El proyecto busca complementar la formación teórica, fortalecer
-        los conocimientos y promover mejores prácticas de prevención
-        y protección digital.
-    </p>
-
-    <div class="num">05 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 6: TIPO Y ENFOQUE -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo III</div>
-
-    <h1>Tipo y enfoque de investigación</h1>
-
-    <p>
-        <strong>Tipo de investigación: Aplicada.</strong>
-    </p>
-
-    <p>
-        La investigación será aplicada porque busca desarrollar una solución
-        tecnológica ante una necesidad relacionada con la capacitación
-        en ciberseguridad de los estudiantes.
-    </p>
-
-    <p>
-        <strong>Enfoque: Mixto.</strong>
-    </p>
-
-    <p>
-        Se utilizarán datos cuantitativos y cualitativos. Los cuantitativos
-        permitirán comparar los resultados de las encuestas antes y después
-        de utilizar el videojuego, mientras que los cualitativos permitirán
-        conocer la opinión de un docente o encargado del área de ciberseguridad.
-    </p>
-
-    <div class="num">06 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 7: DISEÑO -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo III</div>
-
-    <h1>Diseño de investigación</h1>
-
-    <p>
-        Se utilizará un diseño preexperimental de un solo grupo, en el que
-        los participantes realizarán una evaluación inicial antes de utilizar
-        el videojuego y una evaluación posterior después de la experiencia.
-    </p>
-
-    <p>
-        Este procedimiento permitirá comparar los resultados obtenidos
-        y observar posibles cambios en los conocimientos de los estudiantes
-        sobre ciberseguridad.
-    </p>
-
-    <p>
-        Las actividades se desarrollarán mediante escenarios simulados
-        y controlados, sin realizar ataques reales ni intervenir en sistemas
-        externos.
-    </p>
-
-    <div class="num">07 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 8: POBLACIÓN -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo III</div>
-
-    <h1>Población</h1>
-
-    <p>
-        La población estará conformada por todos los alumnos de la
-        Universidad del Norte (UNINORTE), sede Caacupé.
-    </p>
-
-    <p>
-        Para el desarrollo de la investigación se tendrá en cuenta a los
-        estudiantes de Ingeniería Informática del 4.º año, considerando
-        los turnos mañana, tarde y noche.
-    </p>
-
-    <div class="num">08 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 9: MUESTRA E INSTRUMENTOS -->
-
-<section class="slide">
-
-    <div class="chapter">Capítulo III</div>
-
-    <h1>Muestra e instrumentos de recolección</h1>
-
-    <p>
-        <strong>Muestra:</strong> estará integrada por los estudiantes de
-        Ingeniería Informática del 4.º año de los turnos mañana, tarde
-        y noche de la sede Caacupé.
-    </p>
-
-    <p>
-        <strong>Instrumentos de recolección de datos:</strong>
-    </p>
-
-    <p>
-        Se aplicará una encuesta antes de utilizar el videojuego para
-        conocer los conocimientos iniciales y otra después de su utilización
-        para evaluar la experiencia y los posibles cambios obtenidos.
-    </p>
-
-    <p>
-        También se realizará una entrevista a un docente o encargado
-        del área de ciberseguridad para conocer su opinión sobre el proyecto.
-    </p>
-
-    <div class="num">09 / 10</div>
-
-</section>
-
-
-<!-- DIAPOSITIVA 10: CIERRE -->
-
-<section class="slide closing-slide">
-
-    <div class="chapter">UNINORTE · Ingeniería Informática</div>
-
-    <h1>Gracias por su atención</h1>
-
-</section>
-
-</main>
-
-
-<footer>
-
-    <span class="hint">
-        ← → para navegar · Inicio/Fin para desplazarse
-    </span>
-
-    <div class="controls">
-        <button id="prev">← Anterior</button>
-        <button id="next">Siguiente →</button>
-    </div>
-
-    <span id="count">1 / 10</span>
-
-</footer>
-
-<div id="progress"></div>
-
+<div class="stage" id="stage"></div>
+<div class="chrome">
+  <button class="navbtn" id="prev" aria-label="Anterior">&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="next" aria-label="Siguiente">&#8594;</button>
+  <span class="counter" id="counter">1/11</span>
+</div>
 
 <script>
-(function () {
+const slides = [
+// 1 TITLE
+`<div class="pad">
+  <div class="kicker">ANTEPROYECTO DE TRABAJO FINAL</div>
+  <h1>Desarrollo de un videojuego de simulación de ataques informáticos para la capacitación en ciberseguridad de estudiantes de Ingeniería Informática del 4.° año</h1>
+  <div class="sub">Capítulo I — Planteamiento del Problema · Capítulo III — Marco Metodológico</div>
+  <div class="by-label">Presentado por:</div>
+  <div class="by">Manuel José Sosa Cristaldo</div>
+  <div class="by">Sergio José Sosa Cristaldo</div>
+  
+</div>`,
+// 2 DIVIDER CAP I
+`<div class="pad">
+  <div class="eyebrow">CAPÍTULO I</div>
+  <h2>Planteamiento del Problema</h2>
+  <p>Problema, pregunta general, objetivo general y justificación de la investigación.</p>
+</div>`,
+// 3 PROBLEMA
+`<div class="pad">
+  <div class="kicker">CAPÍTULO I · 3.1 PROBLEMA DE INVESTIGACIÓN</div>
+  <h2>Definición del Problema</h2><hr>
+  <div class="body"><p>Los estudiantes usan constantemente dispositivos, redes sociales y plataformas educativas, pero no siempre cuentan con los conocimientos para identificar y actuar ante amenazas informáticas. En UNINORTE, sede Caacupé, surge la necesidad de una herramienta práctica que complemente la capacitación tradicional en ciberseguridad.</p></div>
+  <div class="kicker" style="margin-top:14px;">CINCO ÁREAS DE CIBERSEGURIDAD A ABORDAR</div>
+  <div class="grid c5">
+    <div class="card center"><div class="badge" style="margin:0 auto 8px;">1</div><p>Contraseñas y autenticación</p></div>
+    <div class="card center"><div class="badge" style="margin:0 auto 8px;">2</div><p>Phishing y correo electrónico</p></div>
+    <div class="card center"><div class="badge" style="margin:0 auto 8px;">3</div><p>Ingeniería social</p></div>
+    <div class="card center"><div class="badge" style="margin:0 auto 8px;">4</div><p>Malware</p></div>
+    <div class="card center"><div class="badge" style="margin:0 auto 8px;">5</div><p>Incidentes de seguridad</p></div>
+  </div>
+</div>`,
+// 4 PREGUNTA GENERAL
+`<div class="pad">
+  <div class="kicker">CAPÍTULO I · 3.2 PREGUNTA GENERAL DE INVESTIGACIÓN</div>
+  <h2>Pregunta General de Investigación</h2><hr>
+  <div class="quote"><div class="mark">&#8220;</div>
+    <p>¿De qué manera el desarrollo de un videojuego de simulación de ataques informáticos puede mejorar la interacción, los conocimientos y la capacidad de respuesta de los estudiantes de Ingeniería Informática de 4.° año de la Universidad del Norte, sede Caacupé, ante amenazas de ciberseguridad?</p>
+  </div>
+</div>`,
+// 5 OBJETIVO GENERAL
+`<div class="pad">
+  <div class="kicker">CAPÍTULO I · 4. OBJETIVOS</div>
+  <h2>Objetivo General</h2><hr>
+  <div class="quote"><div class="mark">&#8220;</div>
+    <p>Desarrollar un videojuego de simulación de ataques informáticos que permita mejorar la interacción, los conocimientos y la capacidad de respuesta de los estudiantes de Ingeniería Informática de 4.° año de la Universidad del Norte, sede Caacupé, ante amenazas de ciberseguridad, mediante escenarios simulados en un entorno seguro y controlado.</p>
+  </div>
+</div>`,
+// 6 JUSTIFICACION
+`<div class="pad">
+  <div class="kicker">CAPÍTULO I · 6. JUSTIFICACIÓN</div>
+  <h2>Justificación</h2><hr>
+  <div class="grid c3">
+    <div class="card"><div class="badge">1</div><h3>Necesidad</h3><p>Fortalecer conocimientos y habilidades prácticas de los estudiantes de 4.° año en ciberseguridad, ante su exposición diaria a amenazas digitales.</p></div>
+    <div class="card dk"><div class="badge">2</div><h3>Aporte</h3><p>Complementa la capacitación tradicional con escenarios interactivos donde los estudiantes identifican amenazas y toman decisiones.</p></div>
+    <div class="card"><div class="badge">3</div><h3>Viabilidad</h3><p>Dirigido a estudiantes de los turnos mañana, tarde y noche, en un entorno seguro, sin comprometer dispositivos ni datos reales.</p></div>
+  </div>
+</div>`,
+// 7 DIVIDER CAP III
+`<div class="pad">
+  <div class="eyebrow">CAPÍTULO III</div>
+  <h2>Marco Metodológico</h2>
+  <p>Tipo y diseño de investigación, población y muestra, y tipo de muestreo.</p>
+</div>`,
+// 8 TIPO DE INVESTIGACION
+`<div class="pad">
+  <div class="kicker">CAPÍTULO III · TIPO DE INVESTIGACIÓN</div>
+  <h2>Tipo de Investigación</h2>
+  <div class="chips">
+    <span class="chip">Aplicada</span><span class="chip">Enfoque mixto</span><span class="chip">Tecnológica</span><span class="chip">Alcance descriptivo</span>
+  </div>
+  <div class="card" style="padding:4% 5%;">
+    <p style="font-size:.98rem;line-height:1.6;margin:0 0 10px;">Esta investigación será de tipo aplicada, ya que busca dar respuesta a una necesidad relacionada con la capacitación en ciberseguridad de los estudiantes de Ingeniería Informática de 4.° año, mediante el desarrollo de un videojuego de simulación de ataques informáticos.</p>
+    <p style="font-size:.98rem;line-height:1.6;margin:0;">Tendrá un enfoque mixto, ya que se recogerán datos cuantitativos (encuestas y evaluaciones) y cualitativos (entrevista). Su orientación será tecnológica, pues se diseñará y desarrollará una herramienta informática con fines educativos, y su alcance cuantitativo será descriptivo, al buscar conocer los conocimientos de los estudiantes antes y después de utilizar el videojuego.</p>
+  </div>
+</div>`,
+// 9 DISEÑO DE INVESTIGACION
+`<div class="pad">
+  <div class="kicker">CAPÍTULO III · DISEÑO DE LA INVESTIGACIÓN</div>
+  <h2>Diseño de la Investigación</h2>
+  <div class="chips"><span class="chip">Preexperimental</span></div>
+  <div class="card dk" style="padding:4% 5%;">
+    <p style="font-size:.98rem;line-height:1.6;margin:0 0 10px;">La investigación tendrá un diseño preexperimental, ya que se trabajará con un solo grupo de estudiantes: primero se realizará una evaluación inicial para conocer sus conocimientos previos, y luego una segunda evaluación después de utilizar el videojuego.</p>
+    <p style="font-size:.98rem;line-height:1.6;margin:0;">Con los resultados de ambas evaluaciones se podrán comparar las respuestas de los participantes y observar los cambios en sus conocimientos, en el reconocimiento de amenazas y en las decisiones tomadas. Las actividades se realizarán en un entorno educativo controlado, sin utilizar ataques informáticos reales ni poner en riesgo dispositivos, redes o información de los participantes.</p>
+  </div>
+</div>`,
+// 10 POBLACION Y MUESTRA
+`<div class="pad">
+  <div class="kicker">CAPÍTULO III · POBLACIÓN Y MUESTRA</div>
+  <h2>Población y Muestra</h2><hr>
+  <div class="grid c2">
+    <div class="card"><div class="badge">1</div><h3>Población</h3><p>Estudiantes de la Universidad del Norte (UNINORTE), sede Caacupé, de las diferentes carreras y años académicos durante el periodo 2027. Cada estudiante matriculado es considerado una unidad de análisis.</p></div>
+    <div class="card"><div class="badge">2</div><h3>Muestra</h3><p>Estudiantes de 4.° año de Ingeniería Informática de UNINORTE, sede Caacupé, correspondientes a los turnos mañana, tarde y noche, durante el periodo académico 2027.</p></div>
+  </div>
+</div>`,
+// 11 TIPO DE MUESTREO
+`<div class="pad">
+  <div class="kicker">CAPÍTULO III · TIPO DE MUESTREO</div>
+  <h2>Tipo de Muestreo</h2>
+  <div class="chips"><span class="chip">Muestreo censal</span></div>
+  <div class="card" style="padding:4% 5%;">
+    <p style="font-size:.98rem;line-height:1.6;margin:0 0 10px;">Se invitará a participar a todos los estudiantes de 4.° año de Ingeniería Informática de los turnos mañana, tarde y noche. Por ello se trabajará con una estrategia censal, buscando incluir a la totalidad de los estudiantes de ese grupo, sin realizar una selección individual de participantes.</p>
+    <p style="font-size:.98rem;line-height:1.6;margin:0;">Durante el desarrollo del estudio se registrará cuántos estudiantes fueron invitados y cuántos participaron efectivamente.</p>
+  </div>
+</div>`
+];
 
-    const slides = [...document.querySelectorAll(".slide")];
+const types = ['title','div','content','content','content','content','div','content','content','content','content'];
+const stage = document.getElementById('stage');
+const dotsEl = document.getElementById('dots');
+let cur = 0;
 
-    let index = 0;
+function slideClass(i){
+  if(types[i]==='title') return 'slide dark s-title';
+  if(types[i]==='div') return 'slide dark s-div';
+  return 'slide light s-content';
+}
 
-    const prevButton = document.getElementById("prev");
-    const nextButton = document.getElementById("next");
-    const count = document.getElementById("count");
-    const progress = document.getElementById("progress");
+stage.innerHTML = slides.map((html,i)=>`<div class="${slideClass(i)}" id="sl${i}">${html}</div>`).join('');
 
-    function show(n) {
+if(types[0]==='title'){
+  const t = document.getElementById('sl0');
+  t.insertAdjacentHTML('beforeend', `
+    <div class="deco" style="width:220px;height:220px;top:-80px;right:-40px;background:var(--dk2);"></div>
+    <div class="deco" style="width:130px;height:130px;top:20px;right:60px;border:1.5px solid var(--a1);"></div>
+    <div class="deco" style="width:170px;height:170px;bottom:-60px;left:-70px;border:1px solid var(--a3);"></div>`);
+}
 
-        index = Math.max(0, Math.min(n, slides.length - 1));
+dotsEl.innerHTML = slides.map((_,i)=>`<div class="dot" data-i="${i}"></div>`).join('');
 
-        slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === index);
-            slide.scrollTop = 0;
-        });
+function render(){
+  document.querySelectorAll('.slide').forEach((el,i)=>el.classList.toggle('active', i===cur));
+  document.querySelectorAll('.dot').forEach((el,i)=>el.classList.toggle('on', i===cur));
+  document.getElementById('counter').textContent = (cur+1)+'/'+slides.length;
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===slides.length-1;
+  try{ localStorage.setItem('deck-slide-sosa', String(cur)); }catch(e){}
+}
+function go(i){ cur = Math.max(0, Math.min(slides.length-1, i)); render(); }
 
-        count.textContent = (index + 1) + " / " + slides.length;
+document.getElementById('prev').addEventListener('click', ()=>go(cur-1));
+document.getElementById('next').addEventListener('click', ()=>go(cur+1));
+dotsEl.addEventListener('click', e=>{ const d=e.target.closest('.dot'); if(d) go(+d.dataset.i); });
+window.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key===' ') go(cur+1);
+  if(e.key==='ArrowLeft') go(cur-1);
+});
+let touchX=null;
+stage.addEventListener('touchstart', e=>touchX=e.touches[0].clientX);
+stage.addEventListener('touchend', e=>{
+  if(touchX===null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(dx>40) go(cur-1); else if(dx<-40) go(cur+1);
+  touchX=null;
+});
 
-        prevButton.disabled = index === 0;
-        nextButton.disabled = index === slides.length - 1;
-
-        progress.style.width =
-            ((index + 1) / slides.length * 100) + "%";
-
-        document.body.classList.toggle(
-            "end-screen",
-            slides[index].classList.contains("closing-slide")
-        );
-
-        requestAnimationFrame(refresh);
-    }
-
-    function next() {
-        show(index + 1);
-    }
-
-    function prev() {
-        show(index - 1);
-    }
-
-    prevButton.addEventListener("click", prev);
-    nextButton.addEventListener("click", next);
-
-    document.addEventListener("keydown", function (e) {
-
-        if (["ArrowRight", "PageDown", " "].includes(e.key)) {
-            e.preventDefault();
-            next();
-        }
-
-        if (["ArrowLeft", "PageUp"].includes(e.key)) {
-            e.preventDefault();
-            prev();
-        }
-
-        if (e.key === "Home") {
-            show(0);
-        }
-
-        if (e.key === "End") {
-            show(slides.length - 1);
-        }
-
-    });
-
-    // Ajuste automático del contenido
-    function fitSlide(slide) {
-
-        if (!slide || slide.classList.contains("closing-slide")) {
-            return;
-        }
-
-        slide.style.setProperty("--fit", "1");
-
-        const fits = () =>
-            slide.scrollHeight <= slide.clientHeight + 1 &&
-            slide.scrollWidth <= slide.clientWidth + 1;
-
-        if (fits()) return;
-
-        let low = 0.45;
-        let high = 1;
-
-        for (let i = 0; i < 14; i++) {
-
-            const middle = (low + high) / 2;
-
-            slide.style.setProperty("--fit", String(middle));
-
-            if (fits()) {
-                low = middle;
-            } else {
-                high = middle;
-            }
-
-        }
-
-        slide.style.setProperty(
-            "--fit",
-            String(Math.max(0.45, low - 0.008))
-        );
-    }
-
-    function refresh() {
-        const active = document.querySelector(".slide.active");
-        if (active) fitSlide(active);
-    }
-
-    window.addEventListener("resize", refresh);
-    window.addEventListener("load", refresh);
-
-    show(0);
-
-})();
+let start = 0;
+try{ const saved = localStorage.getItem('deck-slide-sosa'); if(saved!==null) start = +saved; }catch(e){}
+go(start);
 </script>
-
 </body>
 </html>
