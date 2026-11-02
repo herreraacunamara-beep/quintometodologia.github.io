@@ -1,146 +1,51 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anteproyecto | Centro de Salud de Caraguatay</title>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anteproyecto Caraguatay · Presentación</title>
 <style>
-:root{--ink:#182637;--muted:#647181;--accent:#244d69;--bg:#e9edf0;--line:#dce3e8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
-.slide{display:none;width:min(1180px,calc(100vw - 64px));height:min(664px,calc(100vh - 48px));min-height:480px;margin:24px auto 0;background:#fff;box-shadow:0 14px 45px #24384920;position:relative;padding:64px 78px;overflow:auto}
-.slide.active{display:flex;flex-direction:column;justify-content:center}
-.slide:before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:var(--accent)}
-.eyebrow{font-size:15px;font-weight:700;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin:0 0 22px}
-h1{font-size:clamp(28px,3.2vw,45px);line-height:1.18;margin:0 0 26px;max-width:990px}
-h2{font-size:clamp(30px,3.2vw,43px);line-height:1.14;margin:0 0 30px}
-.lead{font-size:clamp(19px,2vw,26px);line-height:1.55;max-width:950px;margin:0}
-.para{font-size:clamp(16px,1.6vw,21px);line-height:1.6;max-width:1000px;margin:0 0 20px;text-align:justify;border-left:5px solid var(--accent);padding-left:26px}
-.small{font-size:17px;color:var(--muted);line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:15px}
-.card{border:1px solid var(--line);border-left:4px solid var(--accent);padding:20px 24px;background:#fafcfd;min-height:120px}
-.card strong{display:block;font-size:19px;margin-bottom:9px}.card span{font-size:18px;line-height:1.45;color:#3b4a59}
-.bigquote{border-left:5px solid var(--accent);padding:12px 0 12px 28px;font-size:clamp(22px,2.3vw,30px);line-height:1.52;max-width:950px}
-.stats{display:flex;gap:20px;margin:24px 0}.stat{flex:1;padding:28px 22px;background:#f3f6f8;border-top:4px solid var(--accent)}
-.stat b{display:block;font-size:51px;color:var(--accent);margin-bottom:9px}.stat span{font-size:18px}
-.flow{display:flex;gap:12px;margin-top:24px}.step{flex:1;padding:22px 15px;border:1px solid var(--line);background:#f7f9fa;text-align:center;font-size:18px;line-height:1.4}.step b{display:block;font-size:15px;color:var(--accent);margin-bottom:9px}
-.footer{position:absolute;bottom:25px;left:78px;right:78px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:13px;color:#7a8792;font-size:13px}
-.cover-sub{font-size:19px;color:var(--muted);margin:0 0 18px}.names{font-size:20px;line-height:1.65;margin-top:14px}
-nav{display:flex;align-items:center;justify-content:center;gap:18px;height:56px}button{background:white;border:1px solid #c8d3da;border-radius:7px;padding:9px 18px;color:var(--ink);font-size:15px;cursor:pointer}button:hover{background:#dfe7ed}#count{min-width:72px;text-align:center;color:#546271;font-size:15px}
-@media(max-width:720px){.slide{width:calc(100vw - 20px);height:calc(100dvh - 20px);margin:10px auto 0;padding:35px 25px;min-height:0}.grid{grid-template-columns:1fr;gap:9px}.card{min-height:0;padding:12px 15px}.card span{font-size:15px}.card strong{font-size:16px}.stats{gap:8px}.stat{padding:16px 10px}.stat b{font-size:33px}.stat span{font-size:14px}.flow{flex-direction:column;gap:6px}.step{padding:10px}.footer{left:25px;right:25px;bottom:14px}h2{margin-bottom:18px}.names{font-size:17px}.para{font-size:15px;padding-left:16px;text-align:left}}
-@media print{body{background:white}.slide,.slide.active{display:flex!important;width:100%;height:100vh;min-height:0;margin:0;box-shadow:none;break-after:page;page-break-after:always}@page{size:landscape;margin:0}}
-</style></head><body>
-<section class="slide active">
-<p class="eyebrow">Universidad del Norte · Ingeniería Informática</p>
-<p class="cover-sub">Anteproyecto de Trabajo Final · 2026–2027</p>
-<h1>Desarrollo de una aplicación móvil con asistente virtual inteligente y sistema web para consultas y agendamientos en el Centro de Salud de Caraguatay</h1>
-<div class="names"><b>Integrantes</b><br>Calderón Benegas, Ana Liz<br>Miranda Quintana, Paloma de Jesús</div>
-<p class="small">Caacupé, Paraguay · Director: Guido Guillen</p>
-<div class="footer"><span>Centro de Salud de Caraguatay</span><span>Portada</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo I · Planteamiento del problema</p>
-<h2>Situación identificada</h2>
-<p class="para">Los usuarios del Centro de Salud de Caraguatay necesitan acceder a información actualizada sobre servicios, médicos, horarios, medicamentos y procedimientos. Sin embargo, las consultas y la gestión de citas se realizan de forma presencial o por contacto directo con el personal, lo que genera traslados, esperas y costos para los pacientes, y una carga constante de solicitudes repetitivas para el personal. Esto dificulta el acceso oportuno a la información y a los turnos.</p>
-<div class="footer"><span>Diagnóstico preliminar</span><span>Capítulo I</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo I · Pregunta general</p>
-<h2>Pregunta de investigación</h2>
-<div class="bigquote">¿De qué manera el desarrollo de una aplicación móvil con asistente virtual inteligente y un sistema web permiten mejorar la gestión de consultas, procesos y agendamientos en el Centro de Salud de Caraguatay durante el año 2027?</div>
-<p class="small">Surge de las dificultades de acceso a información y gestión de turnos identificadas.</p>
-<div class="footer"><span>Pregunta general del anteproyecto</span><span>Capítulo I</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo I · Objetivo general</p>
-<h2>¿Qué se busca desarrollar?</h2>
-<div class="bigquote">Desarrollar una aplicación móvil con asistente virtual inteligente y un sistema web que faciliten el acceso a información sanitaria, con miras a contribuir potencialmente a la mejora de la gestión de consultas y agendamientos.</div>
-<p class="small">Centro de Salud de Caraguatay · Año 2027</p>
-<div class="footer"><span>Objetivo general · Síntesis para exposición</span><span>Capítulo I</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo I · Justificación</p>
-<h2>¿Por qué es importante?</h2>
-<p class="para">El diagnóstico preliminar mostró que los usuarios realizan consultas frecuentes sobre horarios, profesionales, servicios y agendamiento, que hoy generan desplazamientos, esperas y sobrecarga del personal. Una aplicación móvil con asistente virtual y un sistema web permitirían facilitar el acceso a la información y optimizar la gestión de turnos. Además, el proyecto es viable: utiliza herramientas de código abierto y recursos ya disponibles, y se desarrollará como prototipo en un entorno de laboratorio, por lo que sus beneficios son potenciales.</p>
-<div class="footer"><span>Beneficios potenciales, no resultados comprobados</span><span>Capítulo I</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo III · Tipo de investigación</p>
-<h2>Enfoque del estudio</h2>
-<div class="grid">
-<div class="card"><strong>Aplicada</strong><span>Busca fundamentar una solución tecnológica a una necesidad identificada.</span></div>
-<div class="card"><strong>Orientación tecnológica</strong><span>Desarrollo y evaluación de un prototipo.</span></div>
-<div class="card"><strong>Enfoque mixto</strong><span>Combina entrevistas cualitativas y cuestionarios cuantitativos.</span></div>
-<div class="card"><strong>Alcance descriptivo</strong><span>Caracteriza dificultades y necesidades de los usuarios.</span></div>
-</div><div class="footer"><span>Tipo de investigación</span><span>Capítulo III</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo III · Diseño de investigación</p>
-<h2>Diseño mixto exploratorio secuencial</h2>
-<div class="flow">
-<div class="step"><b>01 · CUALITATIVO</b>Entrevistas semiestructuradas</div>
-<div class="step"><b>02 · CUANTITATIVO</b>Cuestionarios estructurados</div>
-<div class="step"><b>03 · INTEGRACIÓN</b>Matriz de hallazgos y requerimientos</div>
-<div class="step"><b>04 · TECNOLÓGICO</b>Prototipo y pruebas en laboratorio</div>
-</div>
-<p class="small">Diagnóstico no experimental y transversal. La evaluación del software es una fase diferenciada.</p>
-<div class="footer"><span>Secuencia metodológica prevista para 2027</span><span>Capítulo III</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo III · Población</p>
-<h2>¿A quiénes comprende el estudio?</h2>
-<div class="stats">
-<div class="stat"><b>1.000</b><span>Pacientes registrados y elegibles</span></div>
-<div class="stat"><b>52</b><span>Profesionales de salud</span></div>
-</div>
-<p class="lead">Dos grupos de estudio del Centro de Salud de Caraguatay, durante el año 2027.</p>
-<div class="footer"><span>Población delimitada</span><span>Capítulo III</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo III · Muestra</p>
-<h2>Participantes previstos</h2>
-<div class="stats">
-<div class="stat"><b>278</b><span>Respuestas completas de pacientes</span></div>
-<div class="stat"><b>52</b><span>Profesionales invitados mediante censo</span></div>
-</div>
-<p class="small">Para pacientes: 95 % de confianza, 5 % de margen de error y proporción esperada de 0,50.</p>
-<p class="small">Entrevistas iniciales: grupo reducido de profesionales, definido según suficiencia de información.</p>
-<div class="footer"><span>Tamaño de muestra y censo</span><span>Capítulo III</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Capítulo III · Muestreo</p>
-<h2>¿Cómo se seleccionarán?</h2>
-<div class="grid">
-<div class="card"><strong>Pacientes</strong><span>Muestreo probabilístico aleatorio simple, sin reemplazo.</span></div>
-<div class="card"><strong>Profesionales</strong><span>Censo: invitación a los 52 integrantes de la población.</span></div>
-<div class="card"><strong>Entrevistas</strong><span>Muestreo no probabilístico intencional de profesionales con experiencia relevante.</span></div>
-<div class="card"><strong>Participación</strong><span>Voluntaria, con registro de respuestas y no respuestas.</span></div>
-</div><div class="footer"><span>Procedimientos de selección</span><span>Capítulo III</span></div>
-</section>
-<section class="slide">
-<p class="eyebrow">Cierre</p>
-<h2>Del diagnóstico a la propuesta tecnológica</h2>
-<div class="flow">
-<div class="step"><b>NECESIDAD</b>Acceso a información y turnos</div>
-<div class="step"><b>ESTUDIO</b>Pacientes y profesionales</div>
-<div class="step"><b>PROPUESTA</b>Aplicación móvil + sistema web</div>
-<div class="step"><b>EVALUACIÓN</b>Pruebas de laboratorio</div>
-</div>
-<p class="lead" style="margin-top:36px">Muchas gracias.</p>
-<div class="footer"><span>Anteproyecto · Caraguatay 2026–2027</span><span>Fin</span></div>
-</section>
+:root{--navy:#101f39;--blue:#1c6684;--teal:#29b8a9;--ink:#203049;--muted:#5a7084;--paper:#f6fafb;--white:#fff;--line:#dce7eb}
+*{box-sizing:border-box}body{margin:0;background:#eaf0f4;color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}button{font:inherit;cursor:pointer} .shell{width:min(1300px,100%);min-height:100dvh;margin:auto;padding:26px 32px 18px;display:flex;flex-direction:column;gap:13px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px}.identity{display:flex;gap:13px;align-items:center;font-weight:750;font-size:13px;letter-spacing:.055em;color:var(--navy)}.mark{height:40px;width:40px;border-radius:12px;background:linear-gradient(140deg,#1a667e,#28b6a8);display:grid;place-items:center;color:white;font-size:24px}.small{font-weight:500;color:var(--muted);font-size:12px;margin-top:3px;letter-spacing:0}.slide{min-height:610px;flex:1;position:relative;overflow:hidden;border-radius:22px;background:white;box-shadow:0 14px 55px #18354a16;border:1px solid #dae8ec;display:none;padding:64px 76px 64px}.slide.active{display:flex;flex-direction:column;justify-content:center}.slide:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#dff8f4 0%,#e6f6f600 70%);right:-80px;top:-80px;pointer-events:none}.kicker{text-transform:uppercase;letter-spacing:.19em;font-weight:800;color:#278e92;font-size:13px;margin-bottom:16px}.slide h1{margin:0;font-size:clamp(30px,4.2vw,59px);line-height:1.12;letter-spacing:-.035em;max-width:990px;color:var(--navy)}.slide h2{font-size:clamp(31px,3.6vw,51px);line-height:1.13;letter-spacing:-.028em;color:var(--navy);margin:0 0 24px}.slide p{font-size:clamp(19px,1.85vw,26px);line-height:1.5;margin:0;max-width:1030px}.hero{background:linear-gradient(120deg,#11243e 0%,#12556c 65%,#127b80 100%);color:white}.hero:before{width:680px;height:680px;right:-180px;top:-190px;border:1px solid #ffffff28;background:repeating-radial-gradient(circle,#ffffff12 0 1px,transparent 2px 45px)}.hero h1,.hero .kicker{color:white}.hero .kicker{opacity:.77}.hero .sub{font-size:21px;color:#d3f1f2;margin-top:28px}.hero .authors{margin-top:48px;font-weight:620;letter-spacing:.01em;font-size:17px;line-height:1.7}.pill{display:inline-flex;background:#e5f7f5;color:#167d7c;border:1px solid #c7eae7;border-radius:50px;padding:8px 15px;font-size:15px;font-weight:750;width:max-content;margin-top:28px}.big-quote{font-size:clamp(24px,2.65vw,39px)!important;font-weight:620;line-height:1.42!important;color:#183855;max-width:1050px}.accent{color:#108e92}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}.card{padding:23px 24px;background:#f4f9fa;border:1px solid #d9e9eb;border-radius:16px;min-height:150px}.card b{display:block;font-size:23px;margin-bottom:10px;color:#174a64}.card p{font-size:19px;line-height:1.35}.two{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:stretch}.two .card{min-height:230px}.tag{display:block;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#108b8c;margin-bottom:13px}.diagram{display:flex;align-items:center;gap:12px;margin:28px 0;flex-wrap:wrap}.step{background:#eef9f8;border:1px solid #bfe7e3;border-radius:15px;padding:19px 22px;min-width:180px;flex:1;font-size:23px;font-weight:750;color:#14566a;text-align:center}.arrow{font-size:30px;color:#19a8a0}.micro{font-size:17px!important;color:#637b8c;margin-top:24px!important}.data{font-size:clamp(58px,7vw,95px);font-weight:850;color:#155d7a;line-height:1;letter-spacing:-.05em}.data-label{font-size:20px;color:#45677a;margin-top:9px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.stat{padding:27px;background:#f1f8f9;border:1px solid var(--line);border-radius:18px}.stat:nth-child(2){background:#e9f7f4}.footer{display:flex;justify-content:space-between;align-items:center;gap:16px;color:#60798a}.nav{display:flex;align-items:center;gap:8px}.nav button,.tool{border:1px solid #cbdde4;background:white;color:#18566d;padding:12px 17px;border-radius:11px;font-weight:760}.nav button.primary{background:#166b7c;color:white;border-color:#166b7c}.nav button:disabled{opacity:.35;cursor:not-allowed}.progress{height:5px;background:#d6e4ea;border-radius:5px;overflow:hidden;flex:1;max-width:450px}.bar{height:100%;background:linear-gradient(90deg,#23698c,#2bbda8);width:10%;transition:width .2s} .end{text-align:center;align-items:center}.end h2{font-size:66px}.end p{max-width:640px}.footline{position:absolute;bottom:28px;left:76px;font-size:13px;font-weight:750;color:#91a6ad;letter-spacing:.09em;text-transform:uppercase}.hero .footline{color:#b1d4db}@media(max-width:750px){.shell{padding:10px;gap:9px}.slide{min-height:65dvh;padding:35px 25px}.slide h1{font-size:33px}.slide h2{font-size:32px}.slide p{font-size:19px}.cards,.two,.stats{grid-template-columns:1fr}.card,.two .card{min-height:unset;padding:15px}.card p{font-size:17px}.stats{gap:10px}.stat{padding:15px}.data{font-size:49px}.diagram{flex-direction:column}.step{width:100%;font-size:19px;min-width:unset}.arrow{transform:rotate(90deg)}.footline{left:25px;bottom:17px}.identity{font-size:10px}.top .small{display:none}.footer .tool{padding:9px}.progress{display:none}}
+@media print{body{background:white}.shell{padding:0;display:block}.top,.footer,.notes{display:none!important}.slide,.slide.active{display:flex!important;min-height:100vh;page-break-after:always;border:0;border-radius:0;box-shadow:none} }
 
+/* Integración con el visor ver.html: su propia barra gestiona navegación y pantalla completa. */
+html,body{width:100%;height:100%;overflow:hidden}
+.shell{height:100dvh;min-height:0;width:100%;max-width:none;margin:0;padding:0;gap:0}
+.top,.footer{display:none!important}
+.slide,.slide.active{width:100%;height:100%;min-height:0;flex:1;border-radius:0;border:0;box-shadow:none;padding:clamp(26px,5.3vw,78px) clamp(26px,6vw,90px);overflow:auto}
+.slide .footline{left:clamp(26px,6vw,90px)}
+.slide h1{font-size:clamp(26px,4vw,57px)}
+.slide h2{font-size:clamp(28px,3.3vw,48px)}
+.slide p{font-size:clamp(16px,1.8vw,24px)}
+.slide .big-quote{font-size:clamp(22px,2.6vw,37px)!important}
+.slide .cards .card p{font-size:clamp(15px,1.45vw,19px)}
+.slide .card b{font-size:clamp(18px,1.75vw,23px)}
+.slide .diagram .step{font-size:clamp(17px,1.7vw,23px)}
+.slide.end{gap:10px}
+.back-menu{display:inline-block;margin-top:26px;padding:13px 24px;border-radius:11px;background:#ffffff;color:#12566b;font-weight:800;text-decoration:none;font-size:18px;border:1px solid #bfe8e6;position:relative;z-index:2}
+.back-menu:hover,.back-menu:focus{background:#e1f7f4}
+@media(max-width:750px){.slide,.slide.active{padding:30px 24px}.slide .footline{left:24px}.slide .cards,.slide .stats,.slide .two{gap:12px}.slide .card{padding:14px}.slide .diagram{gap:5px;margin:14px 0}.slide .diagram .step{padding:10px}.slide h2{margin-bottom:12px}.slide .micro{font-size:14px!important;margin-top:12px!important}}
+@media(max-height:650px){.slide,.slide.active{padding-top:22px;padding-bottom:28px}.slide h2{margin-bottom:12px}.slide .diagram{margin:12px 0}.slide .footline{bottom:12px}}
+</style>
+</head>
+<body><main class="shell"><header class="top"><div class="identity"><div class="mark">✚</div><div>UNIVERSIDAD DEL NORTE<div class="small">Ingeniería Informática · Caacupé</div></div></div><div style="display:flex;gap:8px"><button class="tool" id="fullBtn" title="Pantalla completa">⛶</button></div></header>
+<section class="slide hero active"><div class="kicker">Anteproyecto · 2026–2027</div><h1>Aplicación móvil con asistente virtual inteligente y sistema web para consultas y agendamientos</h1><p class="sub">Centro de Salud de Caraguatay · Caraguatay, Cordillera</p><div class="authors">Ana Liz Calderón Benegas<br>Paloma de Jesús Miranda Quintana<br><span style="opacity:.77;font-weight:480">Director: Ing. Guido Guillén</span></div><div class="footline">Presentación del anteproyecto</div></section>
+<section class="slide"><div class="kicker">01 · Situación identificada</div><h2>Planteamiento del problema</h2><p>En el Centro de Salud de Caraguatay, los pacientes necesitan consultar información sobre médicos, horarios, servicios y medicamentos, además de solicitar citas. Actualmente, gran parte de estas gestiones se realiza de forma presencial o mediante comunicación directa con el personal, lo que puede ocasionar traslados innecesarios, tiempos de espera y una carga adicional de trabajo para los profesionales. Esta situación dificulta el acceso oportuno a la información y la organización de los agendamientos.</p><div class="pill">Situación identificada mediante entrevistas preliminares</div><div class="footline">Capítulo I · Problema de investigación</div></section>
+<section class="slide"><div class="kicker">02 · Pregunta principal</div><h2>Pregunta general</h2><p class="big-quote">¿De qué manera el desarrollo de una <span class="accent">aplicación móvil con asistente virtual inteligente y un sistema web</span> permiten mejorar la gestión de consultas, procesos y agendamientos en el Centro de Salud de Caraguatay durante el año 2027?</p><div class="footline">Texto original del anteproyecto</div></section>
+<section class="slide"><div class="kicker">03 · Propósito del estudio</div><h2>Objetivo general</h2><p class="big-quote">Desarrollar una <span class="accent">aplicación móvil con asistente virtual inteligente y un sistema web</span> que faciliten el acceso a información sanitaria, con miras a contribuir potencialmente a la mejora de la gestión de consultas y agendamientos en el Centro de Salud de Caraguatay durante el año 2027.</p><div class="pill">Prototipo académico · No es una implementación definitiva</div><div class="footline">Texto original del anteproyecto</div></section>
+<section class="slide"><div class="kicker">04 · Importancia de la propuesta</div><h2>Justificación</h2><p>El proyecto se justifica por la necesidad de facilitar el acceso a información institucional y mejorar la organización de las solicitudes de citas en el Centro de Salud de Caraguatay. Para ello, se propone desarrollar una aplicación móvil con asistente virtual inteligente que responda consultas informativas y permita solicitar citas simuladas, junto con un sistema web para administrar la información y gestionar dichas solicitudes. La propuesta busca ofrecer una alternativa tecnológica de bajo costo, cuya funcionalidad será evaluada mediante pruebas de laboratorio, sin implementarse todavía en el establecimiento.</p><div class="footline">Capítulo I · Justificación</div></section>
+<section class="slide"><div class="kicker">05 · Marco metodológico</div><h2>Tipo de investigación</h2><div class="cards"><div class="card"><b>Aplicada</b><p>Busca abordar una dificultad concreta mediante una propuesta tecnológica.</p></div><div class="card"><b>Enfoque mixto</b><p>Combina entrevistas cualitativas y cuestionarios cuantitativos.</p></div><div class="card"><b>Descriptiva</b><p>El componente cuantitativo describirá dificultades y necesidades con frecuencias y porcentajes.</p></div></div><div class="footline">Capítulo III · 3.1</div></section>
+<section class="slide"><div class="kicker">06 · Marco metodológico</div><h2>Diseño de la investigación</h2><div class="diagram"><div class="step">1. Entrevistas<br><span style="font-size:15px;font-weight:500">Fase cualitativa</span></div><div class="arrow">→</div><div class="step">2. Cuestionarios<br><span style="font-size:15px;font-weight:500">Fase cuantitativa</span></div><div class="arrow">→</div><div class="step">3. Integración<br><span style="font-size:15px;font-weight:500">Requerimientos</span></div></div><p>Se utilizará un <strong>diseño mixto exploratorio secuencial</strong>: primero se realizaron entrevistas semiestructuradas en 2026 y, a partir de sus resultados, se elaborarán cuestionarios que serán aplicados en 2027. El diagnóstico será <strong>no experimental y de corte transversal</strong>, porque no se manipularán las variables y se buscará caracterizar la situación estudiada sin realizar un seguimiento de su evolución a lo largo del tiempo.</p><div class="footline">Capítulo III · 3.2</div></section>
+<section class="slide"><div class="kicker">07 · Participantes del estudio</div><h2>Población</h2><div class="two"><div class="card"><span class="tag">Pacientes registrados</span><div class="data">1.000</div><div class="data-label">Pacientes del Centro de Salud</div></div><div class="card"><span class="tag">Profesionales de salud</span><div class="data">52</div><div class="data-label">Personal médico, de enfermería y laboratorio</div></div></div><p class="micro">Cantidades informadas durante las entrevistas preliminares de 2026; se verificarán con los registros vigentes de 2027.</p><div class="footline">Capítulo III · 3.3</div></section>
+<section class="slide"><div class="kicker">08 · Tamaño de la muestra</div><h2>Muestra</h2><div class="two"><div class="card"><span class="tag">Pacientes</span><div class="data">278</div><div class="data-label">Respuestas completas previstas</div></div><div class="card"><span class="tag">Profesionales de salud</span><div class="data">52</div><div class="data-label">Se invitará a la totalidad del personal</div></div></div><p class="micro">Pacientes: cálculo para población finita con 95 % de confianza y 5 % de margen de error. Para las entrevistas cualitativas, el número de profesionales se definirá según la suficiencia de la información.</p><div class="footline">Capítulo III · 3.4</div></section>
+<section class="slide"><div class="kicker">09 · Procedimientos de selección</div><h2>Tipo de muestreo</h2><div class="cards"><div class="card"><b>Probabilístico aleatorio simple</b><p>Los 278 pacientes se seleccionarán aleatoriamente a partir de la lista institucional autorizada.</p></div><div class="card"><b>Procedimiento censal</b><p>Se invitará a participar a los 52 profesionales de salud, sin seleccionar una muestra.</p></div><div class="card"><b>No probabilístico intencional</b><p>Para las entrevistas iniciales se elegirá a profesionales con experiencia en consultas y agendamientos.</p></div></div><p class="micro">La participación será voluntaria y se respetará la confidencialidad de los datos.</p><div class="footline">Capítulo III · 3.5</div></section>
+<section class="slide end hero"><div class="kicker">Fin de la presentación</div><h2>Muchas gracias</h2><p>Por su atención.</p><p class="sub" style="font-size:20px;margin-top:16px">¿Preguntas?</p><a class="back-menu" href="../index.html" target="_top">← Volver al menú principal</a><div class="footline">Centro de Salud de Caraguatay · Anteproyecto</div></section>
+<footer class="footer"><div id="counter" style="min-width:105px;font-weight:750">01 / 11</div><div class="progress"><div class="bar" id="bar"></div></div><div class="nav"><button id="prev" aria-label="Anterior">← Anterior</button><button id="next" class="primary" aria-label="Siguiente">Siguiente →</button></div></footer></main>
 <script>
-/* Navegación de la presentación (flechas del teclado y botones del visor) */
-(function(){
-  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
-  function avisar(){try{parent.postMessage({tipo:'diapositivas',actual:cur+1,total:slides.length},'*')}catch(e){}}
-  function show(n){cur=Math.max(0,Math.min(slides.length-1,n));slides.forEach(function(s,i){s.classList.toggle('active',i===cur)});avisar()}
-  document.addEventListener('keydown',function(e){
-    var k=e.key;
-    if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(cur+1)}
-    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(cur-1)}
-    else if(k==='Home')show(0);else if(k==='End')show(slides.length-1)});
-  window.addEventListener('message',function(e){var d=e.data;if(!d)return;
-    if(d.tipo==='hola')avisar();
-    else if(d.tipo==='ir'){if(d.accion==='sig')show(cur+1);else if(d.accion==='ant')show(cur-1)}});
-  show(0);
-})();
+const slides=[...document.querySelectorAll('.slide')];let index=0;const $=id=>document.getElementById(id);
+function render(){slides.forEach((s,i)=>s.classList.toggle('active',i===index));$('counter').textContent=String(index+1).padStart(2,'0')+' / '+slides.length;$('bar').style.width=((index+1)/slides.length*100)+'%';$('prev').disabled=index===0;$('next').disabled=index===slides.length-1;}
+$('prev').onclick=()=>{index=Math.max(index-1,0);render()};$('next').onclick=()=>{index=Math.min(index+1,slides.length-1);render()};$('fullBtn').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.()};document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();$('next').click()}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();$('prev').click()}});render();
 </script>
+<!-- Compatibilidad con ver.html del sitio de exposiciones (opción B del README). -->
+<script src="../js/puente.js"></script>
 </body></html>
